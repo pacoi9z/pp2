@@ -14,7 +14,13 @@ import { AbsenceComponent } from './services/absence/absence.component';
 import { RetardComponent } from './services/retard/retard.component';
 import { MedicamentComponent } from './services/medicament/medicament.component';
 import { C404Component } from './c404/c404.component';
-//import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +40,13 @@ import { C404Component } from './c404/c404.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //HttpClientModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    FormsModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
