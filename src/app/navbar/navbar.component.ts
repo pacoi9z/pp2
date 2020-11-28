@@ -9,7 +9,7 @@ export class NavbarComponent implements OnInit {
   @Input() Nom : string = '';
 
   
-  constructor(private helpS:HelpersService) {  
+  constructor(public helpS:HelpersService) {  
   }
 
   ngOnInit(): void {
@@ -19,5 +19,7 @@ export class NavbarComponent implements OnInit {
   getPath(){
     return this.helpS.pathToImg;
   }
+
+
 
 }

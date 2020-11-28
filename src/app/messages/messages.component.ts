@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Title} from "@angular/platform-browser";
+import { HelpersService } from '../helpers.service';
 
 @Component({
   selector: 'app-messages',
@@ -57,8 +58,11 @@ export class MessagesComponent implements OnInit {
   message_sender_name:string ='';
   message_sender_pic:string = 'https://www.shankarainfra.com/img/avatar.png';
 
-  constructor(private titleService:Title) {
-    this.titleService.setTitle("Messages [2]");
+  constructor(private helpS: HelpersService, 
+              private titleService:Title ) {
+    if(helpS.notif_Messages != '0')  
+    this.titleService.setTitle(" ["+helpS.notif_Publication+"] Messages - El Razi School");
+    else this.titleService.setTitle("Messages - El Razi School")
    }
 
   ngOnInit(): void {

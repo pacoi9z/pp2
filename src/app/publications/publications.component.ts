@@ -13,9 +13,11 @@ export class PublicationsComponent implements OnInit {
   
   constructor(
     private helpS:HelpersService, 
-    private titeServ :Title) { 
+    private titleService :Title) { 
 
-    this.titeServ.setTitle("Publications [9+]");
+    if(helpS.notif_Publication != '0')  
+    this.titleService.setTitle(" ["+helpS.notif_Publication+"] Publications - El Razi School");
+    else this.titleService.setTitle("Publications - El Razi School")
   }
 
   ngOnInit(): void {
