@@ -5,7 +5,7 @@
         <div class="card-body">
           <h5 class="card-title text-2xl">Rendez-vous</h5>
           <p class="card-text py-2">Nous vous remondons des que possible.</p>
-          <a routerLink="/rendezvous" class="btn btn-primary">Prendre rendez-vous</a>
+          <a routerLink="../rendezvous" class="btn btn-primary">Prendre rendez-vous</a>
         </div>
     </div>
     <div class="card col-span-4 sm:col-span-2 md:col-span-1 bg-gray-100">
@@ -13,7 +13,7 @@
         <div class="card-body">
           <h5 class="card-title text-2xl">Certificat Scolarité</h5>
           <p class="card-text py-2">Nous vous remondons des que possible.</p>
-          <a routerLink="/certificascolarite" class="btn btn-primary">Prendre rendez-vous</a>
+          <a routerLink="../certificascolarite" class="btn btn-primary">Prendre rendez-vous</a>
         </div>
     </div>
     <div class="card col-span-4 sm:col-span-2 md:col-span-1 bg-gray-100">
@@ -21,7 +21,7 @@
         <div class="card-body">
           <h5 class="card-title text-2xl">Absence</h5>
           <p class="card-text py-2">Nous vous remondons des que possible.</p>
-          <a routerLink="/absence" class="btn btn-primary">Prendre rendez-vous</a>
+          <a routerLink="../absence" class="btn btn-primary">Prendre rendez-vous</a>
         </div>
     </div>
     <div class="card col-span-4 sm:col-span-2 md:col-span-1 bg-gray-100">
@@ -29,7 +29,7 @@
         <div class="card-body">
           <h5 class="card-title text-2xl">Retard</h5>
           <p class="card-text py-2">Nous vous remondons des que possible.</p>
-          <a routerLink="/retard" class="btn btn-primary">Prendre rendez-vous</a>
+          <a routerLink="../retard" class="btn btn-primary">Prendre rendez-vous</a>
         </div>
     </div>
     <div class="card col-span-4 sm:col-span-2 md:col-span-1 bg-gray-100">
@@ -37,8 +37,14 @@
         <div class="card-body">
           <h5 class="card-title text-2xl">Médicament</h5>
           <p class="card-text py-2">Nous vous remondons des que possible.</p>
-          <a routerLink="/medicament" class="btn btn-primary">Prendre rendez-vous</a>
+          <a routerLink="../medicament" class="btn btn-primary">Prendre rendez-vous</a>
         </div>
     </div>
+
+    <app-medicament *ngIf="medicament"></app-medicament>
+    <app-certificat *ngIf="certificascolarite"></app-certificat>
+    <app-absence *ngIf="absence"></app-absence>
+    <app-rendezvous *ngIf="rendezvous"></app-rendezvous>
+    <app-retard *ngIf="retard"></app-retard>
 
 </div>
