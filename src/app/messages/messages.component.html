@@ -1,0 +1,122 @@
+
+<!---
+
+88b           d88                                                                                    
+888b         d888                                                                                    
+88`8b       d8'88                                                                                    
+88 `8b     d8' 88   ,adPPYba,  ,adPPYba,  ,adPPYba,  ,adPPYYba,   ,adPPYb,d8   ,adPPYba,  ,adPPYba,  
+88  `8b   d8'  88  a8P_____88  I8[    ""  I8[    ""  ""     `Y8  a8"    `Y88  a8P_____88  I8[    ""  
+88   `8b d8'   88  8PP"""""""   `"Y8ba,    `"Y8ba,   ,adPPPPP88  8b       88  8PP"""""""   `"Y8ba,   
+88    `888'    88  "8b,   ,aa  aa    ]8I  aa    ]8I  88,    ,88  "8a,   ,d88  "8b,   ,aa  aa    ]8I  
+88     `8'     88   `"Ybbd8"'  `"YbbdP"'  `"YbbdP"'  `"8bbdP"Y8   `"YbbdP"Y8   `"Ybbd8"'  `"YbbdP"'  
+                                            aa,    ,88                         
+                                            "Y8bbdP"                       
+
+-->
+<div class="container">
+    <h1 class=" p-1 text-3xl cursor-pointer hover:bg-gray-100" (click)='eee()'>
+        Envoyer 
+    </h1>
+    <hr/>
+    
+    <div class="p-5 " id="wrapper" >
+        
+        
+
+        <!-- Sidebar -->
+        <div class="grid grid-cols-1 " id="sidebar-wrapper">
+            <input class="border-b mb-1 p-2 appearance-none focus:rounded leading-tight focus:outline-none focus:shadow auto" type="text" name="sendTo" placeholder="Envoyer a ?"/>
+            <input class="border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto"  type="text" name="objet" placeholder="Objet du message" />
+            
+            <textarea id="autoresizing" class="border-b mt-1 p-2 h-20 focus:rounded  appearance-none  leading-tight focus:outline-none focus:shadow auto" name="content" placeholder="Redigez votre message ici"></textarea>
+            <div class="flex items-center justify-end mt-2">
+                <button class="border border-green-500 hover:bg-green-700 text-green-500 hover:text-white py-2 px-4 rounded">
+                    Envoyer
+                </button>
+                <button class="ml-2  border border-red-500 hover:bg-red-700 text-red-500 hover:text-white py-2 px-4 rounded">
+                    Abondoner
+                </button>
+            </div>
+        </div>
+            
+        
+        
+    </div>
+    <h1 class="text-3xl">Boite de reception</h1>
+    <hr/>
+    <div class="p-0 flex items-start sm:justify-between justify-center" >
+        <div class="rounded p-1 h-screen w-16 sm:w-1/4 md:w-2/5 "  >
+            <div *ngFor='let x of messages; let index = index' (click)="getMsg(x.id)" class="cursor-pointer sm:flex sm:items-start sm:justify-between mb-2 Myshadow hover:bg-green-100 rounded-full sm:rounded p-2 ">
+                <div class="sm:flex sm:items-center">
+                    <div class="flex-shrink-0 h-10 w-10 relative">
+                        <span class="rounded-full right-0 bottom-0 absolute border border-white bg-green-500 block h-3 w-3"></span>
+                        <img class="h-10 w-10 rounded-full" [src]="x.sender_pic" alt="">
+
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-sm leading-5 font-medium text-gray-900 hidden sm:block ">
+                            {{x.sender_name}}
+                        </div>
+                        <div class="text-sm leading-5 text-gray-500 hidden lg:block ">
+                            {{x.objet}}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-sm leading-5 text-gray-500 hidden lg:block ">
+                    <span>{{x.datetime}}</span><br/>
+                </div>
+            </div>
+            
+            <div class="cursor-pointer flex justify-center mb-2 rounded-full sm:rounded p-2">
+                <button class="text-green-600">
+                    <svg class="h-8" viewBox="0 0 16 16" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="w-4/5 sm:w-3/4 md:3/5 border-gray-100 Myshadow rounded p-2 sticky top-0 ml-1" style="min-height: 500px;">
+            <div class="flex items-center justify-between">
+                <div class="p-2">
+                    <div class="flex items-center justify-start">
+                        <div class="flex-shrink-0 h-10 w-10 relative">
+                            <span class="rounded-full right-0 bottom-0 absolute border border-white bg-green-500 block h-3 w-3"></span>
+                            <img class="h-10 w-10 rounded-full" [src]="message_sender_pic" alt="">
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-sm leading-5 font-medium text-gray-900 hidden sm:block ">
+                                {{message_sender_name}}
+                            </div>
+                            <div class="text-sm leading-5 text-gray-500 hidden lg:block ">
+                                {{ message_datetime }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-gray-500 dropdown">
+                    <button class="dropdown-toggle hover:bg-gray-100 text-gray-800 font-semibold btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" >
+                            <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        </svg>                    
+                    </button> 
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Administration </a>
+                        <a class="dropdown-item" href="#">Class1:Parents</a>
+                        <a class="dropdown-item" href="#">Class2:Parents</a>
+                        <hr>
+                        <a class="dropdown-item" href="#">Touet le monde</a>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="p-3">
+                <h1 class="text-lg mb-3" >{{message_objet}}</h1>
+                <p class="">
+                    {{ message_content }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
