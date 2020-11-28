@@ -13,6 +13,7 @@ export class ServicesComponent implements OnInit {
   
 
   constructor(private route:ActivatedRoute) { }
+  
 
   ngOnInit(): void {
    this.route.params.subscribe(data => { console.log(data) });
