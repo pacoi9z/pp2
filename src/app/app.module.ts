@@ -15,12 +15,9 @@ import { RetardComponent } from './services/retard/retard.component';
 import { MedicamentComponent } from './services/medicament/medicament.component';
 import { C404Component } from './c404/c404.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import {DemoMaterialModule} from './material-module';
 
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
-
+//import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,12 +38,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatDatepickerModule,
-    FormsModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-
+    DemoMaterialModule,
+    //HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
