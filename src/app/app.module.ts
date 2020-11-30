@@ -14,8 +14,8 @@ import { AbsenceComponent } from './services/absence/absence.component';
 import { RetardComponent } from './services/retard/retard.component';
 import { MedicamentComponent } from './services/medicament/medicament.component';
 import { C404Component } from './c404/c404.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {DemoMaterialModule} from './material-module';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import {DemoMaterialModule} from './material-module';
 
 //import { HttpClientModule } from '@angular/common/http';
 
@@ -37,8 +37,8 @@ import {DemoMaterialModule} from './material-module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    DemoMaterialModule,
+    //BrowserAnimationsModule,
+    //DemoMaterialModule,
     //HttpClientModule,
   ],
   providers: [],

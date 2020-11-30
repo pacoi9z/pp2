@@ -1,64 +1,20 @@
 <div class="container my-10" >
     <div class="p-2">
         <span class="text-2xl">Signaler une absence</span>
-        <div class="container grid grid-cols-1 sm:grid-cols-2 gap-1">
-            <div class="col-span-2 sm:col-span-1 w-100 mb-2">
-                <mat-form-field class="w-100 ">
-                    <mat-label>Date d'absence</mat-label>
-                    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker1">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field> 
-            </div>
-            <div class="col-span-2 sm:col-span-1 w-100 mb-2">
-                <mat-form-field class="w-100 ">
-                    <mat-label>Date de retour a l'école</mat-label>
-                    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker2">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div class="col-span-2  w-100 mb-2">
-                <mat-form-field class="w-100">
-                    <mat-label>Clearable input</mat-label>
-                    <input matInput type="text">
-                </mat-form-field>
-            </div>
-            <div class="col-span-2  w-100 mb-2">
-                <mat-form-field class=" w-100">
-                    <mat-label>Justification</mat-label>
-                    <textarea matInput ></textarea>
-                </mat-form-field>
-            </div>
-            <div class="col-span-2 w-100 mb-2">
-                
-                <button mat-raised-button color="accent" class="btn bg-green-600 focus:shadow-none border-1">
-                    Signaler
-                </button> 
-
-            </div>
-
-            <mat-card class="example-card">
-                <mat-card-header>
-                  <div mat-card-avatar class="example-header-image"></div>
-                  <mat-card-title>Shiba Inu</mat-card-title>
-                  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                <mat-card-content>
-                  <p>
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                    bred for hunting.
-                  </p>
-                </mat-card-content>
-                <mat-card-actions>
-                  <button mat-button>LIKE</button>
-                  <button mat-button>SHARE</button>
-                </mat-card-actions>
-              </mat-card>
-
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1">
+            <input class="sm:col-span-1 col-span-2 border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" type="date" placeholder="Date d'absence" > 
+            <input class="sm:col-span-1 col-span-2 border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" type="date" placeholder="Date de retoure a l'école" > 
+            <input list="browsers" class="col-span-2 border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" placeholder="" > 
+            <datalist id="browsers">
+                <option value="Enseignanat1">enseignant1/titre</option>
+                <option value="Enseignanat2">enseignant2/titre</option>
+                <option value="Enseignanat3">enseignant3/titre</option>
+            </datalist>
+            <textarea id="autoresizing" class="col-span-2 border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" placeholder="Justification" ></textarea>
         </div>
+        <button mat-raised-button color="accent" class="btn bg-green-600 text-white focus:shadow-none border-1">
+            Signaler
+        </button>
     </div>
 
 </div>
