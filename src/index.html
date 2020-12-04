@@ -19,32 +19,12 @@
       else x.style.display="none";
     }
     
-    function putMenu() {
-      let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      var el = document.documentElement;
-    
-      if(el.scrollTop>=20 && el.scrollTop<=120){ 
-        document.getElementById("putMenuBtn").style.display="";
-        document.getElementById("putMenuBtn").style.right=(-100+el.scrollTop)+"px"; }
-    
-      else if(el.scrollTop<20) { 
-        document.getElementById("putMenuBtn").style.display="none";
-        document.getElementById("putMenuBtn").style.width="";  }
-      else { 
-        document.getElementById("putMenuBtn").style.display="";
-        document.getElementById("putMenuBtn").style.right=20+"px"; }
-      //get Scroll Position
-     
-    }
-    
     
     </script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="min-h-screen bg-white  mat-typography"  onscroll="putMenu()">
+<body class="min-h-screen bg-white  mat-typography" >
   <app-root></app-root>
 
 

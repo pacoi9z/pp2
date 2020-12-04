@@ -20,6 +20,14 @@ export class NavbarComponent implements OnInit {
     return this.helpS.pathToImg;
   }
 
+  scrollToElement($element): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  }
 
+
+  eee() {
+    document.getElementById('wrapper').classList.toggle("toggled");
+  }
 
 }

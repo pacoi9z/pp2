@@ -1,1 +1,29 @@
-<p>retard works!</p>
+<div class="container my-10" >
+    <div class="p-2">
+        <span class="text-2xl">Signaler un retard</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1">
+            <div class="grid ">
+                <div class="flex items-center ">
+                    <label class="mb-0 mr-4 " for="dateretard">Date du :</label> 
+                    <label class="flex items-center mb-0"><input type="checkbox" /> <span class="ml-2">Aujourd'huit</span></label>
+                </div>
+                <input class="border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" type="date" id="dateretard"  placeholder="Date d'absence" >     
+            </div>
+            <div class="grid sm:col-span-1 col-span-2 ">
+                <label class="mb-0" for="heureentre">Heure d'arrivé :</label>
+                <input class="border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" type="time" placeholder="Heure d'entre" id="heureentre" > 
+            </div>  
+            <input list="browsers" class="col-span-2 border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" placeholder="" > 
+            <datalist id="browsers">
+                <option value="Enseignanat1">enseignant1/titre</option>
+                <option value="Enseignanat2">enseignant2/titre</option>
+                <option value="Enseignanat3">enseignant3/titre</option>
+            </datalist>
+            <textarea id="autoresizing" class="col-span-2 border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" placeholder="Justification" ></textarea>
+        </div>
+        <button mat-raised-button color="accent" class="btn bg-green-600 text-white focus:shadow-none border-1">
+            Signaler
+        </button>
+    </div>
+
+</div>

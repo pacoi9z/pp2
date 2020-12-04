@@ -1,1 +1,43 @@
-<p>medicament works!</p>
+<div class="container my-10" >
+    <div class="p-2">
+        <span class="text-2xl">Signaler une prise de médicaments</span><br/>
+        Medicament 1
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 bg-gray-100 p-2 rounded">
+            
+            <div class="grid lg:col-span-2 xl:col-span-1 col-span-3 ">
+                <input class=" border-b mb-1 p-2 bg-gray-100 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto" type="text"placeholder="Nom du médicament" >     
+            </div>
+            <div class="grid lg:col-span-2  xl:col-span-1 col-span-3 ">
+                <div class="flex items-center justify-center ">
+                    <label class="mb-0 mr-4" style="white-space: nowrap" for="dateretard">Heur de prise :</label> 
+                    <label class="flex items-center mb-0 mr-2"><input type="radio" name="medoc" /> <span class="ml-2">Avan</span></label>                    
+                    <label class="flex items-center mb-0 mr-2"><input type="radio" name="medoc" /> <span class="ml-2">Pendan</span></label>                    
+                    <label class="flex items-center mb-0 mr-2"><input type="radio" name="medoc" /> <span class="ml-2">Apres</span></label>
+                    <label class="mb-0 mr-4" style="white-space: nowrap"> le repas</label>
+                </div>
+            </div>
+            <div class="md:col-span-1 col-span-3 flex items-center justify-end">
+               <input type="number" class="border-b bg-gray-100 mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto w-100" required name="qt" placeholder="dosage, comprimé, cuillères" /> Unitées
+            </div> 
+        </div>
+        
+        <DIV class="mt-2 flex items-center justify-between">
+            <div>
+                <button color="accent" class="mr-1 btn bg-blue-600 text-white focus:shadow-none border-1">
+                    +
+                </button>
+                <button color="accent"      class="btn bg-red-600 text-white focus:shadow-none border-1">
+                    _
+                </button>
+            </div>
+            
+    
+            <button color="accent" class="btn bg-green-600 text-white focus:shadow-none border-1">
+                Signaler
+            </button>
+        </DIV>
+        
+    </div>
+
+</div>
+

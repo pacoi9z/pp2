@@ -14,6 +14,7 @@ import { AbsenceComponent } from './services/absence/absence.component';
 import { RetardComponent } from './services/retard/retard.component';
 import { MedicamentComponent } from './services/medicament/medicament.component';
 import { C404Component } from './c404/c404.component';
+import { ProfileComponent } from './profile/profile.component';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {DemoMaterialModule} from './material-module';
 
@@ -32,7 +33,8 @@ import { C404Component } from './c404/c404.component';
     AbsenceComponent,
     RetardComponent,
     MedicamentComponent,
-    C404Component
+    C404Component,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
