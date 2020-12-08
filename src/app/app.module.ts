@@ -15,6 +15,8 @@ import { RetardComponent } from './services/retard/retard.component';
 import { MedicamentComponent } from './services/medicament/medicament.component';
 import { C404Component } from './c404/c404.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CarteComponent } from './carte/carte.component';
+import { CaisseComponent } from './caisse/caisse.component';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {DemoMaterialModule} from './material-module';
 
@@ -34,7 +36,9 @@ import { ProfileComponent } from './profile/profile.component';
     RetardComponent,
     MedicamentComponent,
     C404Component,
-    ProfileComponent
+    ProfileComponent,
+    CarteComponent,
+    CaisseComponent
   ],
   imports: [
     BrowserModule,

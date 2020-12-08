@@ -2,6 +2,7 @@ import { componentFactoryName } from '@angular/compiler';
 import { Component, ComponentFactory, NgModule } from '@angular/core';
 import { Routes, RouterModule, ROUTES, ExtraOptions } from '@angular/router';
 import { C404Component } from './c404/c404.component';
+import { CarteComponent } from './carte/carte.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PublicationsComponent } from './publications/publications.component';
@@ -9,6 +10,7 @@ import { ServicesComponent } from './services/services.component';
 
 const routes: Routes = [
   { path : 'myprofile', component : ProfileComponent },
+  { path : 'carte', component : CarteComponent },
   { path : 'publications', component : PublicationsComponent },
   { path : 'messages', component : MessagesComponent },
   { path : 'services/:serv', component : ServicesComponent },

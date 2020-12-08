@@ -13,7 +13,7 @@ export class HelpersService {
   notif_Services = '0'
   notif_Relations = '0'
   notif_Disabled = '0'
-
+  notif_Profile = '1';
   constructor() { }
 
 
