@@ -8,7 +8,7 @@ import { HelpersService } from '../helpers.service';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-
+  
   messages = [
     {
       id:1,
