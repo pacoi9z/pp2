@@ -9,6 +9,7 @@ import { PublicationServiceService } from './publication-service.service';
 })
 export class PublicationsComponent implements OnInit {
   
+  whatStat="Text";
   startPub=0;
   endPub=2;
 
@@ -48,8 +49,12 @@ export class PublicationsComponent implements OnInit {
   }
 
   showMore() {
-    
+
     this.PublicationData = this.dataPub.publications.slice(this.startPub-2,this.endPub+2);
   }
+
+  pubType(type) {
+    this.whatStat=type;
+  } 
 
 }
