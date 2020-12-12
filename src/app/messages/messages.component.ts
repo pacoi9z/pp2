@@ -85,7 +85,7 @@ export class MessagesComponent implements OnInit {
   }
 
   eee() {
-    document.getElementById('wrapper').classList.toggle("toggled");
+    document.getElementById('wrapper2').classList.toggle("toggled");
   }
 
 }
