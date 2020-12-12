@@ -8,6 +8,9 @@ import { PublicationServiceService } from './publication-service.service';
   styleUrls: ['./publications.component.scss']
 })
 export class PublicationsComponent implements OnInit {
+  
+  startPub=0;
+  endPub=2;
 
   PublicationData;
   
@@ -20,7 +23,7 @@ export class PublicationsComponent implements OnInit {
     this.titleService.setTitle(" ["+helpS.notif_Publication+"] Publications - El Razi School");
     else this.titleService.setTitle("Publications - El Razi School");
 
-    this.PublicationData = dataPub.publications;
+    this.PublicationData = dataPub.publications.slice(this.startPub,this.endPub);
 
   }
 
@@ -33,6 +36,8 @@ export class PublicationsComponent implements OnInit {
   }
 
 
+
+
   isArabic(txt) {
     var pattern = /[\u0600-\u06FF\u0750-\u077F]/;
     return pattern.test(txt);
@@ -40,6 +45,11 @@ export class PublicationsComponent implements OnInit {
 
   openInNewTab(filePub){
     window.open(filePub, '_blank');
+  }
+
+  showMore() {
+    
+    this.PublicationData = this.dataPub.publications.slice(this.startPub-2,this.endPub+2);
   }
 
 }

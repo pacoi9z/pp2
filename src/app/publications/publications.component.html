@@ -81,7 +81,7 @@
 
     <div #Publications class="relative mb-5 col-span-5 lg:col-span-3">
       <!---- -------------------------------------------------------------------------------------------------------------------------->
-      <div *ngFor='let pub of PublicationData' 
+      <div *ngFor='let pub of PublicationData;' 
       class="p-2 border rounded mb-3">
         <div class="grid grid-cols-3">
           <div class="col-span-3 flex items-start justify-between">
@@ -149,5 +149,13 @@
       <!---- -------------------------------------------------------------------------------------------------------------------------->
       
       <!---- -------------------------------------------------------------------------------------------------------------------------->
+      <div class="cursor-pointer flex justify-center mb-2 p-2">
+        <button (click)="showMore()" class="text-green-600 hover:bg-green-300 focus:bg-green-300 rounded-full ">
+            <svg class="h-8 rounded-full" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </button>
+    </div>
   </div>
 </div>
