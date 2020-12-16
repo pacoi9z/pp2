@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import { HelpersService } from '../helpers.service';
@@ -10,13 +11,14 @@ import { PublicationServiceService } from './publication-service.service';
 export class PublicationsComponent implements OnInit {
   
   whatStat="Text";
-  startPub=0;
-  endPub=2;
+  startPub=0;//commancer par affiche la pub 0
+  endPub=2;//finir avec la pub 2
 
   PublicationData;
   
   constructor(
-    private helpS:HelpersService,
+    private datePipe: DatePipe,
+    public helpS:HelpersService,
     private dataPub:PublicationServiceService, 
     private titleService :Title) { 
      
@@ -36,9 +38,6 @@ export class PublicationsComponent implements OnInit {
     return this.helpS.pathToImg;
   }
 
-
-
-
   isArabic(txt) {
     var pattern = /[\u0600-\u06FF\u0750-\u077F]/;
     return pattern.test(txt);
@@ -49,12 +48,55 @@ export class PublicationsComponent implements OnInit {
   }
 
   showMore() {
+    this.startPub;
+    this.endPub+=2;
+    this.refreshPubList();
+  }
 
-    this.PublicationData = this.dataPub.publications.slice(this.startPub-2,this.endPub+2);
+  refreshPubList() {
+    this.PublicationData = this.dataPub.publications.slice(this.startPub,this.endPub)
   }
 
   pubType(type) {
     this.whatStat=type;
   } 
+
+  SendLike(idPub) {
+    
+    let myObj = this.dataPub.publications.find(e=> e.idPub == idPub);
+    let jm = myObj.jaimPub;
+
+    if(jm==="true") {
+      myObj.jaimPub = "false";
+      myObj.nbjPub -= 1;
+    }
+    else {
+      myObj.jaimPub = "true";
+      myObj.nbjPub += 1;
+    }
+    this.refreshPubList();
+    this.dataPub.LikePost(idPub);
+  }
+
+  ModPub(idPub) {
+
+  }
+  setVu (idPub){
+    let myObj = this.dataPub.publications.find(e=> e.idPub == idPub);
+    let vu = myObj.vuPub;
+
+    myObj.vuPub = this.datePipe.transform(new Date(),'h:m');
+    
+    this.refreshPubList();
+    this.dataPub.setVu(idPub);
+  }
+
+  
+
+  startVideo() {
+    new window['YT'].Player('player',{
+      videoID: 
+    })
+  }
 
 }

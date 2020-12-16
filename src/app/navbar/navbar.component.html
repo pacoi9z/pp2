@@ -31,7 +31,7 @@
             <nav class="navbar navbar-expand-xl navbar-dark bg-green-700 autor">
                 <div class="container p-0">
                     <a class="navbar-brand hover:bg-green-800 p-2 rounded" href="#">
-                        <img src="{{ getPath() }}/logo.png"  width="35" height="35" class="d-inline-block align-top bg-white rounded" alt="" loading="lazy">
+                        <img [src]="getPath()+'/logo.png'" width="35" height="35" class="d-inline-block align-top bg-white rounded" alt="" loading="lazy">
                         <i class="ml-2">Kid's School El-Razi</i>
                     </a>
                     <div class="flex items-center">
@@ -83,19 +83,19 @@
                         </ul>
                         <div class="my-2 my-lg-0 dropdown">
                             <button data-toggle="dropdown" id="profiledropdown" class="dropdown-toggle flex text-sm text-white rounded-full focus:outline-none hover:bg-green-800 transition duration-150 ease-in-out">
-                                <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name=Ziane+Roufaida&amp;color=7F9CF5&amp;background=EBF4FF" alt="Ziane Roufaida">
-                                <p class="p-1">{{Nom}} (Hasna)</p>
+                                <img class="h-8 w-8 rounded-full object-cover" [src]="this.helpS.getphoto()" alt="Ziane Roufaida">
+                                <p class="p-1">{{this.helpS.getnom() | uppercase }} {{this.helpS.getprenom()}} {{this.helpS.getalias()!='' ? '('+this.helpS.getalias()+')' : ''}}</p>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profiledropdown">
-                                <a class="dropdown-item" routerLink="myprofile" href="#">Mon Profile</a>
-                                <hr />
-                                <a class="dropdown-item" routerLink="services/rendezvous"  >Rendez-vous</a>
-                                <a class="dropdown-item" routerLink="services/certificascolarite">Certificat de scolarité</a>
-                                <hr />
-                                <a class="dropdown-item" routerLink="services/retard">Signaler un retard a l'educateur</a>
-                                <a class="dropdown-item" routerLink="services/absence">Signaler une absence a l'educateur</a>
-                                <a class="dropdown-item" routerLink="services/medicament">Signaler une prise de médicaments</a>
-                                <hr/>
+                            <div  class="dropdown-menu dropdown-menu-right" aria-labelledby="profiledropdown">
+                                <a *ngIf="this.helpS.gettype()=='Parent'" class="dropdown-item" routerLink="myprofile" href="#">Mon Profile</a>
+                                <hr *ngIf="this.helpS.gettype()=='Parent'" />
+                                <a *ngIf="this.helpS.gettype()=='Parent'" class="dropdown-item" routerLink="services/rendezvous"  >Rendez-vous</a>
+                                <a *ngIf="this.helpS.gettype()=='Parent'" class="dropdown-item" routerLink="services/certificascolarite">Certificat de scolarité</a>
+                                <hr *ngIf="this.helpS.gettype()=='Parent'" />
+                                <a *ngIf="this.helpS.gettype()=='Parent'" class="dropdown-item" routerLink="services/retard">Signaler un retard a l'educateur</a>
+                                <a *ngIf="this.helpS.gettype()=='Parent'" class="dropdown-item" routerLink="services/absence">Signaler une absence a l'educateur</a>
+                                <a *ngIf="this.helpS.gettype()=='Parent'" class="dropdown-item" routerLink="services/medicament">Signaler une prise de médicaments</a>
+                                <hr *ngIf="this.helpS.gettype()=='Parent'" />
                                 <a class="dropdown-item focus:bg-red-500 hover:bg-red-200" href="#">Deconnexion</a>
                             </div>
                         </div>

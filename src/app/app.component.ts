@@ -8,10 +8,8 @@ import { HelpersService } from './helpers.service';
 })
 export class AppComponent implements OnInit {
   
-  tit = 'Publications';
-  nomPersonne = 'Ziane Hasna';
+  
   constructor() {
-    this.tit;
   }
 
   ngOnInit() {

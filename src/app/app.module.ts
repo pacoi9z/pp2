@@ -17,6 +17,7 @@ import { C404Component } from './c404/c404.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CarteComponent } from './carte/carte.component';
 import { CaisseComponent } from './caisse/caisse.component';
+import { DatePipe } from '@angular/common';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {DemoMaterialModule} from './material-module';
 
@@ -47,7 +48,7 @@ import { CaisseComponent } from './caisse/caisse.component';
     //DemoMaterialModule,
     //HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

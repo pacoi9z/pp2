@@ -6,7 +6,7 @@ import {HelpersService} from '../helpers.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  @Input() Nom : string = '';
+  
 
   
   constructor(public helpS:HelpersService) {  
