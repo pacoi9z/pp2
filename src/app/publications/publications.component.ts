@@ -12,7 +12,7 @@ export class PublicationsComponent implements OnInit {
   
   whatStat="Text";
   startPub=0;//commancer par affiche la pub 0
-  endPub=2;//finir avec la pub 2
+  endPub=5;//finir avec la pub 5
 
   PublicationData;
   
@@ -49,8 +49,13 @@ export class PublicationsComponent implements OnInit {
 
   showMore() {
     this.startPub;
-    this.endPub+=2;
+    if(this.endPub<this.dataPub.publications.length)
+    this.endPub+=3;
     this.refreshPubList();
+  }
+
+  end9elMenData() {
+    return this.endPub<this.dataPub.publications.length;
   }
 
   refreshPubList() {
@@ -61,8 +66,24 @@ export class PublicationsComponent implements OnInit {
     this.whatStat=type;
   } 
 
-  SendLike(idPub) {
+  SendInfo(idPub) {
     
+    let myObj = this.dataPub.publications.find(e=> e.idPub == idPub);
+    let inf = myObj.infoPub;
+
+    if(inf==="true") {
+      myObj.infoPub = "false";
+      myObj.nbiPub -= 1;
+    }
+    else {
+      myObj.infoPub = "true";
+      myObj.nbiPub += 1;
+    }
+    this.refreshPubList();
+    this.dataPub.LikePost(idPub);
+  }
+
+  SendLike(idPub) {
     let myObj = this.dataPub.publications.find(e=> e.idPub == idPub);
     let jm = myObj.jaimPub;
 
@@ -75,12 +96,13 @@ export class PublicationsComponent implements OnInit {
       myObj.nbjPub += 1;
     }
     this.refreshPubList();
-    this.dataPub.LikePost(idPub);
+    this.dataPub.infoPost(idPub);
   }
 
   ModPub(idPub) {
 
   }
+
   setVu (idPub){
     let myObj = this.dataPub.publications.find(e=> e.idPub == idPub);
     let vu = myObj.vuPub;
@@ -91,12 +113,7 @@ export class PublicationsComponent implements OnInit {
     this.dataPub.setVu(idPub);
   }
 
-  
 
-  startVideo() {
-    new window['YT'].Player('player',{
-      videoID: 
-    })
-  }
+
 
 }

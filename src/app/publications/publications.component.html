@@ -91,7 +91,9 @@
       <!---- -------------------------------------------------------------------------------------------------------------------------->
       <div *ngFor='let pub of PublicationData;' 
       class="p-2 border rounded mb-3"
-      (load)="pub.vuPub==null ? setVu(pub.idPub) : false" >
+      (mouseenter)="pub.vuPub==null ? setVu(pub.idPub) : false" 
+      (loadstart)="pub.vuPub==null ? setVu(pub.idPub) : false" 
+      (loadeddata)="pub.vuPub==null ? setVu(pub.idPub) : false" >
         <div class="grid grid-cols-3">
           <div class="col-span-3 flex items-start justify-between">
             <div class="flex items-center">
@@ -120,32 +122,62 @@
             </h1> 
             <div 
             *ngIf="pub.MediaLinkPub != null" class="w-full mb-2 rounded" >
+              <div 
+              *ngIf="pub.MediaTypePub=='file'"  
+              class="bg-dark text-white rounded p-2 container flex items-center justify-between">
+                <div class="flex items-center" >
+                  <img [src]="'assets/img/'+pub.MediaLinkPub.split('.')[1]+'.png'" width="75" class="mr-2" />
+                  <div class="grid">
+                    <label class="m-0 text-xl text-uppercase">
+                      {{pub.MediaNamePub}}
+                    </label>
+                    <div class="flex gap-1">
+                      <button class="btn p-2 btn-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                          <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                          <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
+                        </svg>
+                      </button>
+                      <button class="btn p-2 btn-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info" viewBox="0 0 16 16">
+                          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                          <circle cx="8" cy="4.5" r="1"/>
+                        </svg>
+                      </button>
+                    </div>
+                    
+                  </div>
 
-              <div *ngIf="pub.MediaTypePub=='file'"  class="container w-50">
-                {{pub.MediaNamePub}}
-                <button (click)="openInNewTab(pub.MediaLinkPub)" 
-                target="_blank"  
-                class="text-uppercase w-full bg-gray-100 hover:bg-green-100 text-green-600 hover:text-green-400 px-3 py-2 rounded">
-                  Telecharger
-                </button>
+                </div>
+                <div>
+                  <button (click)="openInNewTab(pub.MediaLinkPub)" 
+                  target="_blank"  
+                  class="text-uppercase w-full bg-green-400 hover:bg-green-600 text-green-800 hover:text-green-300 px-3 py-2 rounded flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                  </svg>  
+                  <label class="ml-2 m-0">Télécharger ({{pub.MediaSizePub}}kb)</label>
+                  </button>
+                </div>
+                
               </div>
               <div 
               *ngIf="pub.MediaTypePub=='vdo'"  
               class="container w-full"
               >
-                <video controls>
+                <video controls class="rounded">
                   <source [src]="getPath()+'/'+pub.MediaLinkPub" [type]="'video/'+pub.MediaNamePub">
                   Mettez a jour votre navigateur pour lire cette video.. 
                 </video>
               </div>
 
-              <div *ngIf="pub.MediaTypePub=='img'"  class="w-full mb-2">
+              <div *ngIf="pub.MediaTypePub=='img'"  class="w-full  mb-2">
                 <div (click)="openInNewTab(getPath()+'/'+pub.MediaLinkPub)" 
-                target="_blank"  class="h-64"
+                target="_blank"  class="h-64 rounded"
                 [style.background-image]="'url('+getPath()+'/'+pub.MediaLinkPub+')'" 
                 [style.background-size]="'cover'"   
-               >
-                  
+               >    
               </div>
               </div>
 
@@ -173,11 +205,15 @@
                 <span >J'aime</span>
               </button>
             
-              <button [ngClass]="{'text-green-500 font-black': pub.qestPub==='true'}" class="hover:bg-gray-300  px-3 py-2 w-full rounded">
+              <button 
+              [ngClass]="{'text-green-500 font-black': pub.qestPub==='true'}" class="hover:bg-gray-300  px-3 py-2 w-full rounded">
                 <span>Question?</span>
               </button>
             
-              <button [ngClass]="{'text-green-500 font-black': pub.infoPub==='true'}" class="hover:bg-gray-300 px-3 py-2 w-full  rounded">
+              <button 
+              (click)="SendInfo(pub.idPub)"
+              [ngClass]="{'text-green-500 font-black': pub.infoPub==='true'}" 
+              class="hover:bg-gray-300 px-3 py-2 w-full  rounded">
                 <span>+ Infos!</span>
               </button>
             </div>
@@ -198,7 +234,7 @@
       <!---- -------------------------------------------------------------------------------------------------------------------------->
       
       <!---- -------------------------------------------------------------------------------------------------------------------------->
-      <div class="cursor-pointer flex justify-center mb-2 p-2">
+      <div *ngIf="end9elMenData()" class="cursor-pointer flex justify-center mb-2 p-2">
         <button (click)="showMore()" class="text-green-600 hover:bg-green-300 focus:bg-green-300 rounded-full ">
             <svg class="h-8 rounded-full" viewBox="0 0 16 16" fill="currentColor">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>

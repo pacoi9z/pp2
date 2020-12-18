@@ -3,3 +3,14 @@
     text-align: right;
     font-size: 14px;
 }
+
+
+.card-columns {
+    @media (max-width: 1024px) {
+      column-count: 2;
+    }
+    @media (max-width: 720px) {
+      column-count: 1;
+    }
+
+  }
