@@ -254,7 +254,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="questModalLabel">Posez votre questions en privé</h5>
+        <h5 class="modal-title" id="questModalLabel">Posez votre questions en privé à : {{MoulPubName}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -262,9 +262,26 @@
       <div class="modal-body">
         <form>
           <input type="hidden" class="form-control" id="forPub">
+          <input type="hidden" class="form-control" id="forMoulPub">
+          
           <div class="form-group">
             <label for="message-text" class="col-form-label">Question : </label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea 
+            *ngIf="!msgIsSelectif()"
+            class="form-control" placeholder="Tapez votre question ici"></textarea>
+            
+            <select class="form-control"
+            *ngIf="msgIsSelectif()" > 
+              <option value="Q1">
+                Q1 : Qeustion1
+              </option>
+              <option value="Q2">
+                Q1 : Qeustion2
+              </option>
+              <option value="Q3">
+                Q1 : Qeustion3
+              </option>
+            </select>
           </div>
         </form>
       </div>

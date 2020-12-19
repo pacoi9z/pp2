@@ -13,8 +13,9 @@ export class PublicationsComponent implements OnInit {
   whatStat="Text";
   startPub=0;//commancer par affiche la pub 0
   endPub=5;//finir avec la pub 5
-
+  qestionSelectedPub; 
   PublicationData;
+  MoulPubName;
   
   constructor(
     private datePipe: DatePipe,
@@ -114,11 +115,19 @@ export class PublicationsComponent implements OnInit {
     this.dataPub.setVu(idPub);
   }
 
-  questionModal(e) {
-    document.getElementById("forPub").setAttribute('value',e);
-    
+  questionModal(idPub) {
+    let myObj = this.dataPub.publications.find(e=> e.idPub == idPub);
+    this.qestionSelectedPub=myObj.typeMoulPub;
+    this.MoulPubName = myObj.nomPub;
+    document.getElementById("forPub").setAttribute('value',idPub);
+    document.getElementById("forMoulPub").setAttribute('value',myObj.idMoulPub);
   }
 
   
+  msgIsSelectif() {
+    if(this.helpS.gettype()=='Parent' && this.qestionSelectedPub=='Enseignant')
+    return true;
+    else return false;
+  }
 
 }
