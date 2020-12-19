@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {Title} from '@angular/platform-browser';
+import { Component, OnInit} from '@angular/core';
+import { Title} from '@angular/platform-browser';
 import { HelpersService } from '../helpers.service';
 import { PublicationServiceService } from './publication-service.service';
 @Component({
@@ -28,6 +28,7 @@ export class PublicationsComponent implements OnInit {
 
     this.PublicationData = dataPub.publications.slice(this.startPub,this.endPub);
 
+     
   }
 
   ngOnInit(): void {
@@ -113,7 +114,11 @@ export class PublicationsComponent implements OnInit {
     this.dataPub.setVu(idPub);
   }
 
+  questionModal(e) {
+    document.getElementById("forPub").setAttribute('value',e);
+    
+  }
 
-
+  
 
 }
