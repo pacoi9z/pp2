@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {HelpersService} from '../helpers.service';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,9 +8,10 @@ import {HelpersService} from '../helpers.service';
 })
 export class NavbarComponent implements OnInit {
   
-
+  notificationsData : any;
   
-  constructor(public helpS:HelpersService) {  
+  constructor(public helpS:HelpersService) {
+      this.notificationsData = helpS.notifications;
   }
 
   ngOnInit(): void {

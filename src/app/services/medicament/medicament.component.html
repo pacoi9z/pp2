@@ -1,7 +1,8 @@
 <div class="container my-10" >
     <div class="p-2">
         <span class="text-2xl">Signaler une prise de médicaments</span><br/>
-        Medicament 1
+        <div *ngFor="let m of medoc;let i = index">
+        Medicament {{i+1}}
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 bg-gray-100 p-2 rounded">
             
             <div class="grid lg:col-span-2 xl:col-span-1 col-span-3 ">
@@ -20,13 +21,13 @@
                <input type="number" class="border-b bg-gray-100 mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto w-100" required name="qt" placeholder="dosage, comprimé, cuillères" /> Unitées
             </div> 
         </div>
-        
-        <DIV class="mt-2 flex items-center justify-between">
+        </div>
+        <div class="mt-2 flex items-center justify-between">
             <div>
-                <button color="accent" class="mr-1 btn bg-blue-600 text-white focus:shadow-none border-1">
+                <button color="accent" (click)="addMedoc()" class="mr-1 btn bg-blue-600 text-white focus:shadow-none border-1">
                     +
                 </button>
-                <button color="accent"      class="btn bg-red-600 text-white focus:shadow-none border-1">
+                <button *ngIf="medoc.length>1" color="accent" (click)="removeMedoc()" class="btn bg-red-600 text-white focus:shadow-none border-1">
                     _
                 </button>
             </div>
@@ -35,7 +36,7 @@
             <button color="accent" class="btn bg-green-600 text-white focus:shadow-none border-1">
                 Signaler
             </button>
-        </DIV>
+        </div>
         
     </div>
 

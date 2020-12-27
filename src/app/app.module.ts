@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PublicationsComponent } from './publications/publications.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ChatComponent } from './chat/chat.component';
@@ -15,9 +14,13 @@ import { RetardComponent } from './services/retard/retard.component';
 import { MedicamentComponent } from './services/medicament/medicament.component';
 import { C404Component } from './c404/c404.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CarteComponent } from './carte/carte.component';
-import { CaisseComponent } from './caisse/caisse.component';
 import { DatePipe } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileModule } from './profile/profile.module';
+import { PublicationsModule } from './publications/publications.module';
+import { MessagesModule } from './messages/messages.module';
+import { ServicesModule } from './services/services.module';
+
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {DemoMaterialModule} from './material-module';
 
@@ -26,20 +29,9 @@ import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-    PublicationsComponent,
-    MessagesComponent,
     NavbarComponent,
     ChatComponent,
-    ServicesComponent,
-    RendezvousComponent,
-    CertificatComponent,
-    AbsenceComponent,
-    RetardComponent,
-    MedicamentComponent,
     C404Component,
-    ProfileComponent,
-    CarteComponent,
-    CaisseComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +39,12 @@ import { DatePipe } from '@angular/common';
     //BrowserAnimationsModule,
     //DemoMaterialModule,
     //HttpClientModule,
+    ProfileModule,
+    PublicationsModule,
+    ServicesModule,
+    MessagesModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicamentComponent implements OnInit {
 
+  medoc = [0];
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addMedoc() {
+    this.medoc.push(0);
+  }
+  
+  removeMedoc() {
+    this.medoc.splice(0,1);
   }
 
 }
