@@ -308,13 +308,18 @@ SEND_HTTP_VU(idPost) {
   console.log('http send to server id:'+idPost+" for add vu");
 }
 
-getPubs() {
-  setTimeout(()=>{
-    return this.publications;
-  },
-  2000
-  );
+getPubs = () => {
   
+  return new Promise(
+    (resolve,reject) => {
+      setTimeout(()=>{
+       resolve(this.publications);
+      },
+      1000
+      );
+    }
+  );
+
 }
 
 }

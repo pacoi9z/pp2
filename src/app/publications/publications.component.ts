@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title} from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { HelpersService } from '../helpers.service';
@@ -16,7 +15,8 @@ export class PublicationsComponent implements OnInit {
   private pub_txt_minLength = 2;
   private pub_evt_titre_maxLength = 255;
   private pub_evt_titre_minLength = 5;
-
+  /////////////////////////////////////////////////////////
+  loadingSpiner=true;
   whatStat="Text";
   startPub=0;//commancer par affiche la pub 0
   endPub=5;//finir avec la pub 5
@@ -44,45 +44,53 @@ export class PublicationsComponent implements OnInit {
     else this.titleService.setTitle("Publications - El Razi School");
 
     //lire l'id trouvé dans l'url
-    this.route.params.subscribe(e => { 
-                                      this.prio = e.id;
-                                      //trier les pub selon priorité pui selon les vu
-                                      this.trierPubs();
-                                    });
+    this.route.params.subscribe(e => {
+      this.loadingSpiner=true; 
+      this.PublicationData=null;
+      this.prio = e.id;
+      //trier les pub selon priorité pui selon les vu
+      this.trierPubs();
+    });
 
   }
 
 
   trierPubs() {
+    let dataPubs:any;
+    this.pubS.getPubs().then((e) => {
+      this.loadingSpiner=false;
+      dataPubs = e;
+      let mySelectedPub;
+      //trier la data ta3na d'une façon a avoir les non vu en premier
+      dataPubs.sort((e1,e2) => { 
+          if(e1.vuPub==null && e2.vuPub!=null) return -1 
+          else if(e1.vuPub!=null && e2.vuPub!=null) return 1
+          else if(e1.vuPub!=null && e2.vuPub!=null) 
+                if(e1.vuPub>e2.vuPub) return -1
+                else if(e1.vuPub<e2.vuPub) return 1
+                else return 0
+          else return 0
+        })
 
-    let mySelectedPub;
-    //trier la data ta3na d'une façon a avoir les non vu en premier
-    this.pubS.publications.sort((e1,e2) => { 
-        if(e1.vuPub==null && e2.vuPub!=null) return -1 
-        else if(e1.vuPub!=null && e2.vuPub!=null) return 1
-        else if(e1.vuPub!=null && e2.vuPub!=null) 
-              if(e1.vuPub>e2.vuPub) return -1
-              else if(e1.vuPub<e2.vuPub) return 1
-              else return 0
-        else return 0
-      })
-
-    if(this.prio!=null)
-    {
-      let pubs = this.pubS.getPubs();
-      let index = pubs.findIndex(e => e.idPub == this.prio);
-      mySelectedPub = pubs.find(e => e.idPub == this.prio);
-      if(mySelectedPub!=null) {
-        //supprimer l'objet selectionner
-        pubs.splice(index,1);
-              
-        //replacé ma pub selectionner en première position  
-        pubs.unshift(mySelectedPub);
+      if(this.prio!=null)
+      {
+        
+        let index = dataPubs.findIndex(e => e.idPub == this.prio);
+        mySelectedPub = dataPubs.find(e => e.idPub == this.prio);
+        if(mySelectedPub!=null) {
+          //supprimer l'objet selectionner
+          dataPubs.splice(index,1);
+                
+          //replacé ma pub selectionner en première position  
+          dataPubs.unshift(mySelectedPub);
+        }
+        
       }
-      
-    }
 
-    this.refreshPubList();
+      this.refreshPubList();
+    });
+    
+    
   }
 
 
