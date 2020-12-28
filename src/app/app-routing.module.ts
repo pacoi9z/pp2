@@ -9,7 +9,7 @@ const route: Routes = [
   { path : 'publications', loadChildren: () => import('./publications/publications.module').then(m => m.PublicationsModule) },
   { path : 'messages', loadChildren: () => import('./messages/messages.module').then(m => m.MessagesModule) },
   { path : 'services', loadChildren: () => import('./services/services.module').then(m => m.ServicesModule) },
-  { path : '', component : AppComponent },
+  { path : '', redirectTo: 'publications', pathMatch: 'full' },
   { path: '**', redirectTo : '404' },
   { path: '404' , component : C404Component },
   
