@@ -12,8 +12,8 @@ export class PublicationServiceService {
   //recent first, not seen first
 
   publications =[{
-    idPub:"21P",
-    idMoulPub : "17P",
+    idPub:"21",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
     photoPub:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
     nomPub:"Ziane Raiss",
@@ -34,8 +34,8 @@ export class PublicationServiceService {
     infoPub:"true",
   },
   {
-    idPub:"24P",
-    idMoulPub : "17P",
+    idPub:"24",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
     photoPub:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
     nomPub:"Bechkoune Hanane",
@@ -55,8 +55,8 @@ export class PublicationServiceService {
     infoPub:"false",
   },
   {
-    idPub:"25P",
-    idMoulPub : "17P",
+    idPub:"25",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1546820389-44d77e1f3b31?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzR8fGZhY2V8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
     nomPub:"Ziane Islam",
@@ -76,8 +76,8 @@ photoPub:"https://images.unsplash.com/photo-1546820389-44d77e1f3b31?ixid=MXwxMjA
     infoPub:"true",
   },
   {
-    idPub:"28P",
-    idMoulPub : "18P",
+    idPub:"28",
+    idMoulPub : "18",
     typeMoulPub : "Enseignant",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -98,8 +98,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
   },
   
   {
-    idPub:"29P",
-    idMoulPub : "17P",
+    idPub:"29",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -120,8 +120,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
   },
   
   {
-    idPub:"05P",
-    idMoulPub : "10P",
+    idPub:"5",
+    idMoulPub : "10",
     typeMoulPub : "Enseignant",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -141,8 +141,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
     infoPub:"true",
   },
   {
-    idPub:"30P",
-    idMoulPub : "10P",
+    idPub:"30",
+    idMoulPub : "10",
     typeMoulPub : "Enseignant",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -167,8 +167,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
     infoPub:"true",
   },
   {
-    idPub:"31P",
-    idMoulPub : "17P",
+    idPub:"31",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -188,8 +188,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
     infoPub:"true",
   },
   {
-    idPub:"32P",
-    idMoulPub : "17P",
+    idPub:"32",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -209,8 +209,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
     infoPub:"true",
   },
   {
-    idPub:"33P",
-    idMoulPub : "17P",
+    idPub:"33",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -230,8 +230,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
     infoPub:"true",
   },
   {
-    idPub:"34P",
-    idMoulPub : "17P",
+    idPub:"34",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -250,8 +250,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
     infoPub:"true",
   },
   {
-    idPub:"35P",
-    idMoulPub : "17P",
+    idPub:"35",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Amel",
@@ -271,8 +271,8 @@ photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-
     infoPub:"true",
   },
   {
-    idPub:"36P",
-    idMoulPub : "17P",
+    idPub:"36",
+    idMoulPub : "17",
     typeMoulPub : "Direction",
 photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
     nomPub:"Belmadi Farouk",

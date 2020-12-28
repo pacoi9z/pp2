@@ -36,9 +36,9 @@
                     </a>
                     <div class="flex items-center">
                         <div class="dropdown">
-                            <button data-toggle="dropdown" 
+                            <button data-toggle="dropdown" (click)="helpS.gosetNofiVu()"
                             class="dropdown-toggle flex items-center justify-center bg-green-800 hover:bg-green-900 rounded-full h-8 w-8 text-white mr-2 focus:outline-none transition duration-150 ease-in-out">
-                                <span *ngIf='helpS.notif_Cloche!="0"' class="rounded-full text-xs bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Cloche}}</b></span>
+                                <span *ngIf='helpS.notif_Cloche!==0' class="rounded-full text-xs bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Cloche}}</b></span>
                                 <svg class="w-1/2 h-1/2 text" viewBox="0 0 16 16" fill="currentColor" >
                                     <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
                                 </svg>
@@ -70,24 +70,24 @@
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item relative ml-1" >
                                 <a class="nav-link hover:bg-green-900 rounded" [routerLinkActive]="'text-white font-bold'" routerLink="publications">Publications</a>
-                                <span  *ngIf='helpS.notif_Publication!="0"' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Publication}}</b></span>
+                                <span  *ngIf='helpS.notif_Publication!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Publication}}</b></span>
                             </li>
                             
                             <li class="nav-item relative  ml-1" >
                                 <a class="nav-link hover:bg-green-900 rounded" [routerLinkActive]="'text-white font-bold'" routerLink="messages">Messages</a>
-                                <span *ngIf='helpS.notif_Messages!="0"' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Messages}}</b></span>
+                                <span *ngIf='helpS.notif_Messages!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Messages}}</b></span>
                             </li>
                             <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()=='D'" >
                                 <a class="nav-link hover:bg-green-900 rounded" [routerLinkActive]="'text-white font-bold'" routerLink="relations">Relations</a>
-                                <span  *ngIf='helpS.notif_Relations!="0"' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Relations}}</b></span>
+                                <span  *ngIf='helpS.notif_Relations!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Relations}}</b></span>
                             </li>
                             <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()=='D'">
                                 <a class="nav-link hover:bg-green-900 rounded " [routerLinkActive]="'text-white font-bold'" href="#" tabindex="-1">Dashboard</a>
-                                <span  *ngIf='helpS.notif_Disabled!="0"' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Disabled}}</b></span>
+                                <span  *ngIf='helpS.notif_Disabled!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Disabled}}</b></span>
                             </li>
                             <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()!='E'">
                                 <a class="nav-link hover:bg-green-900 rounded " [routerLinkActive]="'text-white font-bold'" href="#" tabindex="-1">Kid's Space</a>
-                                <span  *ngIf='helpS.notif_Disabled!="0"' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Disabled}}</b></span>
+                                <span  *ngIf='helpS.notif_Disabled!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Disabled}}</b></span>
                             </li>
                         </ul>
                         <div class="my-2 my-lg-0 dropdown">

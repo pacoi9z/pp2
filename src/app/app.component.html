@@ -2,9 +2,16 @@
 <app-navbar ></app-navbar>
 <!-- c'est ici que s'affiche ma route mami -->
 <div class="p-1 container-fluid" id="newBody" >
-<router-outlet></router-outlet>
+    <div *ngIf="loadingApp" class="flex items-center justify-center " style="height:75vh;">
+       <div style="display: grid; justify-items: center;" >
+            <img [src]="getPath()+'/logo.png'" class="Myshadow rounded" />
+            <div class="mt-2">Chargement de l'application kid's school</div>
+            <div class="spinner-border mt-2" role="status">
+                <span class="sr-only"></span>
+            </div>
+       </div>
+    </div>
+    <router-outlet *ngIf="!loadingApp" ></router-outlet>
+
 <app-chat></app-chat>
 </div>
-
-<!-- tit=$event ou bien  -->
-<!-- <app-publications (versApp)="catchEvent($event)" ></app-publications> -->

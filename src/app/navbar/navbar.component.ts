@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
   notificationsData : any;
   
   constructor(public helpS:HelpersService) {
-      this.notificationsData = helpS.notifications;
+      this.notificationsData = helpS.getClochNotifs();
   }
 
   ngOnInit(): void {

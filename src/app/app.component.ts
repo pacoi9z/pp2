@@ -8,9 +8,17 @@ import { HelpersService } from './helpers.service';
 })
 export class AppComponent implements OnInit {
   
-  
-  constructor() {
+  loadingApp = true;
+  constructor(private helpS : HelpersService) {
+    setTimeout(()=> { this.loadingApp=false;},2000);
+    
   }
+
+  getPath(){
+    return this.helpS.pathToImg;
+  }
+
+
 
   ngOnInit() {
     window.addEventListener('scroll', this.scrollEvent, true);

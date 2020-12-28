@@ -39,7 +39,7 @@ export class PublicationsComponent implements OnInit {
   ngOnInit(): void {
     
     //affiché le titre + le nombre de notif dans la balise TITLE dans l'HTML  
-    if(this.helpS.notif_Publication != '0')  
+    if(this.helpS.notif_Publication != 0)  
     this.titleService.setTitle(" ["+this.helpS.notif_Publication+"] Publications - El Razi School");
     else this.titleService.setTitle("Publications - El Razi School");
 
@@ -48,7 +48,7 @@ export class PublicationsComponent implements OnInit {
       this.loadingSpiner=true; 
       this.PublicationData=null;
       this.prio = e.id;
-      //trier les pub selon priorité pui selon les vu
+      //trier les pub selon priorité pui selon les vu, je t'aiiiiiiime sina <3 <3 hmara 
       this.trierPubs();
     });
 
@@ -81,7 +81,7 @@ export class PublicationsComponent implements OnInit {
           //supprimer l'objet selectionner
           dataPubs.splice(index,1);
                 
-          //replacé ma pub selectionner en première position  
+          //positioné ma pub selectionné en première position, chghol kima nti dok dertek priorité lowla ga3 fi hyati khi hmara -_-
           dataPubs.unshift(mySelectedPub);
         }
         

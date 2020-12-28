@@ -60,7 +60,7 @@ export class MessagesComponent implements OnInit {
 
   constructor(private helpS: HelpersService, 
               private titleService:Title ) {
-    if(helpS.notif_Messages != '0')  
+    if(helpS.notif_Messages != 0)  
     this.titleService.setTitle(" ["+helpS.notif_Messages+"] Messages - El Razi School");
     else this.titleService.setTitle("Messages - El Razi School")
    }

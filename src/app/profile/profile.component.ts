@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private helpS: HelpersService, 
     private titleService:Title ) {
-    if(helpS.notif_Profile != '0')  
+    if(helpS.notif_Profile != 0)  
     this.titleService.setTitle(" ["+helpS.notif_Profile+"] Profile - El Razi School");
     else this.titleService.setTitle("Profile - El Razi School")
     }
