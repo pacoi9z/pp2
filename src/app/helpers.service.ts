@@ -15,33 +15,31 @@ export class HelpersService {
     email : "ziane.ra@fakemail.com",
     photo : "https://scontent-mrs2-1.cdninstagram.com/v/t51.2885-15/e35/51018454_836621796669873_8611465961240760159_n.jpg?_nc_ht=scontent-mrs2-1.cdninstagram.com&_nc_cat=109&_nc_ohc=jin3B_TGlJwAX93FHGB&tp=1&oh=a7c60f5aff444da6c2774d9e228499b9&oe=5FFEC8B3"
   }
-
-  pathToImg = 'http://localhost/DesignEcole';
   notifMe = []; 
 
   notif_Cloche = 0;
   notif_Publication=0;
   notif_Messages=0;
+  notif_Dashboard=0;
   notif_Services=0;
   notif_Relations=0;
-  notif_Disabled=0;
+  notif_kids_space=0;
   notif_Profile=0;
-  //n'oublie pas d'ajouter les traitement notif pour le chat
-  notif_chat=0;
+  notif_Chat=0;
 
   constructor() { 
     this.gogetNotifForMe();this.gogetNotifCount();
-    //check for new notification every 5sec in this exemple it's set for 50sec, i love you sina <3
-    setInterval(()=>{this.gogetNotifForMe();this.gogetNotifCount()},50000); 
+    //check for new notification every 5sec in this exemple it's set for 20sec, i love you sina <3
+    setInterval(()=>{this.gogetNotifForMe();this.gogetNotifCount()},20000); 
   }
   
 
   gogetNotifForMe() {
 
     //HTTP REQUEST TO GET ALL NOTIFS for auth user so set in the button cloche
-    //replace the array by http data response
+    //replace "notifMe" array values by http data response
     //i want to marry you sina :'( do you want to ?
-   this.notifMe.unshift({
+   this.notifMe=[{
       
       idPub:"21",
       photoPub:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
@@ -58,7 +56,17 @@ export class HelpersService {
       nomPub:"Ziane Raiss",
       newLable : "Vous a envoyé un nouveau message",
       timePub  : "il y'a 1 jour",
-      linkTo : "messages/21"
+      linkTo : "messages/3"
+  
+    },
+    {
+      
+      idPub:"21",
+      photoPub:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+      nomPub:"Ziane Raiss",
+      newLable : "Vous a envoyé un nouveau message",
+      timePub  : "il y'a 1 jour",
+      linkTo : "messages/4"
   
     },
     {
@@ -77,31 +85,56 @@ export class HelpersService {
       timePub  : "il y'a 2 jours",
       linkTo : "publications/36"
     }, 
-  );
+  ];
 
-  this.notif_Cloche = this.notifMe.length;
+  //enlève le simbole + 3mira dertout pour les testes berk
+  this.notif_Cloche += this.notifMe.length;
 
   }
 
-  gosetNofiVu() {
-    //SET all listed notif in notifMe as VU with timestamp
+  gosetNofiClochVu() {
+    //SET all listed notif in notifMe as VU with current timestamp
     this.notif_Cloche = 0;
   }
+  gosetNofiKidsVu() {
+    //Set vu pour tout les notif de type kids_space
+    this.notif_kids_space = 0;
+  }
+  gosetNofiDashVu() {
+    //Set vu pour tout les notif de type Dash
+    this.notif_Dashboard = 0;
+  }
+  gosetNofiPubsVu() {
+    //Set vu pour tout les notif de type pulication
+    this.notif_Publication = 0;
+  }
+  gosetNofiMsgsVu() {
+    //Set vu pour tout les notif de type Message
+    this.notif_Messages = 0;
+  }
+  gosetNofiChatVu() {
+    //Set vu pour tout les notif de type chat
+    this.notif_Chat = 0;
+  }
+
 
   getClochNotifs() {
     return this.notifMe;
   }
 
   gogetNotifCount() {
-    //HTTP REQUEST TO GET ALL SYSTEM NOTIFS COUNT
-    let notifs = [99,2,0,0,0,1];
 
-    this.notif_Publication = notifs[0];
-    this.notif_Messages = notifs[1];
-    this.notif_Services = notifs[2];
-    this.notif_Relations = notifs[3];
-    this.notif_Disabled = notifs[4];
-    this.notif_Profile = notifs[5];
+    //HTTP REQUEST TO GET ALL SYSTEM NOTIFS COUNT
+    let notifs = [1,2,3,4,5,6,7,8];
+   //enlève ga3 les + stp, je t'aime <3
+    this.notif_Publication  += notifs[0];
+    this.notif_Messages     += notifs[1];
+    this.notif_Services     += notifs[2];
+    this.notif_Relations    += notifs[3];
+    this.notif_kids_space   += notifs[4];
+    this.notif_Profile      += notifs[5];
+    this.notif_Chat         += notifs[6];
+    this.notif_Dashboard    += notifs[7];
   }
   
   getnom() {

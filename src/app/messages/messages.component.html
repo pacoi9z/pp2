@@ -15,43 +15,60 @@
 -->
 <div class="container">
     <h1 class=" p-1 text-3xl cursor-pointer hover:bg-gray-100" (click)='eee()'>
-        Envoyer 
+        Nouveau message 
     </h1>
     <hr/>
     
-    <div class="p-5 " id="wrapper2" >
+    <div class="p-3 " id="wrapper2" >
         
-        
-
         <!-- Sidebar -->
         <div class="grid grid-cols-1 " id="sidebar-wrapper">
-            <input class="border-b mb-1 p-2 appearance-none focus:rounded leading-tight focus:outline-none focus:shadow auto" type="text" name="sendTo" placeholder="Envoyer a ?"/>
-            <input class="border-b mb-1 p-2 appearance-none focus:rounded  leading-tight focus:outline-none focus:shadow auto"  type="text" name="objet" placeholder="Objet du message" />
-            
-            <textarea id="autoresizing" class="border-b mt-1 p-2 h-20 focus:rounded  appearance-none  leading-tight focus:outline-none focus:shadow auto" name="content" placeholder="Redigez votre message ici"></textarea>
-            <div class="flex items-center justify-end mt-2">
-                <button class="border border-green-500 hover:bg-green-700 text-green-500 hover:text-white py-2 px-4 rounded">
-                    Envoyer
-                </button>
-                <button class="ml-2  border border-red-500 hover:bg-red-700 text-red-500 hover:text-white py-2 px-4 rounded">
-                    Abondoner
-                </button>
-            </div>
+            <form [formGroup]="frmG" class="form-check" >
+                <input formControlName="contact_Message" class="form-control mb-1" type="text" name="sendTo" placeholder="Envoyer a ?"/>
+                <input formControlName="objet_Message" class="form-control mb-1" type="text" name="objet" placeholder="Objet du message" />
+                
+                <textarea formControlName="Text_Message" id="autoresizing" class="form-control mb-1" name="content" placeholder="Redigez votre message ici"></textarea>
+                <div class="flex items-center justify-between mt-2">
+                    <div>
+                        <label class="text-red-500" *ngIf="errEnvoiMsg!=''">
+                            {{errEnvoiMsg}}
+                        </label>
+                        <label class="text-green-500" *ngIf="msgSuccess!=''">
+                            {{msgSuccess}}
+                        </label>
+                        
+                    </div>
+                    <div>
+                        <button data-target="#envoyervrmModal" data-toggle="modal" class="border border-green-500 hover:bg-green-700 text-green-500 hover:text-white py-2 px-4 rounded">
+                            Envoyer
+                        </button>
+                        <button class="ml-2  border border-red-500 hover:bg-red-700 text-red-500 hover:text-white py-2 px-4 rounded">
+                            Abondoner
+                        </button>
+                    </div>
+                </div>
+                </form>
         </div>
-            
-        
-        
+
     </div>
+
     <h1 class="text-3xl">Boite de reception</h1>
     <hr/>
-    <div class="p-0 flex items-start sm:justify-between justify-center" >
+    <div *ngIf="loadingSpiner" class="cursor-pointer flex justify-center items-center mb-2 p-2" style="height:50vh;">
+        <div class="cursor-pointer flex justify-center mb-2 p-2 spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div *ngIf="!loadingSpiner" class="p-0 flex items-start sm:justify-between justify-center" >
         <div class="rounded p-1 h-screen w-16 sm:w-1/4 md:w-2/5 "  >
-            <div *ngFor='let x of messages; let index = index' (click)="getMsg(x.id)" class="cursor-pointer sm:flex sm:items-start sm:justify-between mb-2 Myshadow hover:bg-green-100 rounded-full sm:rounded p-2 ">
+            <div 
+            *ngFor='let x of MessagesData; let index = index' (click)="getMsg(x.id)" 
+            [ngClass]="{ 'bg-gray-200'  : x.vuMsg==null }"
+            class="cursor-pointer sm:flex sm:items-start sm:justify-between mb-2 Myshadow hover:bg-green-100 rounded-full sm:rounded p-2 ">
                 <div class="sm:flex sm:items-center">
                     <div class="flex-shrink-0 h-10 w-10 relative">
                         <span class="rounded-full right-0 bottom-0 absolute border border-white bg-green-500 block h-3 w-3"></span>
                         <img class="h-10 w-10 rounded-full" [src]="x.sender_pic" alt="">
-
                     </div>
                     <div class="ml-4">
                         <div class="text-sm leading-5 font-medium text-gray-900 hidden sm:block ">
@@ -62,13 +79,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-sm leading-5 text-gray-500 hidden lg:block ">
-                    <span>{{x.datetime}}</span><br/>
+                <div class="grid" style="justify-items: right;">
+                    <div class="text-sm leading-5 hidden lg:block ">
+                        <span>{{x.datetime}}</span>
+                    </div>
+                    <div class="text-sm leading-5 text-gray-500 hidden lg:block ">
+                        <span>{{x.aMsg}}</span>
+                    </div>
                 </div>
+                
             </div>
             
             <div class="cursor-pointer flex justify-center mb-2 rounded-full sm:rounded p-2">
-                <button class="text-green-600">
+                <button *ngIf="!loadingSpiner && end9elMenData()" (click)='showMore()' class="text-green-600">
                     <svg class="h-8" viewBox="0 0 16 16" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
@@ -120,3 +143,30 @@
     </div>
 
 </div>
+
+<div class="modal fade" id="envoyervrmModal" tabindex="-1" role="dialog" aria-labelledby="envoyervrmModal" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="envoyervrmModalLabel">Confirmez l'envoi du message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <input type="hidden" class="form-control" id="forPub">
+            <input type="hidden" class="form-control" id="forMoulPub">
+            
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Vous voulez vraiment envoyer ce message ? </label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >Fermer</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="sendMsg()">Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </div>

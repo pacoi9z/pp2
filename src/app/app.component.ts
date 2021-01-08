@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalVarsService } from './global-vars.service';
 import { HelpersService } from './helpers.service';
 
 @Component({
@@ -9,16 +10,15 @@ import { HelpersService } from './helpers.service';
 export class AppComponent implements OnInit {
   
   loadingApp = true;
-  constructor(private helpS : HelpersService) {
-    setTimeout(()=> { this.loadingApp=false;},2000);
-    
+  constructor(
+    public helpS : HelpersService, 
+    private gVars: GlobalVarsService) {
+    setTimeout(()=> { this.loadingApp=false; },1000);
   }
 
   getPath(){
-    return this.helpS.pathToImg;
+    return this.gVars.linkToPHP;
   }
-
-
 
   ngOnInit() {
     window.addEventListener('scroll', this.scrollEvent, true);

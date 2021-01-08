@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalVarsService } from '../global-vars.service';
 import {HelpersService} from '../helpers.service';
 
 @Component({
@@ -10,7 +11,9 @@ export class NavbarComponent implements OnInit {
   
   notificationsData : any;
   
-  constructor(public helpS:HelpersService) {
+  constructor(
+      public helpS:HelpersService, 
+      private gVars: GlobalVarsService) {
       this.notificationsData = helpS.getClochNotifs();
   }
 
@@ -19,11 +22,10 @@ export class NavbarComponent implements OnInit {
   }
 
   getPath(){
-    return this.helpS.pathToImg;
+    return this.gVars.linkToPHP;
   }
 
   scrollToElement($element): void {
-    console.log($element);
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 

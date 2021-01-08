@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile.component';
 import { RouterModule, Routes } from '@angular/router';
 
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 const route: Routes = [
@@ -14,7 +14,7 @@ const route: Routes = [
   declarations: [
     ProfileComponent,
   ],
-  imports: [RouterModule.forChild(route), CommonModule],
+  imports: [RouterModule.forChild(route), CommonModule,HttpClientModule],
   exports: []
 })
 export class ProfileModule { }

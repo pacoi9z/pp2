@@ -292,12 +292,12 @@
       
       <!---- -------------------------------------------------------------------------------------------------------------------------->
       <div *ngIf="loadingSpiner" class="cursor-pointer flex justify-center items-center mb-2 p-2" style="height:75vh;">
-        <div *ngIf="true" class="cursor-pointer flex justify-center mb-2 p-2 spinner-border" role="status">
+        <div class="cursor-pointer flex justify-center mb-2 p-2 spinner-border" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
       
-      <div *ngIf="end9elMenData() && !loadingSpiner" class="cursor-pointer flex justify-center mb-2 p-2">
+      <div *ngIf="!loadingSpiner && end9elMenData()" class="cursor-pointer flex justify-center mb-2 p-2">
         <button (click)="showMore()" class="text-green-600 hover:bg-green-300 focus:bg-green-300 rounded-full ">
             <svg class="h-8 rounded-full" viewBox="0 0 16 16" fill="currentColor">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>

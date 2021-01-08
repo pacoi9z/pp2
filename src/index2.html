@@ -29,25 +29,12 @@ function putMenu() {
   var el = document.documentElement;
 
   if(el.scrollTop>=20 && el.scrollTop<=120){ 
-    console.log("\n1"); document.getElementById("putMenuBtn").style.display="";
+    document.getElementById("putMenuBtn").style.display="";
     document.getElementById("putMenuBtn").style.right=(-100+el.scrollTop)+"px"; }
-/*
-  if(el.scrollTop>=60.97) { console.log("\n1"); document.getElementById("putMenuBtn").style.display=""; 
-  document.getElementById("putMenuBtn").style.width="50px"; 
-  document.getElementById("putMenuBtn").style.height="50px"; }
-  else if(el.scrollTop>=30) { console.log("\n0"); 
-    document.getElementById("putMenuBtn").style.height="200px";
-    document.getElementById("putMenuBtn").style.display=""; 
-    document.getElementById("putMenuBtn").style.width="200px"; }*/
-  else if(el.scrollTop<20) { console.log("\n2"); document.getElementById("putMenuBtn").style.display="none";document.getElementById("putMenuBtn").style.width="";  }
+  else if(el.scrollTop<20) { document.getElementById("putMenuBtn").style.display="none";document.getElementById("putMenuBtn").style.width="";  }
   else { 
-    console.log("\n1"); document.getElementById("putMenuBtn").style.display="";
+    document.getElementById("putMenuBtn").style.display="";
     document.getElementById("putMenuBtn").style.right=20+"px"; }
-  //get Scroll Position
- 
-  console.log("\n scrollTop = "+el.scrollTop);
-  console.log("\n scrollLeft = "+el.scrollLeft);
-  console.log("_____________ \n");
 }
 
 

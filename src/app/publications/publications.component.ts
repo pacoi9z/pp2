@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { Title} from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalVarsService } from '../global-vars.service';
 import { HelpersService } from '../helpers.service';
 import { PublicationServiceService } from './publication-service.service';
 @Component({
@@ -32,8 +33,8 @@ export class PublicationsComponent implements OnInit {
     private datePipe: DatePipe,
     public helpS:HelpersService,
     public pubS:PublicationServiceService, 
-    private titleService :Title) { 
-    
+    private titleService :Title, 
+    private gVars: GlobalVarsService) { 
   }
 
   ngOnInit(): void {
@@ -43,21 +44,17 @@ export class PublicationsComponent implements OnInit {
     this.titleService.setTitle(" ["+this.helpS.notif_Publication+"] Publications - El Razi School");
     else this.titleService.setTitle("Publications - El Razi School");
 
-    //lire l'id trouvé dans l'url
-    this.route.params.subscribe(e => {
-      this.loadingSpiner=true; 
-      this.PublicationData=null;
-      this.prio = e.id;
-      //trier les pub selon priorité pui selon les vu, je t'aiiiiiiime sina <3 <3 hmara 
-      this.trierPubs();
-    });
+
+    //trier les pub selon priorité pui selon les vu. 
+      //je t'aiiiiiiime sina <3 <3 hmara 
+      this.getPublicationsData();
 
   }
 
 
-  trierPubs() {
+  getPublicationsData() {
     let dataPubs:any;
-    this.pubS.getPubs().then((e) => {
+    this.pubS.gogetPubs().then((e) => {
       this.loadingSpiner=false;
       dataPubs = e;
       let mySelectedPub;
@@ -71,23 +68,29 @@ export class PublicationsComponent implements OnInit {
                 else return 0
           else return 0
         })
-
-      if(this.prio!=null)
-      {
-        
-        let index = dataPubs.findIndex(e => e.idPub == this.prio);
-        mySelectedPub = dataPubs.find(e => e.idPub == this.prio);
-        if(mySelectedPub!=null) {
-          //supprimer l'objet selectionner
-          dataPubs.splice(index,1);
-                
-          //positioné ma pub selectionné en première position, chghol kima nti dok dertek priorité lowla ga3 fi hyati khi hmara -_-
-          dataPubs.unshift(mySelectedPub);
+      //lire l'id trouvé dans l'url
+      this.route.params.subscribe(e => {
+        this.prio = e.id;
+        if(this.prio!=undefined)
+        {
+          
+          let index = dataPubs.findIndex(e => e.idPub == this.prio);
+          mySelectedPub = dataPubs.find(e => e.idPub == this.prio);
+          if(mySelectedPub!=null) {
+            //supprimer l'objet selectionner
+            dataPubs.splice(index,1);
+                  
+            //positioné ma pub selectionné en première position, chghol kima nti dok dertek priorité lowla ga3 fi hyati khi hmara -_-
+            dataPubs.unshift(mySelectedPub);
+          }
+          
         }
-        
-      }
+        this.refreshPubList();
+      });
 
-      this.refreshPubList();
+      
+
+      
     });
     
     
@@ -95,7 +98,7 @@ export class PublicationsComponent implements OnInit {
 
 
   getPath(){
-    return this.helpS.pathToImg;
+    return this.gVars.linkToPHP;
   }
 
   isArabic(txt) {
@@ -139,13 +142,13 @@ export class PublicationsComponent implements OnInit {
       myObj.infoPub = "true";
       myObj.nbiPub += 1;
     }
-    this.refreshPubList();
+    
     this.pubS.SEND_HTTP_INFO(idPub);
 
-     //
   }
 
   SendLike(idPub) {
+
     let myObj = this.pubS.publications.find(e=> e.idPub == idPub);
     let jm = myObj.jaimPub;
 
@@ -157,8 +160,9 @@ export class PublicationsComponent implements OnInit {
       myObj.jaimPub = "true";
       myObj.nbjPub += 1;
     }
-    this.refreshPubList();
+
     this.pubS.SEND_HTTP_LIKE(idPub);
+
   }
 
   ModPub(idPub) {
@@ -171,7 +175,6 @@ export class PublicationsComponent implements OnInit {
 
     myObj.vuPub = this.datePipe.transform(new Date(),'h:m');
     
-    this.refreshPubList();
     this.pubS.SEND_HTTP_VU(idPub);
   }
 
