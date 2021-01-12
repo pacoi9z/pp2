@@ -11,7 +11,10 @@
             </div>
        </div>
     </div>
-    <router-outlet *ngIf="!loadingApp" ></router-outlet>
+    <div class="mt-20">
+        <router-outlet *ngIf="!loadingApp" ></router-outlet>
+    </div>
+    
 
 <app-chat (click)="helpS.gosetNofiChatVu()"></app-chat>
 </div>

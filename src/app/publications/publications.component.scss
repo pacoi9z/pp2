@@ -14,3 +14,19 @@
     }
 
   }
+
+.pub_width {
+  width:50vw;
+  @media only screen and (max-width: 1200px) {
+    width:60vw;
+  }
+  @media only screen and (max-width: 1024px) {
+    width:70vw;
+  }
+  @media only screen and (max-width: 720px) {
+    width:80vw;
+  }
+  @media only screen and (max-width: 640px) {
+    width:98vw;
+  }
+}  

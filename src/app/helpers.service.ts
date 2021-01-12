@@ -11,7 +11,7 @@ export class HelpersService {
     prenom : "Roufaida",
     username: "zi.roufaida",
     alias : "Hasna",
-    type : "P",
+    type : "D",
     tel:"0668212222",
     email : "ziane.ra@fakemail.com",
     photo : "https://scontent-mrs2-1.cdninstagram.com/v/t51.2885-15/e35/51018454_836621796669873_8611465961240760159_n.jpg?_nc_ht=scontent-mrs2-1.cdninstagram.com&_nc_cat=109&_nc_ohc=jin3B_TGlJwAX93FHGB&tp=1&oh=a7c60f5aff444da6c2774d9e228499b9&oe=5FFEC8B3"
