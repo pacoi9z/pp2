@@ -29,16 +29,19 @@ export class AppComponent implements OnInit {
   }
    
   scrollEvent = (event): void => {
+    if(event.target.scrollingElement!=undefined) {
     const scrollTopVal = event.target.scrollingElement.scrollTop;
     this.putMenu();
+    }
   }
   
   putMenu() {
+    
     let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
     var el = document.documentElement;
-  
+    
     if(el.scrollTop>=20 && el.scrollTop<=120){ 
       document.getElementById("putMenuBtn").style.display="";
       document.getElementById("putMenuBtn").style.left=(-100+el.scrollTop)+"px"; }
@@ -53,6 +56,6 @@ export class AppComponent implements OnInit {
       document.getElementById("putMenuBtn").style.left=20+"px"; }
     //get Scroll Position
     document.getElementById('wrapper').classList.toggle("toggled",false);
-   
+    
   }
 }

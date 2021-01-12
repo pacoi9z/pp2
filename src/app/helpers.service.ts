@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class HelpersService {
 
   ME = {
+    id : "0",
     nom : "Ziane",
     prenom : "Roufaida",
     username: "zi.roufaida",
