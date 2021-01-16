@@ -57,13 +57,12 @@
                                 <a class="nav-link hover:bg-green-900 rounded" (click)="helpS.gosetNofiPubsVu()" [routerLinkActive]="'text-white font-bold'" routerLink="publications">Publications</a>
                                 <span  *ngIf='helpS.notif_Publication!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Publication}}</b></span>
                             </li>
-                            
                             <li class="nav-item relative  ml-1" >
                                 <a class="nav-link hover:bg-green-900 rounded" (click)="helpS.gosetNofiMsgsVu()" [routerLinkActive]="'text-white font-bold'" routerLink="messages">Messages</a>
                                 <span *ngIf='helpS.notif_Messages!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Messages}}</b></span>
                             </li>
                             <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()=='D'" >
-                                <a class="nav-link hover:bg-green-900 rounded" [routerLinkActive]="'text-white font-bold'" routerLink="relations">Relations</a>
+                                <a class="nav-link hover:bg-green-900 rounded" (click)="helpS.gosetNofiRelsVu()" [routerLinkActive]="'text-white font-bold'" routerLink="relations">Relations</a>
                                 <span  *ngIf='helpS.notif_Relations!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Relations}}</b></span>
                             </li>
                             <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()=='D'">

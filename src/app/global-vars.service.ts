@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalVarsService {
 
-  linkToPHP = "http://127.0.0.1/DesignEcole";
+  linkToPHP = "http://127.0.0.1/__API_KIDS";
   constructor() { }
 }

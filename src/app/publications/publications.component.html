@@ -177,7 +177,7 @@ class="container p-0 relative flex items-start justify-between grid "  >
                   </div>
                 </div>
                 <div>
-                  <button (click)="openInNewTab(pub.MediaLinkPub)" 
+                  <button (click)="openInNewTab(getPath()+'/uploads/file/'+pub.MediaLinkPub)" 
                   target="_blank"  
                   class="mt-2 text-uppercase w-full bg-green-400 hover:bg-green-600 text-green-800 hover:text-green-300 px-3 py-2 rounded flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
@@ -219,7 +219,7 @@ class="container p-0 relative flex items-start justify-between grid "  >
               >
               <div class="flex items-center justify-center">
                 <video controls class="rounded " >
-                  <source [src]="getPath()+'/'+pub.MediaLinkPub" [type]="'video/'+pub.MediaNamePub">
+                  <source [src]="getPath()+'/uploads/vdo/'+pub.MediaLinkPub" [type]="'video/'+pub.MediaNamePub">
                   Mettez a jour votre navigateur pour lire cette video.. 
                 </video>
               </div>
@@ -227,9 +227,9 @@ class="container p-0 relative flex items-start justify-between grid "  >
               </div>
 
               <div *ngIf="pub.MediaTypePub=='img'"  class="w-full  mb-2">
-                <div (click)="openInNewTab(getPath()+'/'+pub.MediaLinkPub)" 
+                <div (click)="openInNewTab(getPath()+'/uploads/img/'+pub.MediaLinkPub)" 
                 target="_blank"  class="h-64 rounded"
-                [style.background-image]="'url('+getPath()+'/'+pub.MediaLinkPub+')'" 
+                [style.background-image]="'url('+getPath()+'/uploads/img/'+pub.MediaLinkPub+')'" 
                 [style.background-size]="'cover'"   
                >    
               </div>

@@ -1,1 +1,248 @@
-<p>relations works!</p>
+
+<div *ngIf="this.helpS.gettype()=='D'" class="container grid grid-cols-1 md:grid-cols-2 md:gap-4">
+    <div class="">
+        <div>
+            <h1 class="text-3xl ">
+                Ajouter un compte parent
+            </h1> 
+            <hr/>
+                <h1 class="text-2xl ">
+                    inforamtions enfant
+                </h1> 
+                <hr/>
+                <input type="text" class="form-control mt-2 mb-1" #prenom_enf placeholder="Prenom" />
+                <input type="text" class="form-control mb-1" #annee_enf placeholder="Années" />
+                <input type="file" (change)="uploadFiles($event.target.files)" accept="image/*" #photo_enf placeholder="Photo" />
+                <h1 class="text-2xl mt-3">
+                    Liste d'Enseignants
+                </h1> 
+                <div>
+                    <div class="">
+                        <select class="form-control" #enseignant_enf multiple>
+                            <option value="1">Enseignant 1</option>
+                            <option value="2">Enseignant 1</option>
+                            <option value="3">Enseignant 1</option>
+                            <option value="4">Enseignant 1</option>
+                            <option value="5">Enseignant 1</option>
+                            <option value="6">Enseignant 1</option>
+                            <option value="7">Enseignant 1</option>
+                        </select>
+                    </div>
+                </div>
+                <h1 class="text-2xl mt-3">
+                    Informmations parent
+                </h1> 
+                <hr/>
+                <input type="checkbox" (change)="parent_existant()" class="checkbox-light" > Parent Existant
+                <div *ngIf="!parentexistant">
+                    <input type="text" class="form-control mb-1" #nom_par placeholder="Nom" />
+                    <input type="text" class="form-control mb-1" #prenom_par placeholder="Prenom" />
+                    <input type="text" class="form-control mb-1" #username_par placeholder="username" />
+                    <input type="text" class="form-control mb-1" #password_par placeholder="Mot de pass"/> 
+                    <button (click)="pass_par()" class="btn btn-primary mb-1">
+                        Generer un mot de pass automatique
+                    </button>
+                    <input type="file" (change)="uploadFiles($event.target.files)" accept="image/*" #photo_par class="form-control-file mb-1" placeholder="Photo" />
+                </div>
+                <div *ngIf="parentexistant">
+                    <Select class="form-control mb-1" #parent_enf >
+                        <option value="1">Parent 1</option>
+                        <option value="2" >Parent 2</option>
+                        <option value="3" >Parent 3</option>
+                    </Select>
+                </div>
+                <button (click)="save_par()" class="w-full text-white py-2 px-2 rounded bg-green-700 hover:bg-green-400">
+                    Enregistrer l'élève
+                </button>
+                
+        </div>
+    </div>
+
+    <div class="">
+        <div>
+            <h1 class="text-3xl ">
+                Ajouter un compte enseignant
+            </h1> 
+            <hr/>
+                <input type="text" class="form-control mt-2 mb-1" #nom_ens placeholder="Nom Enseignant" />
+                <input type="text" class="form-control mb-1" #prenom_ens placeholder="Prenom Enseignant" />
+                <input type="text" class="form-control mb-1" #username_ens placeholder="Username" />
+                <input type="text" class="form-control mb-1" #password_ens placeholder="Mot de pass"/> 
+                <button (click)="pass_ens()" class="btn btn-primary mb-1">
+                    Generer un mot de pass automatique
+                </button>
+                <input type="file" (change)="uploadFiles($event.target.files)" accept="image/*" #photo_ens placeholder="Photo" />
+
+                <h1 class="text-2xl mt-3">
+                    Liste d'élèves
+                </h1> 
+                
+                <div>
+                    <div class="mb-1">
+                        <select class="form-control" #enfants_ens multiple>
+                            <option value="1">Enfant 1</option>
+                            <option value="2">Enfant 1</option>
+                            <option value="3">Enfant 1</option>
+                            <option value="4">Enfant 1</option>
+                            <option value="5">Enfant 1</option>
+                            <option value="6">Enfant 1</option>
+                            <option value="7">Enfant 1</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <button (click)="save_ens()" class="w-full text-white py-2 px-2 rounded bg-green-700 hover:bg-green-400">
+                    Enregistrer l'Enseignant
+                </button>
+
+                <div *ngIf="showMsg" class="mt-2 bg-blue-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+                    <p class="font-bold">{{ dataHTTP }}</p>
+                </div>
+                
+        </div>
+    </div>
+    <div>
+        <div class="">
+            <div>
+                <h1 class="p-1 text-3xl">
+                    Parents
+                </h1>
+            </div>
+            <div>
+                <hr>
+            </div>
+        </div>
+        <div class="">
+            <table class="table table-hover bg-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Parents
+                        </th>
+                        <th>
+                            Enfants
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let r of Re_parent_enfant">
+                        <td>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img alt="" class="h-10 w-10 rounded-full" [src]="r.photo_parent">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm leading-5 font-medium text-gray-900"> 
+                                        {{r.nom_prenom_parent}}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500 dropdown">
+                                        <div class="flex gap-1">
+                                            <button class="btn p-0 text-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" role="img" class="iconify iconify--mdi" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="transform: rotate(360deg);"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-2.3 6.35c.22-.21.22-.56 0-.77L15.42 7.3a.532.532 0 0 0-.77 0l-1 1l2.05 2.05l1-1M7 14.94V17h2.06l6.06-6.06l-2.06-2.06L7 14.94z" fill="currentColor"></path></svg>
+                                            </button>
+                                            <button class="btn p-0 text-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" role="img" class="iconify iconify--mdi" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="transform: rotate(360deg);"><path d="M19 3H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2H19a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-3.4 14L12 13.4L8.4 17L7 15.6l3.6-3.6L7 8.4L8.4 7l3.6 3.6L15.6 7L17 8.4L13.4 12l3.6 3.6l-1.4 1.4z" fill="currentColor"></path></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </td>
+                        <td>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img alt="" class="h-10 w-10 rounded-full" [src]="r.photo_enfant">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm leading-5 font-medium text-gray-900"> 
+                                        {{r.nom_prenom_enfant}}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500 dropdown">
+                                        {{r.annee_enfant}}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>    
+                    </tr>
+                </tbody>           
+            </table>
+        </div>
+    </div>
+    
+        
+    <div>
+        <div class="">
+            <div>
+                <h1 class="p-1 text-3xl">
+                    Enseignants
+                </h1>
+            </div>
+            <div>
+                <hr>
+            </div>
+        </div>
+        <div class="">
+            <table class="table table-hover bg-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Enseignants
+                        </th>
+                        <th>
+                            Enfants
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let r of Re_enseignant_enfant">
+                        <td>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img alt="" class="h-10 w-10 rounded-full" [src]="r.photo_enseignant">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm leading-5 font-medium text-gray-900"> 
+                                        {{r.nom_prenom_enseignant}}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500 dropdown">
+                                        <div class="flex gap-1">
+                                            <button class="btn p-0 text-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" role="img" class="iconify iconify--mdi" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="transform: rotate(360deg);"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-2.3 6.35c.22-.21.22-.56 0-.77L15.42 7.3a.532.532 0 0 0-.77 0l-1 1l2.05 2.05l1-1M7 14.94V17h2.06l6.06-6.06l-2.06-2.06L7 14.94z" fill="currentColor"></path></svg>
+                                            </button>
+                                            <button class="btn p-0 text-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" role="img" class="iconify iconify--mdi" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="transform: rotate(360deg);"><path d="M19 3H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2H19a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-3.4 14L12 13.4L8.4 17L7 15.6l3.6-3.6L7 8.4L8.4 7l3.6 3.6L15.6 7L17 8.4L13.4 12l3.6 3.6l-1.4 1.4z" fill="currentColor"></path></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </td>
+                        <td>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img alt="" class="h-10 w-10 rounded-full" [src]="r.photo_enfant">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm leading-5 font-medium text-gray-900"> 
+                                        {{r.nom_prenom_enfant}}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500 dropdown">
+                                        {{r.annee_enfant}}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+    
+    
+</div>
+
+

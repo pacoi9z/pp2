@@ -1,1 +1,148 @@
-<p>kidsspace works!</p>
+<div *ngIf="this.helpS.gettype()!='E' " class="container" >
+
+    <div class="mb-10" *ngIf="this.helpS.gettype()=='D'" >
+        <h1 class="text-3xl ">
+            Ajouter un Jeux, Video, Histoire ou Leçon
+        </h1> 
+        <div *ngIf="showMsg" class="mt-2 bg-blue-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+            <p class="font-bold">{{ dataHTTP }}</p>
+        </div>
+        <hr/>
+            <input type="text" class="form-control mt-2 mb-1" #Titre placeholder="Titre" />
+            <textarea class="form-control mb-1" #Text placeholder="Text de description"></textarea>
+            <input type="text" class="form-control mb-1" #Lien placeholder="Lien de l'image a afficher" />
+            <input type="text" class="form-control mb-1" #Lien placeholder="Lien de l'activité" />
+            <select class="form-control mb-1" #Type >
+                <option value="J" >Jeux</option>
+                <option value="V" >Video</option>
+                <option value="H" >Histoir</option>
+                <option value="L" >Leçon</option>
+            </select> 
+                        
+            <button (click)="goAddKids()"  class="w-full text-white py-2 px-2 rounded bg-green-700 hover:bg-green-400">
+                Ajouter
+            </button>
+
+           
+    </div>
+
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Jeux
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <div *ngIf="loading" class="flex items-center justify-center">
+                    <div class="spinner-border mt-2" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div  *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+                    <a *ngFor="let k of gameOnly()" [href]="k.lien"         
+                        class="h-full cursor-pointer btn p-0 m-0 border-0 focus:shadow-none hover:bg-gray-200 ">
+                        <img class="card-img-top object-cover h-40" [src]="k.img" />
+                        <div class="card-body">
+                            <h5 class="card-title text-2xl">{{k.titre}}</h5>
+                            <p class="card-text py-2">{{k.text}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Videos
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+            <div *ngIf="loading" class="flex items-center justify-center">
+                <div class="spinner-border mt-2" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+            <div *ngIf="!loading" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-1">
+                    <div *ngFor="let k of videoOnly()" class="card text-white bg-dark h-full border-0 bg-gray-100">
+                        <div class="card-header">
+                            {{k.titre}}
+                        </div>
+                        <iframe class="mt-2 w-full" style="height: 50vh;" 
+                        [src]="trustedUrl(k.lien)" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Histoires
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+                <div *ngIf="loading" class="flex items-center justify-center">
+                    <div class="spinner-border mt-2" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div  *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+                    <a *ngFor="let k of histoirOnly()" [href]="k.lien"         
+                        class="h-full cursor-pointer btn p-0 m-0 border-0 focus:shadow-none hover:bg-gray-200 ">
+                        <img class="card-img-top object-cover h-40" [src]="k.img" />
+                        <div class="card-body">
+                            <h5 class="card-title text-2xl">{{k.titre}}</h5>
+                            <p class="card-text py-2">{{k.text}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                  Leçons
+                </button>
+              </h2>
+            </div>
+            <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
+              <div class="card-body">
+                <div *ngIf="loading" class="flex items-center justify-center">
+                    <div class="spinner-border mt-2" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div  *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+                    <a *ngFor="let k of leconOnly()" [href]="k.lien"         
+                        class="h-full cursor-pointer btn p-0 m-0 border-0 focus:shadow-none hover:bg-gray-200 ">
+                        <img class="card-img-top object-cover h-40" [src]="k.img" />
+                        <div class="card-body">
+                            <h5 class="card-title text-2xl">{{k.titre}}</h5>
+                            <p class="card-text py-2">{{k.text}}</p>
+                        </div>
+                    </a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    
+    
+</div>

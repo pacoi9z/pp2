@@ -8,13 +8,13 @@ export class HelpersService {
   ME = {
     id : "0",
     nom : "Ziane",
-    prenom : "Roufaida",
-    username: "zi.roufaida",
-    alias : "Hasna",
+    prenom : "Islam Abdelakder",
+    username: "ziane.ia",
+    alias : "Paco",
     type : "D",
     tel:"0668212222",
     email : "ziane.ra@fakemail.com",
-    photo : "https://scontent-mrs2-1.cdninstagram.com/v/t51.2885-15/e35/51018454_836621796669873_8611465961240760159_n.jpg?_nc_ht=scontent-mrs2-1.cdninstagram.com&_nc_cat=109&_nc_ohc=jin3B_TGlJwAX93FHGB&tp=1&oh=a7c60f5aff444da6c2774d9e228499b9&oe=5FFEC8B3"
+    photo : "https://scontent-mrs2-1.cdninstagram.com/v/t51.2885-15/e35/119684614_747265149156231_4571377250068643229_n.jpg?_nc_ht=scontent-mrs2-1.cdninstagram.com&_nc_cat=103&_nc_ohc=851FIC_dqpsAX9dcZQy&tp=1&oh=4f62787595192af53d76209757ad331d&oe=6029C70E"
   }
   notifMe = []; 
 
@@ -108,6 +108,10 @@ export class HelpersService {
   gosetNofiPubsVu() {
     //Set vu pour tout les notif de type pulication
     this.notif_Publication = 0;
+  }
+  gosetNofiRelsVu() {
+    //Set vu pour tout les notif de type pulication
+    this.notif_Relations = 0;
   }
   gosetNofiMsgsVu() {
     //Set vu pour tout les notif de type Message
