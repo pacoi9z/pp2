@@ -3,25 +3,24 @@
         <h1 class="text-3xl">
             Statistiques système
         </h1>
-        {{x}}
         <hr/>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2">
-        <div class="bg-green-200 text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
+        <div class="bg-green-200 hover:bg-green-300 cursor-pointer text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl">
                     127878675
                 </h1>
                 <label>
                     Total Publications
-                </label>
+                </label><br/>
             </div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" role="img" class="iconify iconify--ic" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="transform: rotate(360deg);"><path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2L7.5 3.5L6 2v14H3v3c0 1.66 1.34 3 3 3h12c1.66 0 3-1.34 3-3V2l-1.5 1.5zM15 20H6c-.55 0-1-.45-1-1v-1h10v2zm4-1c0 .55-.45 1-1 1s-1-.45-1-1v-3H8V5h11v14z" fill="currentColor"></path><path d="M9 7h6v2H9zm0 3h6v2H9zm7-3h2v2h-2zm0 3h2v2h-2z" fill="currentColor"></path></svg>
             </div>
         </div>
 
-        <div class="bg-blue-200 text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
+        <div class="bg-blue-200 hover:bg-blue-300 cursor-pointer text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl">
                     255785785
@@ -35,7 +34,7 @@
             </div>
         </div>
 
-        <div class="bg-gray-200 text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
+        <div class="bg-gray-200 hover:bg-gray-300 cursor-pointer text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl">
                     2556786
@@ -49,7 +48,7 @@
             </div>
         </div>
 
-        <div class="bg-red-200 text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
+        <div class="bg-red-200 hover:bg-red-300 cursor-pointer text-dark rounded col-span-1 Myshadow p-3 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl">
                     2578977
@@ -63,5 +62,50 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="mt-2 conteiner p-0 grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div class="col-span-1 md:col-span-2 Myshadow rounded p-3">
+            <div>
+                <div id="chart">
+                    <apx-chart
+                      [series]="chartOptions.series"
+                      [chart]="chartOptions.chart"
+                      [labels]="chartOptions.labels"
+                      [responsive]="chartOptions.responsive"
+                    ></apx-chart>
+                  </div>
+            </div>
+        </div>
+        <div class="col-span-1 Myshadow rounded">
+            <div>
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-action">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small>3 days ago</small>
+                      </div>
+                      <p class="mb-1">Some placeholder content in a paragraph.</p>
+                      <small>And some small print.</small>
+                    </div>
+                    <div class="list-group-item list-group-item-action">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small class="text-muted">3 days ago</small>
+                      </div>
+                      <p class="mb-1">Some placeholder content in a paragraph.</p>
+                      <small class="text-muted">And some muted small print.</small>
+                    </div>
+                    <div class="list-group-item list-group-item-action">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small class="text-muted">3 days ago</small>
+                      </div>
+                      <p class="mb-1">Some placeholder content in a paragraph.</p>
+                      <small class="text-muted">And some muted small print.</small>
+                    </div>
+                  </div>
+            </div>
+        </div>
     </div>
 </div>

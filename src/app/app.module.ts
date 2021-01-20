@@ -16,6 +16,8 @@ import { KidsspaceComponent } from './kidsspace/kidsspace.component';
 import { RelationsComponent } from './relations/relations.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { NgApexchartsModule } from "ng-apexcharts";
+
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {DemoMaterialModule} from './material-module';
 
@@ -32,6 +34,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent,
   ],
   imports: [
+    NgApexchartsModule,
     BrowserModule,
     AppRoutingModule,
     //BrowserAnimationsModule,
