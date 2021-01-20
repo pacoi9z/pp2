@@ -19,12 +19,8 @@ export class ChatComponent implements OnInit {
   @ViewChild('chat_input') fondovalor:ElementRef;
 
   constructor(public helpS:HelpersService, private chatS:ChatService) {
-    setInterval( ()=> {
-      if(this.isopenchat) 
-      {  
-        this.getUsers(); 
-      }
-    },5000); 
+    
+    setInterval( ()=> {if(this.isopenchat) {   this.getUsers();   }  },5000); 
     
   }
 

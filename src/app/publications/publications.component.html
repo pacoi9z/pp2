@@ -118,6 +118,7 @@ class="container p-0 relative flex items-start justify-between grid "  >
       
       <div *ngFor='let pub of PublicationData;' 
       class="p-2 border rounded mb-3"
+      [ngClass]="{'bg-green-100 border-info':this.prio!=undefined && this.prio==pub.idPub}"
       (mouseenter)="pub.vuPub==null ? sendVu(pub.idPub) : false" 
       (loadstart)="pub.vuPub==null ? sendVu(pub.idPub) : false" 
       (loadeddata)="pub.vuPub==null ? sendVu(pub.idPub) : false" >

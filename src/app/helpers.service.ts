@@ -32,6 +32,7 @@ export class HelpersService {
     this.gogetNotifForMe();this.gogetNotifCount();
     //check for new notification every 5sec in this exemple it's set for 20sec, i love you sina <3
     setInterval(()=>{this.gogetNotifForMe();this.gogetNotifCount()},20000); 
+    //setTimeout(()=>{this.gogetNotifForMe();this.gogetNotifCount()},10000);
   }
   
 

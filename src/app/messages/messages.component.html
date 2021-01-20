@@ -123,20 +123,20 @@
                         </svg>                    
                     </button> 
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Administration </a>
-                        <a class="dropdown-item" href="#">Class1:Parents</a>
-                        <a class="dropdown-item" href="#">Class2:Parents</a>
-                        <hr>
-                        <a class="dropdown-item" href="#">Touet le monde</a>
+                        <a class="dropdown-item" href="#"> Répondre </a>
+                        <a class="dropdown-item" href="#"> Transferer </a>
                     </div>
                 </div>
             </div>
             <hr/>
             <div class="p-3">
-                <h1 class="text-lg mb-3" >{{message_objet}}</h1>
+                <small *ngIf="message_id_pub!='' && message_id_pub!=null">Ce message est une question sur une publication - <a class="text-green-500" [routerLink]='"/publications/"+message_id_pub'>voir la publication</a></small>
+                <h1 *ngIf="message_objet!='' && message_objet!=null" class="text-lg mb-3" >Objet : {{message_objet}}</h1>
+                <hr/>
                 <p class="">
                     {{ message_content }}
                 </p>
+                
             </div>
         </div>
     </div>

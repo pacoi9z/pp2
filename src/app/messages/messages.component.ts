@@ -24,6 +24,7 @@ export class MessagesComponent implements OnInit {
   msgSuccess="";
   message_content:string = '';
   message_objet:string = '';
+  message_id_pub:string="";
   message_datetime:string = '';
   message_sender_name:string ='';
   message_sender_pic:string = 'https://www.shankarainfra.com/img/avatar.png';
@@ -84,7 +85,8 @@ export class MessagesComponent implements OnInit {
     
     let msg = this.msgS.getData(id);
     if(msg!=undefined) {
-      this.message_objet = msg.id+" - "+msg.objet;
+      this.message_id_pub = msg.id_pub;
+      this.message_objet = msg.objet;
       this.message_datetime = msg.datetime;
       this.message_content =  msg.content; 
       this.message_sender_name=msg.sender_name;

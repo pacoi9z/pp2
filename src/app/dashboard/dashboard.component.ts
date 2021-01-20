@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HelpersService } from '../helpers.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public helpS : HelpersService,) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

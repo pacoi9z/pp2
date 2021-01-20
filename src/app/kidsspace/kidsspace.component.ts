@@ -50,14 +50,20 @@ export class KidsspaceComponent implements OnInit {
     },2000);
   }
 
-  trustedUrl(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  trustedUrl() {
+    let url;
+    for(let i of this.kidsData.filter((e)=>e.elem=='V'))
+    { 
+      i['trustedLien'] = this.sanitizer.bypassSecurityTrustResourceUrl(i.lien);
+    }
   }
 
   goGetKids() {
+
     this.http.get('http://localhost:3000/kids').subscribe(
-      (e:any[])=>{ this.kidsData=e; console.log(e); this.loading=false; },
+      (e:any[])=>{ this.kidsData=e; this.loading=false; this.trustedUrl() },
       (e)=>{} )
+    
   }
 
 
