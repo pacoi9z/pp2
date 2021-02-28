@@ -1,5 +1,5 @@
 
-<div *ngIf="this.helpS.gettype()=='D'" class="container grid grid-cols-1 md:grid-cols-2 md:gap-4">
+<div *ngIf="this.helpS.ME?.type=='D'" class="container grid grid-cols-1 md:grid-cols-2 md:gap-4">
     <div class="">
         <div>
             <h1 class="text-3xl ">
@@ -12,7 +12,7 @@
                 <hr/>
                 <input type="text" class="form-control mt-2 mb-1" #prenom_enf placeholder="Prenom" />
                 <input type="text" class="form-control mb-1" #annee_enf placeholder="Années" />
-                <input type="file" (change)="uploadFiles($event.target.files)" accept="image/*" #photo_enf placeholder="Photo" />
+                <input type="date" class="form-control mb-1" #naiss_enf placeholder="date de naissance" />
                 <h1 class="text-2xl mt-3">
                     Liste d'Enseignants
                 </h1> 
@@ -42,7 +42,7 @@
                     <button (click)="pass_par()" class="btn btn-primary mb-1">
                         Generer un mot de pass automatique
                     </button>
-                    <input type="file" (change)="uploadFiles($event.target.files)" accept="image/*" #photo_par class="form-control-file mb-1" placeholder="Photo" />
+                    <input type="file" (change)="uploadPerentPhoto($event.target.files)" accept="image/*" #photo_par class="form-control-file mb-1" placeholder="Photo" />
                 </div>
                 <div *ngIf="parentexistant">
                     <Select class="form-control mb-1" #parent_enf >
@@ -54,6 +54,10 @@
                 <button (click)="save_par()" class="w-full text-white py-2 px-2 rounded bg-green-700 hover:bg-green-400">
                     Enregistrer l'élève
                 </button>
+
+                <div *ngIf="showMsg1" class="mt-2 bg-blue-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+                    <p class="font-bold">{{ dataHTTP1 }}</p>
+                </div>
                 
         </div>
     </div>

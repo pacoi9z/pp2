@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { C404Component } from './c404/c404.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { KidsspaceComponent } from './kidsspace/kidsspace.component';
+import { LoginComponent } from './login/login.component';
 import { RelationsComponent } from './relations/relations.component';
 
 const route: Routes = [
@@ -15,7 +16,7 @@ const route: Routes = [
   { path : 'kids' , component : KidsspaceComponent},
   { path : 'relations', component : RelationsComponent},
   { path : 'dashboard', component : DashboardComponent},
-  { path : '', redirectTo: 'publications', pathMatch: 'full' },
+  { path : '', component : LoginComponent},
   { path: '**', redirectTo : '404' },
   { path: '404' , component : C404Component },
 ];

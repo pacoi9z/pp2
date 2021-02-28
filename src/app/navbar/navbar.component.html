@@ -8,7 +8,7 @@
 88     `8888   d8'        `8b  `888'       
 88      `888  d8'          `8b  `8'        
 -->
-<header>
+<header *ngIf="helpS.isLoggedIn()">
             <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-green-700 autor">
                 <div class="container p-0">
                     <div class="flex items-center">
@@ -61,15 +61,15 @@
                                 <a class="nav-link hover:bg-green-900 rounded" (click)="helpS.gosetNofiMsgsVu()" [routerLinkActive]="'text-white font-bold'" routerLink="messages">Messages</a>
                                 <span *ngIf='helpS.notif_Messages!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Messages}}</b></span>
                             </li>
-                            <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()=='D'" >
+                            <li class="nav-item relative  ml-1" *ngIf="this.helpS.ME?.type=='D'" >
                                 <a class="nav-link hover:bg-green-900 rounded" (click)="helpS.gosetNofiRelsVu()" [routerLinkActive]="'text-white font-bold'" routerLink="relations">Relations</a>
                                 <span  *ngIf='helpS.notif_Relations!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Relations}}</b></span>
                             </li>
-                            <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()=='D'">
+                            <li class="nav-item relative  ml-1" *ngIf="this.helpS.ME?.type=='D'">
                                 <a class="nav-link hover:bg-green-900 rounded " (click)="helpS.gosetNofiDashVu()" [routerLinkActive]="'text-white font-bold'" routerLink="dashboard" tabindex="-1">Dashboard</a>
-                                <span  *ngIf='helpS.notif_kids_space!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Dashboard}}</b></span>
+                                <span  *ngIf='helpS.notif_Dashboard!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Dashboard}}</b></span>
                             </li>
-                            <li class="nav-item relative  ml-1" *ngIf="this.helpS.gettype()!='E'">
+                            <li class="nav-item relative  ml-1" *ngIf="this.helpS.ME?.type!='E'">
                                 <a class="nav-link hover:bg-green-900 rounded " (click)="helpS.gosetNofiKidsVu()" [routerLinkActive]="'text-white font-bold'" routerLink="kids" tabindex="-1">Kid's Space</a>
                                 <span  *ngIf='helpS.notif_kids_space!=0' class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_kids_space}}</b></span>
                             </li>
@@ -78,20 +78,20 @@
                         <div class="my-2 my-lg-0 flex justify-end">
                             <div class="dropdown">
                                 <button data-toggle="dropdown" id="profiledropdown" class="dropdown-toggle flex text-sm text-white rounded-full focus:outline-none hover:bg-green-800 transition duration-150 ease-in-out">
-                                    <img class="h-8 w-8 rounded-full object-cover" [src]="this.helpS.getphoto()" alt="Ziane Roufaida">
-                                    <p class="p-1">{{this.helpS.getnom() | uppercase }} {{this.helpS.getprenom()}} {{this.helpS.getalias()!='' ? '('+this.helpS.getalias()+')' : ''}}</p>
+                                    <img class="h-8 w-8 rounded-full object-cover" [src]="this.helpS.ME?.photo" [alt]="(this.helpS.ME?.nom | uppercase )+' '+this.helpS.ME?.prenom">
+                                    <p class="p-1">{{this.helpS.ME?.nom | uppercase }} {{this.helpS.ME?.prenom}} </p>
                                 </button>
                                 <div  class="dropdown-menu dropdown-menu-right" aria-labelledby="profiledropdown">
-                                    <a *ngIf="this.helpS.gettype()=='P'" class="dropdown-item" routerLink="myprofile" href="#">Mon Profile</a>
-                                    <hr *ngIf="this.helpS.gettype()=='P'" />
-                                    <a *ngIf="this.helpS.gettype()=='P'" class="dropdown-item" routerLink="services/rendezvous"  >Rendez-vous</a>
-                                    <a *ngIf="this.helpS.gettype()=='P'" class="dropdown-item" routerLink="services/certificascolarite">Certificat de scolarité</a>
-                                    <hr *ngIf="this.helpS.gettype()=='P'" />
-                                    <a *ngIf="this.helpS.gettype()=='P'" class="dropdown-item" routerLink="services/retard">Signaler un retard a l'educateur</a>
-                                    <a *ngIf="this.helpS.gettype()=='P'" class="dropdown-item" routerLink="services/absence">Signaler une absence a l'educateur</a>
-                                    <a *ngIf="this.helpS.gettype()=='P'" class="dropdown-item" routerLink="services/medicament">Signaler une prise de médicaments</a>
-                                    <hr *ngIf="this.helpS.gettype()=='P'" />
-                                    <a class="dropdown-item focus:bg-red-500 hover:bg-red-200" href="#">Deconnexion</a>
+                                    <a *ngIf="this.helpS.ME?.type=='P'" class="dropdown-item" routerLink="myprofile" href="#">Mon Profile</a>
+                                    <hr *ngIf="this.helpS.ME?.type=='P'" />
+                                    <a *ngIf="this.helpS.ME?.type=='P'" class="dropdown-item" routerLink="services/rendezvous"  >Rendez-vous</a>
+                                    <a *ngIf="this.helpS.ME?.type=='P'" class="dropdown-item" routerLink="services/certificascolarite">Certificat de scolarité</a>
+                                    <hr *ngIf="this.helpS.ME?.type=='P'" />
+                                    <a *ngIf="this.helpS.ME?.type=='P'" class="dropdown-item" routerLink="services/retard">Signaler un retard a l'educateur</a>
+                                    <a *ngIf="this.helpS.ME?.type=='P'" class="dropdown-item" routerLink="services/absence">Signaler une absence a l'educateur</a>
+                                    <a *ngIf="this.helpS.ME?.type=='P'" class="dropdown-item" routerLink="services/medicament">Signaler une prise de médicaments</a>
+                                    <hr *ngIf="this.helpS.ME?.type=='P'" />
+                                    <a class="dropdown-item focus:bg-red-500 hover:bg-red-200" (click)="logout()" href="#">Deconnexion</a>
                                 </div>
                             </div>
                         </div>

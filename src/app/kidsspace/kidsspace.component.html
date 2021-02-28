@@ -1,6 +1,6 @@
-<div *ngIf="this.helpS.gettype()!='E' " class="container" >
+<div *ngIf="this.helpS.ME?.type!='E' " class="container" >
 
-    <div class="mb-10" *ngIf="this.helpS.gettype()=='D'" >
+    <div class="mb-10" *ngIf="this.helpS.ME?.type=='D'" >
         <h1 class="text-3xl ">
             Ajouter un Jeux, Video, Histoire ou Leçon
         </h1> 
@@ -46,7 +46,8 @@
                 <div  *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
                     <a *ngFor="let k of gameOnly()" [href]="k.lien"         
                         class="h-full cursor-pointer btn p-0 m-0 border-0 focus:shadow-none hover:bg-gray-200 ">
-                        <img class="card-img-top object-cover h-40" [src]="k.img" />
+                        <img class="card-img-top object-cover h-40" *ngIf="k.img!=null && k.img!='' &&  k.img!='null'" [src]="k.img" />
+                        <img class="card-img-top object-cover h-40" *ngIf="k.img==null || k.img=='' ||  k.img=='null'" src="../assets/img/g.svg" />
                         <div class="card-body">
                             <h5 class="card-title text-2xl">{{k.titre}}</h5>
                             <p class="card-text py-2">{{k.text}}</p>
@@ -103,7 +104,8 @@
                 <div  *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
                     <a *ngFor="let k of histoirOnly()" [href]="k.lien"         
                         class="h-full cursor-pointer btn p-0 m-0 border-0 focus:shadow-none hover:bg-gray-200 ">
-                        <img class="card-img-top object-cover h-40" [src]="k.img" />
+                        <img class="card-img-top object-cover h-40" *ngIf="k.img!=null && k.img!='' &&  k.img!='null'" [src]="k.img" />
+                        <img class="card-img-top object-cover h-40" *ngIf="k.img==null || k.img=='' ||  k.img=='null'" src="../assets/img/h.svg" />
                         <div class="card-body">
                             <h5 class="card-title text-2xl">{{k.titre}}</h5>
                             <p class="card-text py-2">{{k.text}}</p>
@@ -131,7 +133,8 @@
                 <div  *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
                     <a *ngFor="let k of leconOnly()" [href]="k.lien"         
                         class="h-full cursor-pointer btn p-0 m-0 border-0 focus:shadow-none hover:bg-gray-200 ">
-                        <img class="card-img-top object-cover h-40" [src]="k.img" />
+                        <img class="card-img-top object-cover h-40" *ngIf="k.img!=null && k.img!='' &&  k.img!='null'" [src]="k.img" />
+                        <img class="card-img-top object-cover h-40" *ngIf="k.img==null || k.img=='' ||  k.img=='null'" src="../assets/img/b.svg" />
                         <div class="card-body">
                             <h5 class="card-title text-2xl">{{k.titre}}</h5>
                             <p class="card-text py-2">{{k.text}}</p>

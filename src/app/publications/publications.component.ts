@@ -188,7 +188,7 @@ export class PublicationsComponent implements OnInit {
 
   
   msgIsSelectif() {
-    if(this.helpS.gettype()=='Parent' && this.qestionSelectedPub=='Enseignant')
+    if(this.helpS.ME?.type=='Parent' && this.qestionSelectedPub=='Enseignant')
     return true;
     else return false;
   }

@@ -42,6 +42,9 @@ export class KidsspaceComponent implements OnInit {
   }
 
   goAddKids() {
+
+    
+
     this.showMsg=true;
     this.dataHTTP = "OK"
     setTimeout(()=>{

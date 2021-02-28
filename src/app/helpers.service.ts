@@ -1,21 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { GlobalVarsService } from './global-vars.service';
+import { LoginService } from './login/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelpersService {
 
-  ME = {
-    id : "0",
-    nom : "Ziane",
-    prenom : "Islam Abdelakder",
-    username: "ziane.ia",
-    alias : "Paco",
-    type : "D",
-    tel:"0668212222",
-    email : "ziane.ra@fakemail.com",
-    photo : "https://scontent-mrs2-1.cdninstagram.com/v/t51.2885-15/e35/119684614_747265149156231_4571377250068643229_n.jpg?_nc_ht=scontent-mrs2-1.cdninstagram.com&_nc_cat=103&_nc_ohc=851FIC_dqpsAX9dcZQy&tp=1&oh=4f62787595192af53d76209757ad331d&oe=6029C70E"
-  }
+  ME:any; 
   notifMe = []; 
 
   notif_Cloche = 0;
@@ -27,14 +21,49 @@ export class HelpersService {
   notif_kids_space=0;
   notif_Profile=0;
   notif_Chat=0;
+  dataCharged= false;
 
-  constructor() { 
+  constructor(private dataService : LoginService, private http: HttpClient ,private router:Router, private gVars : GlobalVarsService) {
+    
+    if(!this.dataService.isLoggedIn())
+    {
+      const redirect = this.dataService.redirectUrl ? this.dataService.redirectUrl : '';
+      this.router.navigate([redirect]);
+    }
+
     this.gogetNotifForMe();this.gogetNotifCount();
     //check for new notification every 5sec in this exemple it's set for 20sec, i love you sina <3
-    setInterval(()=>{this.gogetNotifForMe();this.gogetNotifCount()},20000); 
-    //setTimeout(()=>{this.gogetNotifForMe();this.gogetNotifCount()},10000);
+    //setInterval(()=>{this.gogetNotifForMe();this.gogetNotifCount()},20000); 
+    //setTimeout(()=>{this.gogetNotifForMe();this.gogetNotifCount()},5000);
+
+    this.ME = this.dataService.getMe();
+    console.log("ME HELP : "+this.ME+" "+new Date().getTime())
+    //this.gogetMe();
+
+  }
+
+  gogetMe() {    
+    
+    /*
+    // http://localhost:3000/ME
+    console.log(this.gVars.linkToPHP+'/GET_USER.php');
+    
+    this.http.get('http://localhost:3000/ME').subscribe(
+            (data:any) => {
+              this.ME = data;
+              this.dataCharged=true;
+              console.log(data);
+            },
+            error => {
+              console.log(error);
+            }
+          );
+    */    
   }
   
+  isLoggedIn() {
+    return this.dataService.isLoggedIn();
+  }
 
   gogetNotifForMe() {
 
@@ -43,12 +72,12 @@ export class HelpersService {
     //i want to marry you sina :'( do you want to ?
    this.notifMe=[{
       
-      idPub:"21",
+      idPub:"30",
       photoPub:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
       nomPub:"Ziane Raiss",
       newLable : "a ajouter une nouvelle publication",
       timePub  : "il y'a 1 semaine",
-      linkTo : "publications/21"
+      linkTo : "publications/30"
   
     },
     {
@@ -90,7 +119,7 @@ export class HelpersService {
   ];
 
   //enlève le simbole + 3mira dertout pour les testes berk
-  this.notif_Cloche += this.notifMe.length;
+  this.notif_Cloche = this.notifMe.length;
 
   }
 
@@ -133,41 +162,17 @@ export class HelpersService {
     //HTTP REQUEST TO GET ALL SYSTEM NOTIFS COUNT
     let notifs = [1,2,3,4,5,6,7,8];
    //enlève ga3 les + stp, je t'aime <3
-    this.notif_Publication  += notifs[0];
-    this.notif_Messages     += notifs[1];
-    this.notif_Services     += notifs[2];
-    this.notif_Relations    += notifs[3];
-    this.notif_kids_space   += notifs[4];
-    this.notif_Profile      += notifs[5];
-    this.notif_Chat         += notifs[6];
-    this.notif_Dashboard    += notifs[7];
+    this.notif_Publication  = notifs[0];
+    this.notif_Messages     = notifs[1];
+    this.notif_Services     = notifs[2];
+    this.notif_Relations    = notifs[3];
+    this.notif_kids_space   = notifs[4];
+    this.notif_Profile      = notifs[5];
+    this.notif_Chat         = notifs[6];
+    this.notif_Dashboard    = notifs[7];
   }
   
-  getnom() {
-    return this.ME.nom;
-  }
-  getprenom() {
-    return this.ME.prenom;
-  }
-  getusername() {
-    return this.ME.username;
-  }
-  getalias() {
-    return this.ME.alias;
-  }
-  gettype() {
-    return this.ME.type;
-  }
-  gettel() {
-    return this.ME.tel;
-  }
-  getemail() {
-    return this.ME.email;
-  }
-
-  getphoto() {
-    return this.ME.photo;
-  }
+  
 
 
 }

@@ -11,7 +11,7 @@ Y8,            88       88  ,adPPPPP88    88
                                                  
 -->
 
-<div class="fixed-bottom right-0 left-auto m-2 rounded-full Myshadow">
+<div *ngIf="helpS.isLoggedIn()" class="fixed-bottom right-0 left-auto m-2 rounded-full Myshadow">
   <span *ngIf='helpS.notif_Chat!=0' 
   class="rounded-full text-xs text-white bg-red-500 absolute top-0 right-0 Myshadow h-4 w-5 flex items-center justify-center"><b>{{helpS.notif_Chat}}</b></span>
     <button (click)="openchat()" class="btn rounded-full bg-green-600 flex items-center text-white">

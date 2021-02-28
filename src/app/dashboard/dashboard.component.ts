@@ -7,6 +7,7 @@ import {
   ApexResponsive,
   ApexChart
 } from "ng-apexcharts";
+import { Title } from '@angular/platform-browser';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -45,7 +46,7 @@ export class DashboardComponent implements OnInit {
   @Input() theme: ApexTheme;
   public chartOptions: Partial<ChartOptions>;
 
-  constructor(public helpS : HelpersService) {
+  constructor(public helpS : HelpersService, private titleService :Title ) {
 
     this.chartOptions = {
       series: [44, 55, 13, 43, 22],
@@ -72,6 +73,13 @@ export class DashboardComponent implements OnInit {
 
 }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    //affiché le titre + le nombre de notif dans la balise TITLE dans l'HTML  
+    if(this.helpS.notif_Dashboard != 0)  
+    this.titleService.setTitle(" ["+this.helpS.notif_Dashboard+"] Dashboard - El Razi School");
+    else this.titleService.setTitle("Dashboard - El Razi School");
+
+  }
 
 }

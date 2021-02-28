@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit {
 
   constructor(public helpS:HelpersService, private chatS:ChatService) {
     
-    setInterval( ()=> {if(this.isopenchat) {   this.getUsers();   }  },5000); 
+    //setInterval( ()=> {if(this.isopenchat) {   this.getUsers();   }  },5000); 
     
   }
 

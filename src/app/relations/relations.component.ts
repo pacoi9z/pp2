@@ -12,7 +12,7 @@ export class RelationsComponent implements OnInit {
   public formData = new FormData();
   @ViewChild('prenom_enf') prenom_enf:ElementRef;
   @ViewChild('annee_enf') annee_enf:ElementRef;
-  @ViewChild('photo_enf') photo_enf:ElementRef;
+  @ViewChild('naiss_enf') naiss_enf:ElementRef;
   @ViewChild('enseignant_enf') enseignant_enf:ElementRef;
   @ViewChild('prenom_par') prenom_par:ElementRef;
   @ViewChild('nom_par') nom_par:ElementRef;
@@ -178,24 +178,80 @@ export class RelationsComponent implements OnInit {
   this.formData.append('nom', nom)
   this.formData.append('eleve', JSON.stringify(eleve))
   this.formData.append('pass', pass)
-  this.http.post( 'http://127.0.0.1/DesignEcole/Req.php', this.formData ).subscribe(
+  this.http.post( 'http://127.0.0.1/__API_KIDS/Req.php', this.formData ).subscribe(
     (d) => {  this.dataHTTP = d;
               this.showMsg=true;
               setTimeout(() => {
                 this.showMsg=false;
               }, 2000); 
-              let photo  = this.photo_ens.nativeElement.value='';
-              let prenom  = this.prenom_ens.nativeElement.value='';
-              let username  = this.username_ens.nativeElement.value='';
-              let nom  = this.nom_ens.nativeElement.value='';
-              let eleve  = this.enfants_ens.nativeElement.value='';
-              let pass  = this.password_ens.nativeElement.value='';
+              this.photo_ens.nativeElement.value='';
+              this.prenom_ens.nativeElement.value='';
+              this.username_ens.nativeElement.value='';
+              this.nom_ens.nativeElement.value='';
+              this.enfants_ens.nativeElement.value='';
+              this.password_ens.nativeElement.value='';
             } ,
     (err) => { this.dataHTTP = err; });     
  }
 
  save_par() {
+  
+  
+  let e_prenom  = this.prenom_enf.nativeElement.value;
+  let e_annee  = this.annee_enf.nativeElement.value;
+  let naiss_enf = this.naiss_enf.nativeElement.value;
+  alert("naiss : "+naiss_enf);
+  let e_ens  = this.getSelectValues(this.enseignant_enf.nativeElement);
 
+  this.formData.append('e_prenom', e_prenom)
+  this.formData.append('e_annee', e_annee)
+  this.formData.append('naiss_enf', naiss_enf)
+  this.formData.append('e_ens', JSON.stringify(e_ens))
+
+  if(!this.parentexistant) {
+    
+    let p_prenom  = this.prenom_par.nativeElement.value;
+    let p_username  = this.username_par.nativeElement.value;
+    let p_nom  = this.nom_par.nativeElement.value;
+    let p_pass  = this.password_par.nativeElement.value;
+  
+    this.formData.append('p_prenom', p_prenom)
+    this.formData.append('p_username', p_username)
+    this.formData.append('p_nom', p_nom)
+    this.formData.append('p_pass', p_pass)
+
+  }
+  else {
+    let p_parent_enf = this.parent_enf.nativeElement.value;
+    this.formData.append('p_parent_enf', p_parent_enf)
+  }
+
+  this.http.post( 'http://127.0.0.1/__API_KIDS/ADD_P_E.php', this.formData ).subscribe(
+    (d) => {  this.dataHTTP1 = d;
+              this.showMsg1=true;
+              setTimeout(() => {
+                this.showMsg1=false;
+              }, 2000); 
+              
+              this.prenom_enf.nativeElement.value="";
+              this.annee_enf.nativeElement.value="";
+              this.naiss_enf.nativeElement.value="";
+
+              if(this.parentexistant) {
+              this.parent_enf.nativeElement.value="";
+              } else {
+              this.photo_par.nativeElement.value='';
+              this.prenom_par.nativeElement.value='';
+              this.username_par.nativeElement.value='';
+              this.enseignant_enf.nativeElement.value='';
+              this.nom_par.nativeElement.value='';
+              this.password_par.nativeElement.value='';
+            }
+            } ,
+    (err) => {  this.showMsg1=true;
+      setTimeout(() => {
+        this.showMsg1=false;
+      }, 2000); console.log(err);  this.dataHTTP1 = err;  });  
  }
 
 getSelectValues(select) {
@@ -213,14 +269,22 @@ getSelectValues(select) {
   return result;
 }
 
+
+uploadPerentPhoto( file ) {
+  for ( let i = 0; i < file.length; i++ ) {
+      this.formData.append( "p_file", file[i], file[i]['name'] );
+  }
+}
+
 uploadFiles( file ) {
   for ( let i = 0; i < file.length; i++ ) {
       this.formData.append( "file", file[i], file[i]['name'] );
   }
 }
 
-
 showMsg=false;
+showMsg1=false;
 dataHTTP: any;
+dataHTTP1:any;
 
 }
