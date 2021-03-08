@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalVarsService } from './global-vars.service';
 import { HelpersService } from './helpers.service';
 import { LoginService } from './login/login.service';
 
@@ -12,25 +11,16 @@ export class AppComponent implements OnInit {
   loadingApp = true;
 
   constructor(
-    public helpS : HelpersService, 
-    private gVars: GlobalVarsService) {
-    
-    
-
+    public helpS : HelpersService, private dataService:LoginService) {
     setTimeout(()=> { this.loadingApp=false; },1000);
   }
 
   getPath(){
-    return this.gVars.linkToPHP;
+    return this.dataService.getpath();
   }
 
   ngOnInit() {
    
   }
-
-  
-  
-  
-  
    
 }

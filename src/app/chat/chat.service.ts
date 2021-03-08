@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class ChatService {
   chats;
   users;
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,private dataService:LoginService) { 
 
   }
 
@@ -16,9 +17,7 @@ export class ChatService {
   
     return new Promise(
       (resolve,reject) => {
-          //'http://127.0.0.1/DesignEcole/datachat.php'
-          //'http://localhost:3000/chats'+id
-          this.http.get('http://localhost:3000/chats'+id).subscribe(
+          this.http.get(this.dataService.URL_PHP("GET_CHATSDATA")).subscribe(
               (data:any) => {
                 this.chats = data;
                 resolve(this.chats);
@@ -38,7 +37,7 @@ export class ChatService {
     return new Promise(
       (resolve,reject) => {
   
-          this.http.get('http://localhost:3000/DirectionUsers').subscribe(
+          this.http.get(this.dataService.URL_PHP("GET_DIRECTIONUSERS")).subscribe(
               (data:any) => {
                 this.users = data;
                 resolve(this.users);

@@ -8,7 +8,7 @@
 88     `8888   d8'        `8b  `888'       
 88      `888  d8'          `8b  `8'        
 -->
-<header *ngIf="helpS.isLoggedIn()">
+<header>
             <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-green-700 autor">
                 <div class="container p-0">
                     <div class="flex items-center">
@@ -29,7 +29,7 @@
                             aria-labelledby="profiledropdown">
                                 <a *ngFor='let notif of notificationsData;' 
                                 class="dropdown-item border-b-2 flex items-center justify-center cursor-pointer" style="white-space: normal;" 
-                                [routerLink]="notif.linkTo">
+                                [routerLink]="notif.linkTo+'/'+notif.idPub">
                                     <img [src]='notif.photoPub' class="h-10 w-10 mr-2 rounded-full" /> 
                                     <label class="m-0 grid">
                                         <p class="text-sm">
@@ -37,7 +37,7 @@
                                         {{ notif.newLable }}   
                                         </p> 
                                         <small class="text-success">                       
-                                            {{notif.timePub}}
+                                            {{ notif.timePub }}
                                         </small> 
                                     </label>
                                 </a>

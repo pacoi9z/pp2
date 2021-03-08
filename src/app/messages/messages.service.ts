@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GlobalVarsService } from '../global-vars.service';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class MessagesService {
           //c bon dertha 3mira hnaya n'har hssalt m3a header ta3 apach ou weritlek l'erreur ou mahabitch twerihali hhhhhh hmara :p
           //hadi bedli fiha ghir link ta3ek 
           //this.http.get(this.gVar.linkToPHP+'/dataMessage.php').subscribe(
-           this.http.get('http://localhost:3000/MsgData').subscribe(
+           this.http.get(this.dataService.URL_PHP("GET_MSGDATA")).subscribe(
             (data:any) => {
               this.messages = data;
               this.dataCharged=true;
@@ -40,7 +40,7 @@ export class MessagesService {
   }
 
   constructor(private http:HttpClient, 
-              private gVar : GlobalVarsService) { 
+    private dataService:LoginService) { 
     
   }
 
@@ -53,7 +53,7 @@ export class MessagesService {
   async goSetMsg(contact,objet,Text) {
     //http fonction to send the message to destination
     let errMsg="";
-    this.http.get("http://localhost:3000/aeaze?c="+contact+"&o="+objet+"&t="+Text).subscribe(
+    this.http.post<any>(this.dataService.URL_PHP("INSERT_messages") , {contact,objet,Text} ).subscribe(
       (data:any)=>{ errMsg = " Test : "+data; },
       (erro)=>{ console.log("eerr : "+erro.status)   
       errMsg = "Ooops! Le message n'a pas été envoyé.. "+erro.error; 

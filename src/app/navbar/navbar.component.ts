@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalVarsService } from '../global-vars.service';
 import {HelpersService} from '../helpers.service';
 import { LoginService } from '../login/login.service';
 
@@ -13,19 +12,21 @@ export class NavbarComponent implements OnInit {
   notificationsData : any;
 
   constructor(
-      public helpS:HelpersService, 
-      private gVars: GlobalVarsService,
+      public helpS:HelpersService,
       private dataService: LoginService) {
-      this.notificationsData = helpS.getClochNotifs();
+      helpS.gogetNotifForMe().then((data)=> { 
+        this.notificationsData = data;
+      });
+      this.helpS.gogetMe();
       
   }
 
   ngOnInit(): void {
-
+    
   }
 
   getPath(){
-    return this.gVars.linkToPHP;
+    return this.dataService.getpath();
   }
 
   scrollToElement($element): void {

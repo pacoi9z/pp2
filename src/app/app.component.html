@@ -1,5 +1,5 @@
 
-<app-navbar ></app-navbar>
+<app-navbar *ngIf="helpS.isLoggedIn()" ></app-navbar>
 <!-- c'est ici que s'affiche ma route mami -->
 <div class="p-1 container-fluid" id="newBody" >
     <div *ngIf="loadingApp" class="flex items-center justify-center " style="height:75vh;">
@@ -16,5 +16,5 @@
     </div>
     
 
-<app-chat (click)="helpS.gosetNofiChatVu()"></app-chat>
+<app-chat *ngIf="helpS.isLoggedIn()" (click)="helpS.gosetNofiChatVu()"></app-chat>
 </div>

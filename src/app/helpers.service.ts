@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalVarsService } from './global-vars.service';
+import { promise } from 'protractor';
 import { LoginService } from './login/login.service';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { LoginService } from './login/login.service';
 export class HelpersService {
 
   ME:any; 
-  notifMe = []; 
+  notifMe:any; 
 
   notif_Cloche = 0;
   notif_Publication=0;
@@ -23,7 +23,7 @@ export class HelpersService {
   notif_Chat=0;
   dataCharged= false;
 
-  constructor(private dataService : LoginService, private http: HttpClient ,private router:Router, private gVars : GlobalVarsService) {
+  constructor(private dataService : LoginService, private http: HttpClient ,private router:Router) {
     
     if(!this.dataService.isLoggedIn())
     {
@@ -31,34 +31,14 @@ export class HelpersService {
       this.router.navigate([redirect]);
     }
 
-    this.gogetNotifForMe();this.gogetNotifCount();
-    //check for new notification every 5sec in this exemple it's set for 20sec, i love you sina <3
-    //setInterval(()=>{this.gogetNotifForMe();this.gogetNotifCount()},20000); 
-    //setTimeout(()=>{this.gogetNotifForMe();this.gogetNotifCount()},5000);
-
-    this.ME = this.dataService.getMe();
-    console.log("ME HELP : "+this.ME+" "+new Date().getTime())
-    //this.gogetMe();
-
+    this.gogetMe();
+    this.gogetNotifCount();
+    
+    setInterval(()=>{this.gogetNotifForMe();this.gogetNotifCount()},5000); 
   }
 
-  gogetMe() {    
-    
-    /*
-    // http://localhost:3000/ME
-    console.log(this.gVars.linkToPHP+'/GET_USER.php');
-    
-    this.http.get('http://localhost:3000/ME').subscribe(
-            (data:any) => {
-              this.ME = data;
-              this.dataCharged=true;
-              console.log(data);
-            },
-            error => {
-              console.log(error);
-            }
-          );
-    */    
+  gogetMe() {
+    this.ME = this.dataService.getMe(); 
   }
   
   isLoggedIn() {
@@ -67,47 +47,8 @@ export class HelpersService {
 
   gogetNotifForMe() {
 
-    //HTTP REQUEST TO GET ALL NOTIFS for auth user so set in the button cloche
-    //replace "notifMe" array values by http data response
-    //i want to marry you sina :'( do you want to ?
-   this.notifMe=[{
-      
-      idPub:"30",
-      photoPub:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-      nomPub:"Ziane Raiss",
-      newLable : "a ajouter une nouvelle publication",
-      timePub  : "il y'a 1 semaine",
-      linkTo : "publications/30"
-  
-    },
-    {
-      
-      idPub:"21",
-      photoPub:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-      nomPub:"Ziane Raiss",
-      newLable : "Vous a envoyé un nouveau message",
-      timePub  : "il y'a 1 jour",
-      linkTo : "messages/3"
-  
-    },
-    {
-      
-      idPub:"21",
-      photoPub:"https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-      nomPub:"Ziane Raiss",
-      newLable : "Vous a envoyé un nouveau message",
-      timePub  : "il y'a 1 jour",
-      linkTo : "messages/4"
-  
-    },
-    {
-      idPub:"24",
-      photoPub:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-      nomPub:"Bechkoune Hanane",
-      newLable : "Nouvelle Publication",
-      timePub  : "a 15h20",
-      linkTo : "publications/24"
-    },
+    /*
+    this.notifMe=[
     {
       idPub:"36",
       photoPub:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
@@ -117,10 +58,21 @@ export class HelpersService {
       linkTo : "publications/36"
     }, 
   ];
+    */
+    return new Promise(
+      (resolve,reject) => {
 
-  //enlève le simbole + 3mira dertout pour les testes berk
-  this.notif_Cloche = this.notifMe.length;
-
+        this.http.get(this.dataService.URL_PHP("GET_NOTIFS")).subscribe(
+          (data)=> {
+            this.notifMe = data;
+            this.notif_Cloche = this.notifMe.length;
+            resolve(data);
+          },
+          (err)=> {resolve(err);}
+        );
+      }
+    );
+  
   }
 
   gosetNofiClochVu() {

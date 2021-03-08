@@ -2,8 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { Title} from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalVarsService } from '../global-vars.service';
 import { HelpersService } from '../helpers.service';
+import { LoginService } from '../login/login.service';
 import { PublicationServiceService } from './publication-service.service';
 @Component({
   selector: 'app-publications',
@@ -33,8 +33,8 @@ export class PublicationsComponent implements OnInit {
     private datePipe: DatePipe,
     public helpS:HelpersService,
     public pubS:PublicationServiceService, 
-    private titleService :Title, 
-    private gVars: GlobalVarsService) { 
+    private titleService :Title,
+    private dataService:LoginService) { 
   }
 
   ngOnInit(): void {
@@ -98,7 +98,7 @@ export class PublicationsComponent implements OnInit {
 
 
   getPath(){
-    return this.gVars.linkToPHP;
+    return this.dataService.getpath();
   }
 
   isArabic(txt) {

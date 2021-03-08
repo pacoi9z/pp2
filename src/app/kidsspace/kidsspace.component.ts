@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HelpersService } from '../helpers.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-kidsspace',
@@ -17,7 +18,8 @@ export class KidsspaceComponent implements OnInit {
 
   constructor(public helpS : HelpersService,
     public http:HttpClient,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    private dataService:LoginService) {
 
     this.goGetKids();    
    }
@@ -63,7 +65,7 @@ export class KidsspaceComponent implements OnInit {
 
   goGetKids() {
 
-    this.http.get('http://localhost:3000/kids').subscribe(
+    this.http.get(this.dataService.URL_PHP("GET_KIDS")).subscribe(
       (e:any[])=>{ this.kidsData=e; this.loading=false; this.trustedUrl() },
       (e)=>{} )
     
