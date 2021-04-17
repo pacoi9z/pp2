@@ -42,7 +42,7 @@
                     <button (click)="pass_par()" class="btn btn-primary mb-1">
                         Generer un mot de pass automatique
                     </button>
-                    <input type="file" (change)="uploadPerentPhoto($event.target.files)" accept="image/*" #photo_par class="form-control-file mb-1" placeholder="Photo" />
+                    <input type="file" (change)="uploadPerentPhoto($event)" accept="image/*" #photo_par class="form-control-file mb-1" placeholder="Photo" />
                 </div>
                 <div *ngIf="parentexistant">
                     <Select class="form-control mb-1" #parent_enf >
@@ -55,9 +55,8 @@
                     Enregistrer l'élève
                 </button>
 
-                <div *ngIf="showMsg1" class="mt-2 bg-blue-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
-                    <p class="font-bold">{{ dataHTTP1 }}</p>
-                </div>
+                <p class="font-bold" #p_err1 ></p>
+                
                 
         </div>
     </div>
@@ -68,14 +67,20 @@
                 Ajouter un compte enseignant
             </h1> 
             <hr/>
+                
                 <input type="text" class="form-control mt-2 mb-1" #nom_ens placeholder="Nom Enseignant" />
                 <input type="text" class="form-control mb-1" #prenom_ens placeholder="Prenom Enseignant" />
+                <input type="text" class="form-control mb-1" #phone_ens placeholder="Numero de téléphone"/>
+                <input type="mail" class="form-control mb-1" #mail_ens placeholder="Adresse email"/>
+                <br/>
+                <hr/>
+                <br/>
                 <input type="text" class="form-control mb-1" #username_ens placeholder="Username" />
                 <input type="text" class="form-control mb-1" #password_ens placeholder="Mot de pass"/> 
                 <button (click)="pass_ens()" class="btn btn-primary mb-1">
                     Generer un mot de pass automatique
                 </button>
-                <input type="file" (change)="uploadFiles($event.target.files)" accept="image/*" #photo_ens placeholder="Photo" />
+                <input type="file" (change)="uploadFiles($event)" accept="image/*" #photo_ens placeholder="Photo" />
 
                 <h1 class="text-2xl mt-3">
                     Liste d'élèves
@@ -99,9 +104,8 @@
                     Enregistrer l'Enseignant
                 </button>
 
-                <div *ngIf="showMsg" class="mt-2 bg-blue-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
-                    <p class="font-bold">{{ dataHTTP }}</p>
-                </div>
+                <p class="font-bold" #p_err ></p>
+                
                 
         </div>
     </div>

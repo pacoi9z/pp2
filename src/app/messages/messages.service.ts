@@ -24,7 +24,7 @@ export class MessagesService {
               resolve(this.messages);
             },
             error => {
-              console.log(error);
+             
               resolve(undefined);
             }
           ) 
@@ -50,17 +50,21 @@ export class MessagesService {
   }
 
 
-  async goSetMsg(contact,objet,Text) {
+  async goSetMsg(id_recepteur,objet_message,text_message) {
     //http fonction to send the message to destination
     let errMsg="";
-    this.http.post<any>(this.dataService.URL_PHP("INSERT_messages") , {contact,objet,Text} ).subscribe(
-      (data:any)=>{ errMsg = " Test : "+data; },
-      (erro)=>{ console.log("eerr : "+erro.status)   
-      errMsg = "Ooops! Le message n'a pas été envoyé.. "+erro.error; 
-    });
+    return new Promise(
+      (resolve,reject) => {
+        this.http.post<string>(this.dataService.URL_PHP("INSERT_messages") , {id_recepteur,objet_message,text_message}).subscribe(
+          (data)=>{ errMsg = data; resolve(errMsg); },
+          (erro)=>{ errMsg = "Ooops! Le message n'a pas été envoyé.. "; reject(errMsg);
+        });
+      }
+    );
 
-
-    return await errMsg;
+    
+    //return await errMsg;
+  
   }
 
 

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Title} from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { HelpersService } from '../helpers.service';
@@ -24,6 +24,13 @@ export class PublicationsComponent implements OnInit {
   qestionSelectedPub; 
   PublicationData;
   MoulPubName;
+  ListeUsers;
+  ListeUsersToShow;
+  selUsers;
+  quipeuvoir;
+  ListeUsersLoading:boolean;
+
+  @ViewChild('ListUsersDiv') ListUsersDiv:ElementRef;
   // grace a cette variable PRIO on va faire un système de priorité béch n'affiché les publications non lu en avan,
   // et des fois les publications li clicka 3lihom b'notification
   prio;
@@ -35,7 +42,13 @@ export class PublicationsComponent implements OnInit {
     public pubS:PublicationServiceService, 
     private titleService :Title,
     private dataService:LoginService) { 
+      
+      this.selUsers = [];
+      this.quipeuvoir = 'all';
+
   }
+
+  
 
   ngOnInit(): void {
     
@@ -51,6 +64,51 @@ export class PublicationsComponent implements OnInit {
 
   }
 
+
+  getUserList() {
+    if(!this.ListeUsers) {
+      this.ListeUsersLoading = true;
+      this.pubS.gogetUserList().then((e)=> {
+        this.ListeUsers = e;
+        for(let u of this.ListeUsers) {
+          u['checked'] = false;
+        }
+        this.ListeUsersToShow = this.ListeUsers;
+        this.ListeUsersLoading = false;
+      })
+    }
+    
+  }
+
+  get get_selUsers() {
+    return this.ListeUsers
+              .filter(p => p.checked)
+              .map(p => p.id)
+  }
+
+  get_searchUsers(val) {
+    return this.ListeUsers.filter((p) => { 
+                if(p.nom.includes(val) || (p.parentde!=null && p.parentde.includes(val)))
+                return p;
+              })
+  }
+
+  checke_user(i,event) {
+    this.ListeUsers[i].checked = event.target.checked;
+  }
+
+  save_quipeuvoir() {
+
+  }
+
+  searchinlist(t) {
+    let val = (t as HTMLInputElement).value;
+    console.log(val);
+    this.ListeUsersToShow = this.get_searchUsers(val);
+    console.log(this.ListeUsers);
+  }
+
+  
 
   getPublicationsData() {
     let dataPubs:any;
@@ -136,11 +194,11 @@ export class PublicationsComponent implements OnInit {
 
     if(inf==="true") {
       myObj.infoPub = "false";
-      myObj.nbiPub -= 1;
+      myObj.nbiPub --;
     }
     else {
       myObj.infoPub = "true";
-      myObj.nbiPub += 1;
+      myObj.nbiPub ++;
     }
     
     this.pubS.SEND_HTTP_INFO(idPub);
@@ -154,11 +212,11 @@ export class PublicationsComponent implements OnInit {
 
     if(jm==="true") {
       myObj.jaimPub = "false";
-      myObj.nbjPub -= 1;
+      myObj.nbjPub--;
     }
     else {
       myObj.jaimPub = "true";
-      myObj.nbjPub += 1;
+      myObj.nbjPub++;
     }
 
     this.pubS.SEND_HTTP_LIKE(idPub);
@@ -186,6 +244,9 @@ export class PublicationsComponent implements OnInit {
     document.getElementById("forMoulPub").setAttribute('value',myObj.idMoulPub);
   }
 
+  selcectquipeuvoir(qui){
+    let v = document.getElementById(qui).classList;
+  }
   
   msgIsSelectif() {
     if(this.helpS.ME?.type=='Parent' && this.qestionSelectedPub=='Enseignant')

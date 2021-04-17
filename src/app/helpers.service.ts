@@ -66,6 +66,7 @@ export class HelpersService {
           (data)=> {
             this.notifMe = data;
             this.notif_Cloche = this.notifMe.length;
+            console.log(data);
             resolve(data);
           },
           (err)=> {resolve(err);}
@@ -77,6 +78,10 @@ export class HelpersService {
 
   gosetNofiClochVu() {
     //SET all listed notif in notifMe as VU with current timestamp
+    this.http.get(this.dataService.URL_PHP("goset_NotifCloch_vu")).subscribe(
+      (data) => {},
+      (err) => {}
+    )
     this.notif_Cloche = 0;
   }
   gosetNofiKidsVu() {

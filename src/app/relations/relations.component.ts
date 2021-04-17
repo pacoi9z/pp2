@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HelpersService } from '../helpers.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-relations',
@@ -26,8 +27,9 @@ export class RelationsComponent implements OnInit {
   @ViewChild('password_ens') password_ens:ElementRef;
   @ViewChild('photo_ens') photo_ens:ElementRef;
   @ViewChild('enfants_ens') enfants_ens:ElementRef;
-
-  constructor(public helpS:HelpersService, public http : HttpClient) { }
+  @ViewChild('p_err') p_err: ElementRef;
+  @ViewChild('p_err1') p_err1: ElementRef;
+  constructor(public helpS:HelpersService,private dataService:LoginService, public http : HttpClient) { }
 
   Re_parent_enfant = [{
     nom_prenom_parent : "Ziane Islam",
@@ -178,11 +180,11 @@ export class RelationsComponent implements OnInit {
   this.formData.append('nom', nom)
   this.formData.append('eleve', JSON.stringify(eleve))
   this.formData.append('pass', pass)
-  this.http.post( 'http://127.0.0.1/__API_KIDS/Req.php', this.formData ).subscribe(
-    (d) => {  this.dataHTTP = d;
-              this.showMsg=true;
+
+  this.http.post( this.dataService.URL_PHP('INSERT_ENS') , this.formData ).subscribe(
+    (d) => {  this.p_err.nativeElement.innerHTML = d;
               setTimeout(() => {
-                this.showMsg=false;
+                this.p_err.nativeElement.innerHTML = "";
               }, 2000); 
               this.photo_ens.nativeElement.value='';
               this.prenom_ens.nativeElement.value='';
@@ -191,16 +193,19 @@ export class RelationsComponent implements OnInit {
               this.enfants_ens.nativeElement.value='';
               this.password_ens.nativeElement.value='';
             } ,
-    (err) => { this.dataHTTP = err; });     
+    (err) => {
+      this.p_err.nativeElement.innerHTML = err.error.text;
+      setTimeout(() => {
+        this.p_err.nativeElement.innerHTML = "";
+      }, 10000);
+    });
  }
 
+
  save_par() {
-  
-  
   let e_prenom  = this.prenom_enf.nativeElement.value;
   let e_annee  = this.annee_enf.nativeElement.value;
   let naiss_enf = this.naiss_enf.nativeElement.value;
-  alert("naiss : "+naiss_enf);
   let e_ens  = this.getSelectValues(this.enseignant_enf.nativeElement);
 
   this.formData.append('e_prenom', e_prenom)
@@ -227,10 +232,9 @@ export class RelationsComponent implements OnInit {
   }
 
   this.http.post( 'http://127.0.0.1/__API_KIDS/ADD_P_E.php', this.formData ).subscribe(
-    (d) => {  this.dataHTTP1 = d;
-              this.showMsg1=true;
+    (d) => {  this.p_err1.nativeElement.innerHTML = d;
               setTimeout(() => {
-                this.showMsg1=false;
+                this.p_err1.nativeElement.innerHTML = "";
               }, 2000); 
               
               this.prenom_enf.nativeElement.value="";
@@ -247,11 +251,14 @@ export class RelationsComponent implements OnInit {
               this.nom_par.nativeElement.value='';
               this.password_par.nativeElement.value='';
             }
+            this.p_err1.nativeElement.innerHTML = d;
+            
             } ,
-    (err) => {  this.showMsg1=true;
+    (err) => { this.p_err1.nativeElement.innerHTML = JSON.stringify(err);
       setTimeout(() => {
-        this.showMsg1=false;
-      }, 2000); console.log(err);  this.dataHTTP1 = err;  });  
+        this.p_err1.nativeElement.innerHTML = "";
+      }, 10000); });
+
  }
 
 getSelectValues(select) {
@@ -270,13 +277,17 @@ getSelectValues(select) {
 }
 
 
-uploadPerentPhoto( file ) {
+uploadPerentPhoto( event ) {
+  const target = event.target as Element;
+  let file = (target as HTMLInputElement).files;
   for ( let i = 0; i < file.length; i++ ) {
       this.formData.append( "p_file", file[i], file[i]['name'] );
   }
 }
 
-uploadFiles( file ) {
+uploadFiles( event ) {
+  const target = event.target as Element;
+  let file = (target as HTMLInputElement).files;
   for ( let i = 0; i < file.length; i++ ) {
       this.formData.append( "file", file[i], file[i]['name'] );
   }
@@ -284,7 +295,7 @@ uploadFiles( file ) {
 
 showMsg=false;
 showMsg1=false;
-dataHTTP: any;
-dataHTTP1:any;
+dataHTTP : any;
+dataHTTP1 : any;
 
 }

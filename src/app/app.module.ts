@@ -18,6 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { NgApexchartsModule } from "ng-apexcharts";
 import { LoginComponent } from './login/login.component';
+import { ChartComponent } from './chart/chart.component';
 
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {DemoMaterialModule} from './material-module';
@@ -34,6 +35,7 @@ import { LoginComponent } from './login/login.component';
     RelationsComponent,
     DashboardComponent,
     LoginComponent,
+    ChartComponent,
   ],
   imports: [
     NgApexchartsModule,

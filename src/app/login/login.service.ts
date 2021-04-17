@@ -18,7 +18,6 @@ export class LoginService {
     constructor(private httpClient : HttpClient) { }
 
     public userlogin(username, password) {
-        console.log(this.getpath()+"/login.php");
         return this.httpClient.post<any>( this.getpath()+"/login.php" , { username, password })
         .pipe(map(Users => {
         

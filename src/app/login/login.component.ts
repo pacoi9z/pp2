@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
   {
   this.dataService.userlogin(angForm1.value.username,angForm1.value.password).pipe(first()).subscribe(
   data => {
-    console.log(data+" "+new Date().getTime());
+  
   const redirect = this.dataService.redirectUrl ? this.dataService.redirectUrl : '/publications';
   this.router.navigate([redirect]);
   },
   error => {
-    console.log(error);
+  
   alert("User name or password is incorrect")
   });
   }

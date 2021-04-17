@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {HelpersService} from '../helpers.service';
 import { LoginService } from '../login/login.service';
 
@@ -9,6 +9,7 @@ import { LoginService } from '../login/login.service';
 })
 export class NavbarComponent implements OnInit {
   
+
   notificationsData : any;
 
   constructor(

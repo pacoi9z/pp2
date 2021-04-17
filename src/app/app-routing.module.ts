@@ -1,6 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ChartComponent } from './chart/chart.component';
 import { AppComponent } from './app.component';
 import { C404Component } from './c404/c404.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -16,6 +17,7 @@ const route: Routes = [
   { path : 'kids' , component : KidsspaceComponent},
   { path : 'relations', component : RelationsComponent},
   { path : 'dashboard', component : DashboardComponent},
+  { path : 'chart', component : ChartComponent},
   { path : '', component : LoginComponent},
   { path: '**', redirectTo : '404' },
   { path: '404' , component : C404Component },

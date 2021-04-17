@@ -57,7 +57,6 @@ export class ChatComponent implements OnInit {
 
   openchat() {
     this.isopenchat=!this.isopenchat;
-    console.log("chat opended")
   }
 
   send_chat() {

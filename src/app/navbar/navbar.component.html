@@ -30,7 +30,9 @@
                                 <a *ngFor='let notif of notificationsData;' 
                                 class="dropdown-item border-b-2 flex items-center justify-center cursor-pointer" style="white-space: normal;" 
                                 [routerLink]="notif.linkTo+'/'+notif.idPub">
-                                    <img [src]='notif.photoPub' class="h-10 w-10 mr-2 rounded-full" /> 
+                                    <div class="flex-shrink-0 w-10 h-10 mr-2 ">
+                                        <img [src]='notif.photoPub' class="h-10 w-10 rounded-full object-cover" /> 
+                                    </div>
                                     <label class="m-0 grid">
                                         <p class="text-sm">
                                         <b>{{ notif.nomPub }}</b>
@@ -79,7 +81,7 @@
                             <div class="dropdown">
                                 <button data-toggle="dropdown" id="profiledropdown" class="dropdown-toggle flex text-sm text-white rounded-full focus:outline-none hover:bg-green-800 transition duration-150 ease-in-out">
                                     <img class="h-8 w-8 rounded-full object-cover" [src]="this.helpS.ME?.photo" [alt]="(this.helpS.ME?.nom | uppercase )+' '+this.helpS.ME?.prenom">
-                                    <p class="p-1">{{this.helpS.ME?.nom | uppercase }} {{this.helpS.ME?.prenom}} </p>
+                                    <p class="p-1 pr-3">{{this.helpS.ME?.nom | uppercase }} {{this.helpS.ME?.prenom}} </p>
                                 </button>
                                 <div  class="dropdown-menu dropdown-menu-right" aria-labelledby="profiledropdown">
                                     <a *ngIf="this.helpS.ME?.type=='P'" class="dropdown-item" routerLink="myprofile" href="#">Mon Profile</a>

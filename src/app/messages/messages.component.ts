@@ -111,17 +111,29 @@ export class MessagesComponent implements OnInit {
   }
 
   sendMsg() {
+
     this.errEnvoiMsg ="";
     this.msgSuccess ="";
-    console.log("Msg : "+this.frmG.get('objet_Message').value);
-    console.log("Msg : "+this.frmG.get('contact_Message').value);
-    console.log("Msg : "+this.frmG.get('Text_Message').value);
-    
-    if(this.errEnvoiMsg!="")
-      this.msgSuccess="Le message a bien été envoyé à "+this.frmG.get('contact_Message').value;
-    this.errEnvoiMsg="Erreur : "+this.msgS.goSetMsg(this.frmG.get('contact_Message').value,this.frmG.get('objet_Message').value,this.frmG.get('Text_Message').value).then(e=> { return e.length; });
-    
 
+    this.msgS.goSetMsg(this.frmG.get('contact_Message').value,this.frmG.get('objet_Message').value,this.frmG.get('Text_Message').value).then(
+      (data:string) => { 
+        if( data.charAt(data.length-1)!="!")
+
+           this.msgSuccess =data+" à "+this.frmG.get('contact_Message').value;
+        else 
+           this.errEnvoiMsg="Erreur : "+data;
+
+    },
+    (err:string) => {
+
+    }
+    )
+
+    
+   
+    
+    
+    
   }
 
   

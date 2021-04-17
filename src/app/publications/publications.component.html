@@ -1,210 +1,219 @@
-<div  
-[ngClass]="{'grid-cols-1 gap-0 pub_width':this.helpS.ME?.type==='P','grid-cols-5 gap-1':this.helpS.ME?.type!='P'  }" 
-class="container p-0 relative flex items-start justify-between grid "  >
-    <div 
-    *ngIf="this.helpS.ME?.type!='P'" 
+<div
+  [ngClass]="{'grid-cols-1 gap-0 pub_width':this.helpS.ME?.type==='P','grid-cols-5 gap-1':this.helpS.ME?.type!='P'  }"
+  class="container p-0 relative flex items-start justify-between grid ">
+  <div *ngIf="this.helpS.ME?.type!='P'"
     class="bg-gray-100 lg:sticky top-0 border border-gray-400 rounded mb-5 col-span-5 lg:col-span-2">
-      <div class="">
-        <div class="flex items-center p-3">
-          <div class="flex-shrink-0 h-10 w-10">
-            <img class="h-10 w-10 rounded-full" [src]="this.helpS.ME?.photo" alt="">
-          </div>
-          <div class="ml-4">
-            <div class="text-sm leading-5 font-medium text-gray-900">
-              {{this.helpS.ME?.nom+' '+this.helpS.ME?.prenom}}
-            </div>
-            <div class="text-sm leading-5 text-gray-500 dropdown">
-              <button class="dropdown-toggle bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Qui peut voir ?</button> 
-                <div class="dropdown-menu" >
-                  <a class="dropdown-item" href="#">Administration </a>
-                  <a class="dropdown-item" href="#">Class1:Parents</a>
-                  <a class="dropdown-item" href="#">Class2:Parents</a>
-                  <hr/>
-                  <a class="dropdown-item" href="#">Touet le monde</a>
-                </div>
-            </div>
-          </div>
+    <div class="">
+      <div class="flex items-center p-3">
+        <div class="flex-shrink-0 h-10 w-10">
+          <img class="h-10 w-10 rounded-full object-cover" [src]="this.helpS.ME?.photo" alt="">
         </div>
-        <div class="form-group px-2 ">
-          
-            <input type="text" class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow " placeholder="Text de votre publication" />
-          
-            <div>
-              <input *ngIf="this.whatStat==='Fichier'" type="file" class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow " placeholder="Text de votre publication" />
-            </div>
-              
-            <div>
-              <input formControlName="pub_evt_titre" *ngIf="this.whatStat==='Evenement'" type="text" class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow" placeholder="Titre de l'event" />
-              <input *ngIf="this.whatStat==='Evenement'" type="date" class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow" placeholder="Text de votre publication" />
-              <input *ngIf="this.whatStat==='Evenement'" type="time" class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow" placeholder="Text de votre publication" />  
-            </div>
-            
-            <div>
-              <textarea *ngIf="this.whatStat==='Devoir' || this.whatStat==='Exercice' || this.whatStat==='Questionaire' " rows="6" id="autoresizing" 
-              class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow auto" 
-              placeholder="Devoir, Exercice, Questionnaire"></textarea>
-            </div>
-                              
+        <div class="ml-4">
+          <div class="text-sm leading-5 font-medium text-gray-900">
+            {{this.helpS.ME?.nom+' '+this.helpS.ME?.prenom}}
+          </div>
+
+
+
+          <button data-target="#quipeuvoirModal" data-toggle="modal"
+            class="dropdown-toggle bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded ">
+            Qui peut voir ?
+          </button>
+
         </div>
-        <hr/>
-        <div class="p-2 grid grid-cols-3 gap-1">
-          <div>
-            <button (click)="pubType('Text')" [ngClass]="{'bg-green-200':this.whatStat==='Text'}" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
-              <span>Text</span>
-            </button>
-          </div>
-          <div>
-            <button (click)="pubType('Evenement')" [ngClass]="{'bg-green-200':this.whatStat==='Evenement'}" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
-              <span>Evènement</span>
-            </button>
-          </div>
-          <div>
-            <button (click)="pubType('Fichier')" [ngClass]="{'bg-green-200':this.whatStat==='Fichier'}" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
-              <span>Fichier</span>
-            </button>
-          </div>
-          <div>
-            <button (click)="pubType('Questionaire')" [ngClass]="{'bg-green-200':this.whatStat==='Questionaire'}" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
-              <span>Questionaire</span>
-            </button>
-          </div>
-          <div>
-            <button (click)="pubType('Exercice')" [ngClass]="{'bg-green-200':this.whatStat==='Exercice'}" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
-              <span>Exercice</span>
-            </button>
-          </div>
-          <div>
-            <button (click)="pubType('Devoir')" [ngClass]="{'bg-green-200':this.whatStat==='Devoir'}" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
-              <span>Devoir</span>
-            </button>
-          </div>
-          
-          
+      </div>
+      <div class="form-group px-2 ">
+
+        <input type="text"
+          class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow "
+          placeholder="Text de votre publication" />
+
+        <div>
+          <input *ngIf="this.whatStat==='Fichier'" type="file"
+            class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow "
+            placeholder="Text de votre publication" />
         </div>
-        <div class="p-2">
-          <button 
-          data-toggle="modal" 
-          data-target="#pub_confirm" 
+
+        <div>
+          <input formControlName="pub_evt_titre" *ngIf="this.whatStat==='Evenement'" type="text"
+            class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow"
+            placeholder="Titre de l'event" />
+          <input *ngIf="this.whatStat==='Evenement'" type="date"
+            class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow"
+            placeholder="Text de votre publication" />
+          <input *ngIf="this.whatStat==='Evenement'" type="time"
+            class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow"
+            placeholder="Text de votre publication" />
+        </div>
+
+        <div>
+          <textarea *ngIf="this.whatStat==='Devoir' || this.whatStat==='Exercice' || this.whatStat==='Questionaire' "
+            rows="6" id="autoresizing"
+            class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow auto"
+            placeholder="Devoir, Exercice, Questionnaire"></textarea>
+        </div>
+
+      </div>
+      <hr />
+      <div class="p-2 grid grid-cols-3 gap-1">
+        <div>
+          <button (click)="pubType('Text')" [ngClass]="{'bg-green-200':this.whatStat==='Text'}"
+            class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
+            <span>Text</span>
+          </button>
+        </div>
+        <div>
+          <button (click)="pubType('Evenement')" [ngClass]="{'bg-green-200':this.whatStat==='Evenement'}"
+            class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
+            <span>Evènement</span>
+          </button>
+        </div>
+        <div>
+          <button (click)="pubType('Fichier')" [ngClass]="{'bg-green-200':this.whatStat==='Fichier'}"
+            class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
+            <span>Fichier</span>
+          </button>
+        </div>
+        <div>
+          <button (click)="pubType('Questionaire')" [ngClass]="{'bg-green-200':this.whatStat==='Questionaire'}"
+            class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
+            <span>Questionaire</span>
+          </button>
+        </div>
+        <div>
+          <button (click)="pubType('Exercice')" [ngClass]="{'bg-green-200':this.whatStat==='Exercice'}"
+            class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
+            <span>Exercice</span>
+          </button>
+        </div>
+        <div>
+          <button (click)="pubType('Devoir')" [ngClass]="{'bg-green-200':this.whatStat==='Devoir'}"
+            class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
+            <span>Devoir</span>
+          </button>
+        </div>
+
+
+      </div>
+      <div class="p-2">
+        <button data-toggle="modal" data-target="#pub_confirm"
           [ngClass]="{'bg-green-700 hover:bg-green-400' : true,'bg-gray-500' : false}"
           class="col-span-3 w-full text-white py-2 px-2 rounded ">
-            <span>Publier</span>
-          </button>
-          
+          <span>Publier</span>
+        </button>
+
+      </div>
+      <small class="p-3 text-sm leading-5 text-gray-500">Veillez a vérifier vos notifications !</small>
+    </div>
+  </div>
+  <div *ngIf="this.helpS.ME?.type!='P'"  class="modal fade" id="pub_confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmer la publication</h5>
         </div>
-        <small class="p-3 text-sm leading-5 text-gray-500">Veillez a vérifier vos notifications !</small>
+        <div class="modal-body">
+          Vous voulez vraiment publier ce contenue ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closebtn">Fermer</button>
+          <button class="btn btn-primary" type="submit">Publier</button>
+        </div>
       </div>
     </div>
-    <div class="modal fade" id="pub_confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Confirmer la publication</h5>
-          </div>
-          <div class="modal-body">
-            Vous voulez vraiment publier ce contenue ?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closebtn" >Fermer</button>
-            <button class="btn btn-primary" type="submit" >Publier</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 
 
 
-    <div #Publications class="relative mb-5 col-span-5 lg:col-span-3">
-      <!---- -------------------------------------------------------------------------------------------------------------------------->
-      
-      <div *ngFor='let pub of PublicationData;' 
-      class="p-2 border rounded mb-3"
+  <div #Publications class="relative mb-5 col-span-5 lg:col-span-3">
+    <!---- -------------------------------------------------------------------------------------------------------------------------->
+
+    <div *ngFor='let pub of PublicationData;' class="p-2 border rounded mb-3"
       [ngClass]="{'bg-green-100 border-info':this.prio!=undefined && this.prio==pub.idPub}"
-      (mouseenter)="pub.vuPub==null ? sendVu(pub.idPub) : false" 
-      (loadstart)="pub.vuPub==null ? sendVu(pub.idPub) : false" 
-      (loadeddata)="pub.vuPub==null ? sendVu(pub.idPub) : false" >
-        <div class="grid grid-cols-3">
-          <div class="col-span-3 flex items-start justify-between">
-            <div class="flex items-center">
-              <div class="flex-shrink-0 h-10 w-10 relative">
-                <span class="rounded-full right-0 bottom-0 absolute border border-white bg-green-500 block h-3 w-3"></span>
-                <img 
-                class="h-10 w-10 rounded-full" 
-                [src]="pub.photoPub" 
-                alt="">
-              </div>
-              <div class="ml-4">
-                <div class="text-sm leading-5 font-medium text-gray-900">
-                  {{pub.nomPub}}
-                </div>
-                <div class="text-sm leading-5 text-gray-500">
-                  {{pub.aPub}}
-                </div>
-              </div>
+      (mouseenter)="pub.vuPub==null ? sendVu(pub.idPub) : false"
+      (loadstart)="pub.vuPub==null ? sendVu(pub.idPub) : false"
+      (loadeddata)="pub.vuPub==null ? sendVu(pub.idPub) : false">
+      <div class="grid grid-cols-3">
+        <div class="col-span-3 flex items-start justify-between">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 h-10 w-10 relative">
+              <span
+                class="rounded-full right-0 bottom-0 absolute border border-white bg-green-500 block h-3 w-3"></span>
+              <img class="h-10 w-10 rounded-full object-cover" [src]="pub.photoPub" alt="">
             </div>
-            <div class="text-sm leading-5 text-gray-500">
-              <span>{{pub.timePub}}</span><br/>
+            <div class="ml-4">
+              <div class="text-sm leading-5 font-medium text-gray-900">
+                {{pub.nomPub}}
+              </div>
+              <div class="text-sm leading-5 text-gray-500">
+                {{pub.aPub}}
+              </div>
             </div>
           </div>
-          <hr class="col-span-3 mt-2" />
-          <div class="col-span-3">
-            <h1 class="p-2" [ngClass]="{'arClas':isArabic(pub.txtPub)}" >
-              {{pub.txtPub}}
-            </h1> 
-            <div 
-            *ngIf="pub.MediaLinkPub != null" class="w-full mb-2 rounded" >
-              <div 
-              *ngIf="pub.MediaTypePub=='file'"  
+          <div class="text-sm leading-5 text-gray-500">
+            <span>{{pub.timePub}}</span><br />
+          </div>
+        </div>
+        <hr class="col-span-3 mt-2" />
+        <div class="col-span-3">
+          <h1 class="p-2" [ngClass]="{'arClas':isArabic(pub.txtPub)}">
+            {{pub.txtPub}}
+          </h1>
+          <div *ngIf="pub.MediaLinkPub != null" class="w-full mb-2 rounded">
+            <div *ngIf="pub.MediaTypePub=='file'"
               class="bg-dark text-white rounded p-2 container sm:flex items-center justify-between">
-                <div class="flex items-center" >
-                  <img [src]="'assets/img/'+pub.MediaLinkPub.split('.')[1]+'.png'" width="75" class="mr-2" />
-                  <div class="grid">
-                    <label class="m-0 text-xl text-uppercase">
-                      {{pub.MediaNamePub}}
-                    </label>
-                    <div class="flex gap-1">
-                      <button class="btn p-2 btn-dark">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                          <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
-                          <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
-                        </svg>
-                      </button>
-                      <button class="btn p-2 btn-dark">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info" viewBox="0 0 16 16">
-                          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                          <circle cx="8" cy="4.5" r="1"/>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <button (click)="openInNewTab(getPath()+'/uploads/file/'+pub.MediaLinkPub)" 
-                  target="_blank"  
-                  class="mt-2 text-uppercase w-full bg-green-400 hover:bg-green-600 text-green-800 hover:text-green-300 px-3 py-2 rounded flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                    <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                  </svg>  
-                  <label class="ml-2 m-0">Télécharger ({{pub.MediaSizePub}}kb)</label>
-                  </button>
-                </div>
-                
-              </div>
-
-              <div 
-              *ngIf="pub.MediaTypePub=='evt'"  
-              class="container bg-gray-300 rounded w-full"
-              >
-                <div class="h-20 flex items-center justify-center" >
-                  <label class="m-0">
+              <div class="flex items-center">
+                <img [src]="'assets/img/'+pub.MediaLinkPub.split('.')[1]+'.png'" width="75" class="mr-2" />
+                <div class="grid">
+                  <label class="m-0 text-xl text-uppercase">
                     {{pub.MediaNamePub}}
                   </label>
+                  <div class="flex gap-1">
+                    <button class="btn p-2 btn-dark">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-link-45deg" viewBox="0 0 16 16">
+                        <path
+                          d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                        <path
+                          d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
+                      </svg>
+                    </button>
+                    <button class="btn p-2 btn-dark">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-info" viewBox="0 0 16 16">
+                        <path
+                          d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
+                        <circle cx="8" cy="4.5" r="1" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
+              <div>
+                <button (click)="openInNewTab(getPath()+'/uploads/file/'+pub.MediaLinkPub)" target="_blank"
+                  class="mt-2 text-uppercase w-full bg-green-400 hover:bg-green-600 text-green-800 hover:text-green-300 px-3 py-2 rounded flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-download" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                    <path fill-rule="evenodd"
+                      d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                  </svg>
+                  <label class="ml-2 m-0">Télécharger ({{pub.MediaSizePub}}kb)</label>
+                </button>
+              </div>
 
-              <div 
-              *ngIf="pub.MediaTypePub=='area'"  
-              class="container rounded w-full" >
+            </div>
+
+            <div *ngIf="pub.MediaTypePub=='evt'" class="container bg-gray-300 rounded w-full">
+              <div class="h-20 flex items-center justify-center">
+                <label class="m-0">
+                  {{pub.MediaNamePub}}
+                </label>
+              </div>
+            </div>
+
+            <div *ngIf="pub.MediaTypePub=='area'" class="container rounded w-full">
               <div style="
               height: 15px;
               background-image: url(../assets/img/cahier_top.png); 
@@ -219,7 +228,7 @@ class="container p-0 relative flex items-start justify-between grid "  >
               background-position: 0px 0px; 
               background-size: 99%; 
               background-repeat: repeat-y;">
-                <div class="p-2 flex items-center justify-center" >
+                <div class="p-2 flex items-center justify-center">
                   <pre class="m-0">
 {{pub.MediaNamePub}}
                   </pre>
@@ -232,105 +241,100 @@ class="container p-0 relative flex items-start justify-between grid "  >
               background-size: 99%; 
               background-repeat: no-repeat;">
               </div>
-                
-              </div>
 
-              <div 
-              *ngIf="pub.MediaTypePub=='vdo'"  
-              class="container w-full"
-              >
+            </div>
+
+            <div *ngIf="pub.MediaTypePub=='vdo'" class="container w-full">
               <div class="flex items-center justify-center">
-                <video controls class="rounded " >
+                <video controls class="rounded ">
                   <source [src]="getPath()+'/uploads/vdo/'+pub.MediaLinkPub" [type]="'video/'+pub.MediaNamePub">
-                  Mettez a jour votre navigateur pour lire cette video.. 
+                  Mettez a jour votre navigateur pour lire cette video..
                 </video>
               </div>
-                
-              </div>
 
-              <div *ngIf="pub.MediaTypePub=='img'"  class="w-full  mb-2">
-                <div (click)="openInNewTab(getPath()+'/uploads/img/'+pub.MediaLinkPub)" 
-                target="_blank"  class="h-64 rounded"
-                [style.background-image]="'url('+getPath()+'/uploads/img/'+pub.MediaLinkPub+')'" 
-                [style.background-size]="'cover'"   
-               >    
-              </div>
-              </div>
+            </div>
 
+            <div *ngIf="pub.MediaTypePub=='img'" class="w-full  mb-2">
+              <div (click)="openInNewTab(getPath()+'/uploads/img/'+pub.MediaLinkPub)" target="_blank"
+                class="h-64 rounded" [style.background-image]="'url('+getPath()+'/uploads/img/'+pub.MediaLinkPub+')'"
+                [style.background-size]="'cover'">
+              </div>
             </div>
 
           </div>
-          <div class="py-2 col-span-3 flex items-end justify-between text-sm text-gray-500">
-            <div class="">
-              [{{pub.nbjPub}}] j'aimes / [{{pub.nbrPub}}] questions / [{{pub.nbiPub}}] +infos
-            </div>
-            <div>
-              <div *ngIf="pub.vuPub!=null">Vu a {{pub.vuPub}}</div>
-            </div>
+
+        </div>
+        <div class="py-2 col-span-3 flex items-end justify-between text-sm text-gray-500">
+          <div class="">
+            [{{pub.nbjPub}}] j'aimes / [{{pub.nbrPub}}] questions / [{{pub.nbiPub}}] +infos
           </div>
-          <div class="col-span-3 flex items-end justify-between grid grid-cols-6 gap-1">
-            
-            <div *ngIf="this.helpS.ME?.type=='P'" class="col-span-6 flex items-center justify-between" >
-              <button 
-              (click)="SendLike(pub.idPub)"
-              [ngClass]="{'text-green-500 font-black': pub.jaimPub==='true'}" 
-              class= "hover:bg-gray-300 px-3 py-2 w-full rounded flex items-center justify-center ">
-                <svg class="mr-2" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                </svg>
-                <span >J'aime</span>
-              </button>
-            
-              <button  
-              (click)="questionModal(pub.idPub)"
-              data-target="#questionModal"
-              data-toggle="modal" 
-              [ngClass]="{'text-green-500 font-black': pub.qestPub==='true'}" class="hover:bg-gray-300  px-3 py-2 w-full rounded">
-                <span>Question?</span>
-              </button>
-            
-              <button 
-              (click)="SendInfo(pub.idPub)"
-              [ngClass]="{'text-green-500 font-black': pub.infoPub==='true'}" 
+          <div>
+            <div *ngIf="pub.vuPub!=null">Vu a {{pub.vuPub}}</div>
+          </div>
+        </div>
+        <div class="col-span-3 flex items-end justify-between grid grid-cols-6 gap-1">
+
+          <div *ngIf="this.helpS.ME?.type=='P'" class="col-span-6 flex items-center justify-between">
+            <button (click)="SendLike(pub.idPub)" [ngClass]="{'text-green-500 font-black': pub.jaimPub=='true'}"
+              class="hover:bg-gray-300 px-3 py-2 w-full rounded flex items-center justify-center ">
+              <svg class="mr-2" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up"
+                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+              </svg>
+              <span>J'aime</span>
+            </button>
+
+            <button (click)="questionModal(pub.idPub)" data-target="#questionModal" data-toggle="modal"
+              [ngClass]="{'text-green-500 font-black': pub.qestPub==='true'}"
+              class="hover:bg-gray-300  px-3 py-2 w-full rounded">
+              <span>Question?</span>
+            </button>
+
+            <button (click)="SendInfo(pub.idPub)" [ngClass]="{'text-green-500 font-black': pub.infoPub==='true'}"
               class="hover:bg-gray-300 px-3 py-2 w-full  rounded">
-                <span>+ Infos!</span>
-              </button>
-            </div>
-            <div *ngIf="this.helpS.ME?.type=='D'" class="col-span-6 flex items-center justify-between" >
-              <button 
-              (click)="ModPub(pub.idPub)" 
-              class= "hover:bg-gray-300 px-3 py-2 w-full rounded flex items-center justify-center ">
-                <svg class="mr-2" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                </svg>
-                <span  class="ml-2" >Modifier</span>
-              </button>
-            </div>
+              <span>+ Infos!</span>
+            </button>
+          </div>
+          <div *ngIf="this.helpS.ME?.type=='D'" class="col-span-6 flex items-center justify-between">
+            <button (click)="ModPub(pub.idPub)"
+              class="hover:bg-gray-300 px-3 py-2 w-full rounded flex items-center justify-center ">
+              <svg class="mr-2" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up"
+                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                <path fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+              </svg>
+              <span class="ml-2">Modifier</span>
+            </button>
           </div>
         </div>
       </div>
-      <!---- -------------------------------------------------------------------------------------------------------------------------->
-      
-      <!---- -------------------------------------------------------------------------------------------------------------------------->
-      <div *ngIf="loadingSpiner" class="cursor-pointer flex justify-center items-center mb-2 p-2" style="height:75vh;">
-        <div class="cursor-pointer flex justify-center mb-2 p-2 spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
+    </div>
+    <!---- -------------------------------------------------------------------------------------------------------------------------->
+
+    <!---- -------------------------------------------------------------------------------------------------------------------------->
+    <div *ngIf="loadingSpiner" class="cursor-pointer flex justify-center items-center mb-2 p-2" style="height:75vh;">
+      <div class="cursor-pointer flex justify-center mb-2 p-2 spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
-      
-      <div *ngIf="!loadingSpiner && end9elMenData()" class="cursor-pointer flex justify-center mb-2 p-2">
-        <button (click)="showMore()" class="text-green-600 hover:bg-green-300 focus:bg-green-300 rounded-full ">
-            <svg class="h-8 rounded-full" viewBox="0 0 16 16" fill="currentColor">
-                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
-            </svg>
-        </button>
+    </div>
+
+    <div *ngIf="!loadingSpiner && end9elMenData()" class="cursor-pointer flex justify-center mb-2 p-2">
+      <button (click)="showMore()" class="text-green-600 hover:bg-green-300 focus:bg-green-300 rounded-full ">
+        <svg class="h-8 rounded-full" viewBox="0 0 16 16" fill="currentColor">
+          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+          <path fill-rule="evenodd"
+            d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z" />
+        </svg>
+      </button>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="questModalLabel" aria-hidden="false">
+<div *ngIf="this.helpS.ME?.type=='P'" class="modal fade" id="questionModal" tabindex="-1" role="dialog"
+  aria-labelledby="questModalLabel" aria-hidden="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -343,15 +347,12 @@ class="container p-0 relative flex items-start justify-between grid "  >
         <form>
           <input type="hidden" class="form-control" id="forPub">
           <input type="hidden" class="form-control" id="forMoulPub">
-          
+
           <div class="form-group">
             <label for="message-text" class="col-form-label">Question : </label>
-            <textarea 
-            *ngIf="!msgIsSelectif()"
-            class="form-control" placeholder="Tapez votre question ici"></textarea>
-            
-            <select class="form-control"
-            *ngIf="msgIsSelectif()" > 
+            <textarea *ngIf="!msgIsSelectif()" class="form-control" placeholder="Tapez votre question ici"></textarea>
+
+            <select class="form-control" *ngIf="msgIsSelectif()">
               <option value="Q1">
                 Q1 : Qeustion1
               </option>
@@ -366,8 +367,135 @@ class="container p-0 relative flex items-start justify-between grid "  >
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Fermer</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         <button type="button" class="btn btn-primary">Envoyer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="this.helpS.ME?.type!='P'" class="modal fade" id="quipeuvoirModal" tabindex="-1" role="dialog"
+  aria-labelledby="quipeuvoirModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title" id="quipeuvoirModalLabel">Qui peut voir cette publication ?</h5>
+          <small>Selectionnez les personnes qui peuvent voir votre publication.</small>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <label for="all" class="d-flex justify-content-between align-items-center p-3 rounded quipeuvoir">
+          <div class="d-flex justify-content-start align-items-center ">
+            <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
+              <img src="../../assets/img/UogbESokoOx.png" />
+            </div>
+            <div>
+              <h5>Tout le monde</h5>
+              <small *ngIf="this.helpS.ME?.type==='E'" >Tout les comptes parents en lien avec vous et tout les comptes direction</small>
+              <small *ngIf="this.helpS.ME?.type==='D'" >Tout les comptes parents, tout les comptes enseignant et tout les comptes direction</small>
+            </div>
+          </div>
+          <div>
+            <input value="all" type="radio" id="all" name="quipeuvoir" checked />
+          </div>
+        </label>
+
+        <label (click)='getUserList()' data-target="#selSsers_Modal" data-toggle="modal" for="sel" class="d-flex justify-content-between align-items-center rounded p-3 quipeuvoir ">
+          <div class="d-flex justify-content-start align-items-center ">
+            <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
+              <img src="../../assets/img/UFYvNcKWkj5.png" />
+            </div>
+            <div>
+              <h5>Selectionnez des parents</h5>
+              <small *ngIf="this.helpS.ME?.type==='E'">Tout le comptes parents selectionné et tout les comptes
+                direction</small>
+              <small *ngIf="this.helpS.ME?.type==='D'">Tout le comptes parents selectionné et tout les comptes
+                enseignant</small>
+            </div>
+          </div>
+          <div>
+            <input value="sel" type="radio" id="sel" name="quipeuvoir" />
+          </div>
+        </label>
+
+        <label for="dir" class="d-flex justify-content-between align-items-center rounded p-3 quipeuvoir ">
+          <div class="d-flex justify-content-start align-items-center ">
+            <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
+              <img src="../../assets/img/tlBBJvkvBea.png" />
+            </div>
+            <div>
+              <h5 *ngIf="this.helpS.ME?.type==='E'" >Direction seulement</h5>
+              <h5 *ngIf="this.helpS.ME?.type==='D'" >Enseignants seulement</h5>
+              <small *ngIf="this.helpS.ME?.type==='E'" >Tout les comptes direction</small>
+              <small *ngIf="this.helpS.ME?.type==='D'" >Tout les comptes enseignant</small>
+            </div>
+          </div>
+          <div>
+            <input value="dir" type="radio" id="dir" name="quipeuvoir" />
+          </div>
+        </label>
+
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="save_quipeuvoir()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="this.helpS.ME?.type!='P'" class="modal fade" id="selSsers_Modal" tabindex="-1" role="dialog"
+  aria-labelledby="selSsers_ModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title" id="selSsers_tModalLabel">Selectionnez des parents d'élèves</h5>
+          <small>Selectionnez parmis cette liste les parents qui peuvent voir votre publication.</small>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mt-2 mb-2">
+        <input type="search" (keyup)='searchinlist($event.target)' class="form-control" placeholder="Recherchez par nom ou par enfant" />
+      </div>
+      <div class="modal-body" style="height: 50vh; overflow-y: auto;" #ListUsersDiv>
+        <div *ngIf="ListeUsersLoading" style="height: 100%;" class="d-flex align-items-center justify-content-center">
+          <div class="cursor-pointer flex justify-center mb-2 p-2 spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div *ngFor="let p of ListeUsersToShow ; let i = index" >
+          <label [for]="'user'+p.id" class="d-flex justify-content-between align-items-center rounded quipeuvoir  p-1 pl-3 pr-3">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="mr-3">
+                <img [src]="p.photo" [alt]='p.id' class="h-10 w-10 rounded-full object-cover" />
+              </div>
+              <div>
+                <h5>{{p.nom}}</h5>
+                <small *ngIf="p.type==='P'">Parent de {{p.parentde}}</small>
+                <small *ngIf="p.type==='E'">Enseignant</small>
+              </div>
+            </div>
+            <div>
+              <input [value]="p.id" type="checkbox" [id]="'user'+p.id" [name]="'seluser'+p.id" [checked]="p.checked" (change)="checke_user(i, $event)" />
+            </div>
+          </label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" >Confirmer</button>
       </div>
     </div>
   </div>

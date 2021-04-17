@@ -20,10 +20,12 @@ export class ChatService {
           this.http.get(this.dataService.URL_PHP("GET_CHATSDATA")).subscribe(
               (data:any) => {
                 this.chats = data;
+                console.log(JSON.stringify(data));
                 resolve(this.chats);
+                
               },
               error => {
-                console.log(error);
+                console.log(JSON.stringify(error));
                 resolve(undefined);
               }
             )      
