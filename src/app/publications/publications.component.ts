@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Title} from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -28,9 +29,24 @@ export class PublicationsComponent implements OnInit {
   ListeUsersToShow;
   selUsers;
   quipeuvoir;
+  avecQui;
   ListeUsersLoading:boolean;
+  mediaName:String="";
+  mediaType:String="";
+  mediaSize=0;
+  maxSizeAuthorised=52399999;
+  progress: number = 0;
+  errorMsgPublier:String = "";
+
 
   @ViewChild('ListUsersDiv') ListUsersDiv:ElementRef;
+  @ViewChild('Text') Text:ElementRef;
+  @ViewChild('media') media:ElementRef;
+  @ViewChild('Evenement_text') Evenement_text:ElementRef;
+  @ViewChild('Evenement_time') Evenement_time:ElementRef;
+  @ViewChild('Evenement_date') Evenement_date:ElementRef;
+  @ViewChild('area') area:ElementRef;
+
   // grace a cette variable PRIO on va faire un système de priorité béch n'affiché les publications non lu en avan,
   // et des fois les publications li clicka 3lihom b'notification
   prio;
@@ -45,7 +61,7 @@ export class PublicationsComponent implements OnInit {
       
       this.selUsers = [];
       this.quipeuvoir = 'all';
-
+      this.save_quipeuvoir();
   }
 
   
@@ -65,6 +81,7 @@ export class PublicationsComponent implements OnInit {
   }
 
 
+  
   getUserList() {
     if(!this.ListeUsers) {
       this.ListeUsersLoading = true;
@@ -80,10 +97,14 @@ export class PublicationsComponent implements OnInit {
     
   }
 
+  radioChanged(evt) {
+    this.quipeuvoir = evt.target.value;
+  }
+
   get get_selUsers() {
     return this.ListeUsers
               .filter(p => p.checked)
-              .map(p => p.id)
+              .map(p => { return  {id:p.id,nom:p.nom}  })
   }
 
   get_searchUsers(val) {
@@ -98,7 +119,19 @@ export class PublicationsComponent implements OnInit {
   }
 
   save_quipeuvoir() {
-
+    //rajouter la condition pour enseignant selon le type de compte papi 
+    if(this.quipeuvoir=="all") {
+      if(this.helpS.ME.type=='D') this.avecQui = "Tout le monde";
+      else this.avecQui = "Direction et tout les comptes liés au votre" 
+    }
+    else if(this.quipeuvoir=="dir") this.avecQui =  "Direction seulement"
+    else {
+      let str = 'direction, ';
+      for(let p of this.get_selUsers) {
+        str+=p.nom+', ';
+      }
+      this.avecQui =  str.substring(0,str.length-2);
+    };
   }
 
   searchinlist(t) {
@@ -184,6 +217,7 @@ export class PublicationsComponent implements OnInit {
   }
 
   pubType(type) {
+    this.viderTout();
     this.whatStat=type;
   } 
 
@@ -204,6 +238,98 @@ export class PublicationsComponent implements OnInit {
     this.pubS.SEND_HTTP_INFO(idPub);
 
   }
+
+  mediaClick() {
+    /*
+    let element = document.getElementById('media') as HTMLElement;
+    element.click()
+    */
+    this.media.nativeElement.click();
+  }
+
+  mediaChanged($event) {
+    //this.mediaName = this.media.nativeElement.value.split(/(\\|\/)/g).pop();
+    
+    this.mediaName = this.media.nativeElement.files[0].name;
+    this.mediaType = this.media.nativeElement.files[0].name.split('.').pop();
+    //this.mediaModified = this.media.nativeElement.files[0].lastModified
+    this.mediaSize = this.media.nativeElement.files[0].size;
+    
+    this.mediaService()
+  }
+
+  // TUTO FROM https://www.positronx.io/angular-file-upload-with-progress-bar-tutorial/
+
+  
+
+  mediaService() {
+    this.pubS.mediaUpload(
+      this.media.nativeElement.files[0]
+    ).subscribe((event: HttpEvent<any>) => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has been received!');
+          break;
+        case HttpEventType.UploadProgress:
+          this.progress = Math.round(event.loaded / event.total * 100);
+          console.log(`Uploaded! ${this.progress}%`);
+          break;
+        case HttpEventType.Response:
+          console.log('User successfully created!', event.body);
+          setTimeout(() => {
+            this.progress = 0;
+            this.viderTout();
+          }, 1500);
+
+      }
+    })
+  }
+  // TUTO FROM https://www.positronx.io/angular-file-upload-with-progress-bar-tutorial/
+  viderTout() {
+    if(this.whatStat == 'Fichier' && this.media != null) {
+      this.mediaName = "";
+      this.mediaSize = 0;
+      this.mediaType = "";
+      this.media = null;
+      this.progress = 0;
+    }
+    else if(this.whatStat == 'Evenement' && this.Evenement_text!=null) {
+        this.Evenement_text = null
+        this.Evenement_time = null 
+        this.Evenement_date = null
+    }
+    else if(this.whatStat == 'Exercice') {
+      this.area.nativeElement.value = "";
+    }
+    else if(this.whatStat == 'Devoir') {
+      this.area.nativeElement.value = "";
+    }
+    else if(this.whatStat == 'Questionaire') {
+      this.area.nativeElement.value = "";
+    }
+  }
+
+  verfieDate(trgt ) {
+    let inpt = (trgt) as HTMLInputElement;
+    alert(this.datePipe.transform(new Date(),'y-MM-dd')+" == "+inpt.value)
+  }
+
+  getReadableFileSizeString(fileSizeInBytes) {
+    if(fileSizeInBytes!=0) {
+      var i = -1;
+      var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+      do {
+          fileSizeInBytes = fileSizeInBytes / 1024;
+          i++;
+      } while (fileSizeInBytes > 1024);
+  
+      return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
+    }
+    return "";
+  };
 
   SendLike(idPub) {
 

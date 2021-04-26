@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { LoginService } from '../login/login.service';
 
 @Injectable({
@@ -69,6 +71,34 @@ gogetPubs = () => {
   );
 
 }
+// TUTO FROM https://www.positronx.io/angular-file-upload-with-progress-bar-tutorial/
+
+mediaUpload(profileImage: File): Observable<any> {
+  var formData: any = new FormData();
+  formData.append("media", profileImage);
+  
+  return this.http.post(this.dataService.URL_PHP("mediaUpload"), formData, {
+    reportProgress: true,
+    observe: 'events'
+  }).pipe(
+    catchError(this.errorMgmt)
+  )
+}
+
+errorMgmt(error: HttpErrorResponse) {
+  let errorMessage = '';
+  if (error.error instanceof ErrorEvent) {
+    // Get client-side error
+    errorMessage = error.error.message;
+  } else {
+    // Get server-side error
+    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  }
+  console.log(errorMessage);
+  return throwError(errorMessage);
+}
+
+// TUTO FROM : https://www.positronx.io/angular-file-upload-with-progress-bar-tutorial/
 
 gogetUserList = () => {
   

@@ -5,8 +5,8 @@
     class="bg-gray-100 lg:sticky top-0 border border-gray-400 rounded mb-5 col-span-5 lg:col-span-2">
     <div class="">
       <div class="flex items-center p-3">
-        <div class="flex-shrink-0 h-10 w-10">
-          <img class="h-10 w-10 rounded-full object-cover" [src]="this.helpS.ME?.photo" alt="">
+        <div class="flex-shrink-0 h-16 w-16">
+          <img class="h-16 w-16 rounded-full object-cover" [src]="this.helpS.ME?.photo" alt="">
         </div>
         <div class="ml-4">
           <div class="text-sm leading-5 font-medium text-gray-900">
@@ -14,34 +14,84 @@
           </div>
 
 
-
-          <button data-target="#quipeuvoirModal" data-toggle="modal"
-            class="dropdown-toggle bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded ">
-            Qui peut voir ?
-          </button>
-
+          <small class="d-flex align-items-center justify-content-between">
+             <button data-target="#quipeuvoirModal" data-toggle="modal"
+              class="dropdown-toggle bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded ">
+              Partage avec
+            </button>
+          </small>
+          <small class=""> {{avecQui}}</small>
         </div>
       </div>
       <div class="form-group px-2 ">
 
         <input type="text"
+          #Text
           class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow "
           placeholder="Text de votre publication" />
 
-        <div>
+        <div *ngIf="this.whatStat==='Fichier'">
           <input *ngIf="this.whatStat==='Fichier'" type="file"
-            class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow "
-            placeholder="Text de votre publication" />
+            #media
+            class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow d-none"
+            placeholder="Text de votre publication"
+            accept="image/png, image/jpeg, image/png, video/mp4, .doc, .docx , .pdf , .xls , .xlsx , .ppt , .pptx , .rar , .zip , application/msword, application/msexcel"
+            (change)="mediaChanged($event)"
+            />
+            <div *ngIf="this.whatStat==='Fichier'">
+              <small>
+                Fichiers autorisé : word, excel, powerpoint, images, videos, archive .rar ou .zip
+                <br/>
+                Taille maximal autorisé : {{getReadableFileSizeString(maxSizeAuthorised)}}
+              </small>
+            </div>
+          <button *ngIf="this.whatStat==='Fichier'" 
+            class="border-2 border-dotted rounded w-100 py-3 px-4 leading-tight " (click)="mediaClick()"
+            [ngClass]="mediaSize>maxSizeAuthorised ? 'bg-red-100 border-red-500 hover:bg-red-200' : 'bg-green-100 border-green-500 hover:bg-green-200'">
+            <div class="flex items-center justify-center">
+              <img *ngIf="mediaSize != 0 "  class="w-5 h-5" 
+              [src]="mediaSize<=maxSizeAuthorised ? 'assets/img/check.png' : 'assets/img/remove.png'" />
+            </div>
+            <div>
+              Cliquez pour selectionner un fichier
+            </div>
+            <div >
+              
+              <small *ngIf="mediaSize != 0 " 
+              style="
+              display:inline-block;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 13ch;" >
+                {{ mediaName }}
+              </small>
+            </div>
+            <div>
+              <small *ngIf="mediaSize != 0 "  >
+                {{ getReadableFileSizeString(mediaSize) }}
+              </small>
+            </div>
+            
+          </button> 
+          <div class="progress mt-4" *ngIf="progress > 0">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [style.width.%]="progress" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+              {{ progress+'%' }} chargé
+            </div>
+          </div> 
         </div>
 
         <div>
           <input formControlName="pub_evt_titre" *ngIf="this.whatStat==='Evenement'" type="text"
+            #Evenement_text
             class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow"
             placeholder="Titre de l'event" />
           <input *ngIf="this.whatStat==='Evenement'" type="date"
+            #Evenement_date (change)="verfieDate($event.target)"
             class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow"
             placeholder="Text de votre publication" />
           <input *ngIf="this.whatStat==='Evenement'" type="time"
+            #Evenement_time
             class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow"
             placeholder="Text de votre publication" />
         </div>
@@ -49,8 +99,9 @@
         <div>
           <textarea *ngIf="this.whatStat==='Devoir' || this.whatStat==='Exercice' || this.whatStat==='Questionaire' "
             rows="6" id="autoresizing"
+            #area
             class="my-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow auto"
-            placeholder="Devoir, Exercice, Questionnaire"></textarea>
+            [placeholder]="'Tappez votre '+this.whatStat.toLowerCase() +' ici'"></textarea>
         </div>
 
       </div>
@@ -71,7 +122,9 @@
         <div>
           <button (click)="pubType('Fichier')" [ngClass]="{'bg-green-200':this.whatStat==='Fichier'}"
             class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-2 rounded">
-            <span>Fichier</span>
+            <span class="w-10">
+              Fichier,Image,Video
+            </span>
           </button>
         </div>
         <div>
@@ -216,7 +269,7 @@
             <div *ngIf="pub.MediaTypePub=='area'" class="container rounded w-full">
               <div style="
               height: 15px;
-              background-image: url(../assets/img/cahier_top.png); 
+              background-image: url(assets/img/cahier_top.png); 
               background-position: 0px 2px; 
               background-size: 99%; 
               background-repeat: no-repeat;">
@@ -224,7 +277,7 @@
               <div style="
               padding-top: 10px;
               line-height: 1.65rem;
-              background-image: url(../assets/img/cahier_mid.png); 
+              background-image: url(assets/img/cahier_mid.png); 
               background-position: 0px 0px; 
               background-size: 99%; 
               background-repeat: repeat-y;">
@@ -236,7 +289,7 @@
               </div>
               <div style="
               height: 50px;
-              background-image: url(../assets/img/cahier_bot.png); 
+              background-image: url(assets/img/cahier_bot.png); 
               background-position: 0px 0px; 
               background-size: 99%; 
               background-repeat: no-repeat;">
@@ -390,57 +443,58 @@
       </div>
       <div class="modal-body">
 
-        <label for="all" class="d-flex justify-content-between align-items-center p-3 rounded quipeuvoir">
-          <div class="d-flex justify-content-start align-items-center ">
-            <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
-              <img src="../../assets/img/UogbESokoOx.png" />
+        <form name="radios" >
+          <label for="all" class="d-flex justify-content-between align-items-center p-3 rounded quipeuvoir">
+            <div class="d-flex justify-content-start align-items-center ">
+              <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
+                <img src="assets/img/UogbESokoOx.png" />
+              </div>
+              <div>
+                <h5>Tout le monde</h5>
+                <small *ngIf="this.helpS.ME?.type==='E'" >Tout les comptes parents en lien avec vous et tout les comptes direction</small>
+                <small *ngIf="this.helpS.ME?.type==='D'" >Tout les comptes parents, tout les comptes enseignant et tout les comptes direction</small>
+              </div>
             </div>
             <div>
-              <h5>Tout le monde</h5>
-              <small *ngIf="this.helpS.ME?.type==='E'" >Tout les comptes parents en lien avec vous et tout les comptes direction</small>
-              <small *ngIf="this.helpS.ME?.type==='D'" >Tout les comptes parents, tout les comptes enseignant et tout les comptes direction</small>
+              <input value="all" type="radio" id="all" name="quipeuvoir" checked (change)="radioChanged($event)" />
             </div>
-          </div>
-          <div>
-            <input value="all" type="radio" id="all" name="quipeuvoir" checked />
-          </div>
-        </label>
+          </label>
 
-        <label (click)='getUserList()' data-target="#selSsers_Modal" data-toggle="modal" for="sel" class="d-flex justify-content-between align-items-center rounded p-3 quipeuvoir ">
-          <div class="d-flex justify-content-start align-items-center ">
-            <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
-              <img src="../../assets/img/UFYvNcKWkj5.png" />
+          <label (click)='getUserList()' data-target="#selSsers_Modal" data-toggle="modal" for="sel" class="d-flex justify-content-between align-items-center rounded p-3 quipeuvoir ">
+            <div class="d-flex justify-content-start align-items-center ">
+              <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
+                <img src="assets/img/UFYvNcKWkj5.png" />
+              </div>
+              <div>
+                <h5>Selectionnez des parents</h5>
+                <small *ngIf="this.helpS.ME?.type==='E'">Tout le comptes parents selectionné et tout les comptes
+                  direction</small>
+                <small *ngIf="this.helpS.ME?.type==='D'">Tout le comptes parents selectionné et tout les comptes
+                  enseignant</small>
+              </div>
             </div>
             <div>
-              <h5>Selectionnez des parents</h5>
-              <small *ngIf="this.helpS.ME?.type==='E'">Tout le comptes parents selectionné et tout les comptes
-                direction</small>
-              <small *ngIf="this.helpS.ME?.type==='D'">Tout le comptes parents selectionné et tout les comptes
-                enseignant</small>
+              <input value="sel" type="radio" id="sel" name="quipeuvoir"  (change)="radioChanged($event)"  />
             </div>
-          </div>
-          <div>
-            <input value="sel" type="radio" id="sel" name="quipeuvoir" />
-          </div>
-        </label>
+          </label>
 
-        <label for="dir" class="d-flex justify-content-between align-items-center rounded p-3 quipeuvoir ">
-          <div class="d-flex justify-content-start align-items-center ">
-            <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
-              <img src="../../assets/img/tlBBJvkvBea.png" />
+          <label for="dir" class="d-flex justify-content-between align-items-center rounded p-3 quipeuvoir ">
+            <div class="d-flex justify-content-start align-items-center ">
+              <div class="p-3 pl-0 mr-3 bgdark-trans rounded-full">
+                <img src="assets/img/tlBBJvkvBea.png" />
+              </div>
+              <div>
+                <h5 *ngIf="this.helpS.ME?.type==='E'" >Direction seulement</h5>
+                <h5 *ngIf="this.helpS.ME?.type==='D'" >Enseignants seulement</h5>
+                <small *ngIf="this.helpS.ME?.type==='E'" >Tout les comptes direction</small>
+                <small *ngIf="this.helpS.ME?.type==='D'" >Tout les comptes enseignant</small>
+              </div>
             </div>
             <div>
-              <h5 *ngIf="this.helpS.ME?.type==='E'" >Direction seulement</h5>
-              <h5 *ngIf="this.helpS.ME?.type==='D'" >Enseignants seulement</h5>
-              <small *ngIf="this.helpS.ME?.type==='E'" >Tout les comptes direction</small>
-              <small *ngIf="this.helpS.ME?.type==='D'" >Tout les comptes enseignant</small>
+              <input value="dir" type="radio" id="dir" name="quipeuvoir"  (change)="radioChanged($event)"  />
             </div>
-          </div>
-          <div>
-            <input value="dir" type="radio" id="dir" name="quipeuvoir" />
-          </div>
-        </label>
-
+          </label>
+        </form>
 
       </div>
       <div class="modal-footer">

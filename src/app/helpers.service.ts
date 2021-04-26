@@ -66,7 +66,6 @@ export class HelpersService {
           (data)=> {
             this.notifMe = data;
             this.notif_Cloche = this.notifMe.length;
-            console.log(data);
             resolve(data);
           },
           (err)=> {resolve(err);}
